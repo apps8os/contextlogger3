@@ -5,7 +5,7 @@ This is a repository for context logger software that has been built in Aalto Un
 
 Folder structure:
 * analysis -- analysis scipts (eg. identifying higher level context and mode of transport detection)
-* clientbase -- 
+* clientframework -- Client-side sensing framework for android devices. This framework is built on top of Funf Open Sensing Framework.
 * demoserver -- example java based http server for uploading the data from the client
 * mobime -- specific client for mobime project
 * visualization -- 
