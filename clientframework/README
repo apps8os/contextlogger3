@@ -1,8 +1,9 @@
 Change log
 ==========
 
-Date					Author 							Change
-====					======							======
-24.08.2012		Nalin Chaudhary			Client sensing framework is uploaded to github first time. 
-																	It is developed on top of Funf Open Sensing Framework (http://code.google.com/p/funf-open-sensing-framework/) as 
-																	part of Master's thesis work of Nalin Chaudhary.
+Date        Author 					Change
+====        ======					======
+24.08.2012	Nalin Chaudhary	Client sensing framework is uploaded to 
+														github first time. It is developed as 
+														part of Master's thesis work of 
+														Nalin Chaudhary.
