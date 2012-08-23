@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ContextLogger demo application - with funf</string>
+    <string name="service_status">ContextLogger status:</string>
+    <string name="start_service_instr">Press \'Start service\' to start the ContextLogger service with the configured sensors.</string>
+	<string name="choose_activity_instr">Start/Stop an activity</string>
+    <string name="service_running">Running</string>
+    <string name="service_stopped">Stopped</string>
+    <string name="btn_start_service">Start service</string>
+    <string name="btn_stop_service">Stop service</string>
+    <string name="btn_start_activity">Start activity</string>
+    <string name="btn_stop_activity">Stop activity</string>
+    <string name="btn_upload">Upload db</string>
+    <string name="btn_export">Export db2SD</string>
+    <string name="activity_prompt">Choose an activity</string>
+    <string-array name="activity_array">
+        <item>At home</item>
+        <item>At work</item>
+        <item>Walking</item>
+        <item>Cycling</item>
+        <item>Driving a car</item>
+        <item>In a bus</item>
+        <item>In a train</item>
+        <item>In a subway</item>
+        <item>Taking a taxi</item>
+    </string-array>
+</resources>
