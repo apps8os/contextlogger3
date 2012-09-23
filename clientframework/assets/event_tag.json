@@ -1,0 +1,26 @@
+{
+	"eventTags":
+	[
+		{
+			"name":"At work"
+		},
+		{
+			"name":"At home"
+		},
+		{
+			"name":"Walking"
+		},
+		{
+			"name":"Cycling"
+		},
+		{
+			"name":"In a bus"
+		},
+		{
+			"name":"In a train"
+		},
+		{
+			"name":"Driving a car"
+		}		
+	]
+}
