@@ -308,13 +308,17 @@ public class MainActivity extends ListActivity implements OnClickListener, OnIte
 	}
 
 	private void notifyEvent(ActionEvent ae){
-		Intent i = new Intent();
-		i.setAction(CUSTOM_INTENT_ACTION);
-		i.putExtra("APPLICATION_ACTION", ae.getActionEventName());
-		i.putExtra("APPLICATION_DATA", ae.getEventState());
-		sendBroadcast(i);
-		exportData();
-		updateEventList();
+		final String payload = ae.getMessagePayload();
+		if(!TextUtils.isEmpty(payload)){
+			Intent i = new Intent();
+			i.setAction(CUSTOM_INTENT_ACTION);
+			i.putExtra("APPLICATION_ACTION", payload);
+			sendBroadcast(i);
+			exportData();
+			updateEventList();
+		} else {
+			ClientApp.getInstance().showToastMessage("Client error!");
+		}
 	}
 	
 	@Override
@@ -373,6 +377,7 @@ public class MainActivity extends ListActivity implements OnClickListener, OnIte
 		notifyEvent(ae);
 		mActionEventList.remove(info.position);
 		updateEventList();
+		refreshSpinner();
 		return true;
 	}
 

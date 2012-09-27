@@ -33,6 +33,17 @@ public class ActionEvent implements Parcelable{
 		return mState.toString();
 	}
 	
+	public final String getMessagePayload(){
+		String msg = "";
+		try {
+			msg = getActionEventName().replace(" ", "_");
+			msg += "_" + getEventState();
+		}catch(NullPointerException e){
+			return msg;
+		}
+		return msg.toUpperCase();
+	}
+	
 	public final long getStartTimestamp(){
 		return mStartTimestamp;
 	}
