@@ -1,0 +1,23 @@
+{
+    "name": "TriggersConfig",
+    "version":1,
+    "triggersConfigUpdateUrl":"http:\/\/192.168.11.4:8080\/SQLiteDBFileReceiver\/receiver?type=clConfig",
+    "triggersConfigUpdatePeriod":30000,
+  "triggers": [
+    {
+      "action": "WALKING_START",
+      "config":
+      {       
+      }
+    },
+    {
+      "action": "WALKING_STOP",
+      "config":
+      {
+    "edu.mit.media.funf.probe.builtin.BatteryProbe": [
+    { "PERIOD": 900 }
+        ]
+      }
+    }
+  ]
+}

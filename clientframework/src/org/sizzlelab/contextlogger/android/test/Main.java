@@ -175,7 +175,7 @@ public class Main extends Activity implements OnSharedPreferenceChangeListener, 
 			if (isRunning) {
 				Intent i = new Intent();
 				i.setAction(CUSTOM_INTENT_ACTION);
-				i.putExtra("APPLICATION_ACTION", mRunAct);
+				i.putExtra("APPLICATION_ACTION", getActionTag(mRunAct) + "_STOP");
 				i.putExtra("APPLICATION_DATA", "false");
 
 				mContext = getApplicationContext();
@@ -216,7 +216,7 @@ public class Main extends Activity implements OnSharedPreferenceChangeListener, 
 			if (!isRunning) {
 				Intent i = new Intent();
 				i.setAction(CUSTOM_INTENT_ACTION);
-				i.putExtra("APPLICATION_ACTION", mSelAct);
+				i.putExtra("APPLICATION_ACTION", getActionTag(mSelAct) + "_START");
 				i.putExtra("APPLICATION_DATA", "true");
 				mContext = getApplicationContext();
 				mContext.sendBroadcast(i);
@@ -228,7 +228,7 @@ public class Main extends Activity implements OnSharedPreferenceChangeListener, 
 			} else {
 				Intent i = new Intent();
 				i.setAction(CUSTOM_INTENT_ACTION);
-				i.putExtra("APPLICATION_ACTION", mRunAct);
+				i.putExtra("APPLICATION_ACTION", getActionTag(mRunAct) + "_STOP");
 				i.putExtra("APPLICATION_DATA", "false");
 				mContext = getApplicationContext();
 				mContext.sendBroadcast(i);
@@ -286,5 +286,17 @@ public class Main extends Activity implements OnSharedPreferenceChangeListener, 
 		i.putExtra("totalCount", MainPipeline.getScanCount(this));
 		mContext = getApplicationContext();
 		mContext.sendBroadcast(i);
+	}
+	
+	private String getActionTag(String action)
+	{
+		String ret = "";
+		if (action != null && !action.isEmpty())
+		{
+			action = action.replaceAll(" ", "_");
+			ret = action.toUpperCase();
+		}
+		
+		return ret;
 	}
 }
