@@ -6,45 +6,41 @@
     android:orientation="horizontal" >
     
    	<TextView  
-	    android:id="@+id/text_view_event_tag_name_history" 		    
+	    android:id="@+id/text_view_event_history_time" 		    
 	    android:layout_height="wrap_content" 
 	    android:layout_width="0dp"
 	    android:layout_weight="1"
 	    android:minHeight="65dp"
+	    android:maxWidth="55dp"
    	    android:gravity="center_vertical|left"
-	    android:textSize="22sp"
-	    android:singleLine="false"
+	    android:textSize="18sp"
 		/>
 
 	<LinearLayout 
 		android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
-        android:layout_weight="0.5"
+    	android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         >	
     
 	 	<TextView  
-		    android:id="@+id/text_view_event_start_datetime_history" 
+		    android:id="@+id/text_view_event_history_name_and_note" 
 		    android:layout_height="wrap_content" 
 		    android:layout_width="wrap_content"
-		    android:textSize="16sp"
+		    android:layout_marginRight="10dp"
+		    android:singleLine="false"
+		    android:textSize="20sp"
 			/>  
-			         
-		<TextView
-		    android:id="@+id/text_view_event_duration_history" 		      
-		    android:layout_height="wrap_content" 
-		    android:layout_width="wrap_content"
-		    android:textSize="16sp"
-		/>  	    
-
+			           	    
 		<TextView
 		    android:id="@+id/text_view_event_action_history" 		      
 		    android:layout_height="wrap_content" 
 		    android:layout_width="wrap_content"
 		    android:textSize="18sp"
-		    android:text="@string/service_stopped" 
-		/> 		
+			/> 		
 			    
     </LinearLayout>
     

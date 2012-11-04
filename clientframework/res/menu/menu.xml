@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     
     <item
-        android:id="@+id/menu_edit"
+        android:id="@+id/menu_add_tag"
     	android:title="@string/add_tag"
  		android:icon="@android:drawable/ic_menu_add"
     	/>
@@ -20,7 +20,8 @@
     	/>  
     	  
     <item
-        android:id="@+id/menu_toggle_service"
+        android:id="@+id/menu_shutdown"
+        android:title="@string/shutdown"
  		android:icon="@android:drawable/ic_lock_power_off"
     	/>  
 </menu>    

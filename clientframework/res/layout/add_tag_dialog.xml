@@ -5,10 +5,11 @@
     android:layout_margin="10dp"
     android:orientation="vertical" >
 
-    <EditText 
+    <com.WazaBe.HoloEverywhere.widget.EditText 
         android:id="@+id/edit_text_tag"
     	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"        
+    	android:layout_height="wrap_content"  
+    	android:minHeight="50dp"      
         android:singleLine="true"
         android:hint="@string/add_tag_hint"
         />

@@ -24,6 +24,10 @@
  */
 package org.sizzlelab.contextlogger.android.CustomProbe;
 
+import java.util.Map;
+
+import org.sizzlelab.contextlogger.android.io.MainPipeline;
+import org.sizzlelab.contextlogger.android.triggershandling.TriggerManager;
 import org.sizzlelab.contextlogger.android.utils.Constants;
 
 import android.content.BroadcastReceiver;
@@ -39,6 +43,9 @@ public class ApplicationProbe extends Probe implements ApplicationSensorKeys, Co
 	private ApplicationIntentReceiver air = null;
 	private static String m_lA = null;
 	private static String m_lAD = null;
+	private static final String CUSTOM_INTENT_ACTION = "org.sizzlelab.contextlogger.android.customIntentAction";
+	private TriggerManager mTMgr = null;
+	private static final String TRIGGERS_INTENT_ACTION = "org.sizzlelab.contextlogger.android.triggersIntentAction";
 	
 	@Override
 	public String[] getRequiredPermissions() {
@@ -63,6 +70,13 @@ public class ApplicationProbe extends Probe implements ApplicationSensorKeys, Co
 		air = new ApplicationIntentReceiver();
 		IntentFilter intentFilter = new IntentFilter(CUSTOM_INTENT_ACTION);
 		registerReceiver(air, intentFilter);
+		
+		mTMgr = TriggerManager.getInstance();
+		IntentFilter if2 = new IntentFilter(TRIGGERS_INTENT_ACTION);
+		registerReceiver(mTMgr, if2);
+
+		Map<String, String> initialTriggersConfig = MainPipeline.getTriggersConfig(this).getTriggers();
+		mTMgr.enable(this, initialTriggersConfig);
 	}
 
 	@Override
@@ -76,6 +90,10 @@ public class ApplicationProbe extends Probe implements ApplicationSensorKeys, Co
 	@Override
 	protected void onDisable() {
 		unregisterReceiver(air);
+		if (mTMgr != null)
+		{
+			mTMgr.disable();
+		}
 	}
 
 	@Override
@@ -99,6 +117,11 @@ public class ApplicationProbe extends Probe implements ApplicationSensorKeys, Co
 				
 				m_lA = appAction;
 				m_lAD = appData;
+				
+				if (TriggerManager.isEnabled())
+				{
+					mTMgr.handleAction(appAction);
+				}
 			}
 		}
 	}
