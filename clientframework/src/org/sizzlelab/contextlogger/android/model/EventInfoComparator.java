@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--  
 /**
  * Copyright (c) 2012 Aalto University and the authors
  *
@@ -24,14 +22,14 @@
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
--->
-<TextView  
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="45dp"
-    android:textSize="20sp"
-    android:gravity="left"  
-    android:textColor="#FFFFFF"         
-    android:padding="5dp"
-	/>
+package org.sizzlelab.contextlogger.android.model;
+
+import java.util.Comparator;
+
+class EventInfoComparator implements Comparator<EventInfo>{
+	@Override
+	public int compare(EventInfo lhs, EventInfo rhs) {
+		return lhs.compareTo(rhs); 
+	}
+
+}

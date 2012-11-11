@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--  
 /**
  * Copyright (c) 2012 Aalto University and the authors
  *
@@ -24,14 +22,35 @@
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
--->
-<TextView  
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="45dp"
-    android:textSize="20sp"
-    android:gravity="left"  
-    android:textColor="#FFFFFF"         
-    android:padding="5dp"
-	/>
+package org.sizzlelab.contextlogger.android.model;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
+abstract class EventTimeUtil {
+
+	protected static String getTimeToStringBase(long time){
+		if(isToday(time)) {
+			return new String (new SimpleDateFormat("HH:mm").format(new Date(time)));
+		}else{
+			return new String (new SimpleDateFormat("dd MMM").format(new Date(time)));
+		}
+	}
+	
+	/**
+	 * Check the time whether belongs to today  
+	 * 
+	 * @param time
+	 * @return true, if it is today's time. Otherwise, false.
+	 */
+	private static boolean isToday(final long time){
+		final int currentDay = Calendar.getInstance(TimeZone.getDefault()).get(Calendar.DAY_OF_YEAR);
+		final int currentYear = Calendar.getInstance(TimeZone.getDefault()).get(Calendar.YEAR);
+		Calendar target = Calendar.getInstance(TimeZone.getDefault());
+		target.setTimeInMillis(time);
+		return (currentDay == target.get(Calendar.DAY_OF_YEAR) 
+				&& (currentYear == target.get(Calendar.YEAR)));
+	}
+}

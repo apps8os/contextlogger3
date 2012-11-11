@@ -1,3 +1,28 @@
+/**
+ * Copyright (c) 2012 Aalto University and the authors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining 
+ * a copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation 
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the 
+ * Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included 
+ * in all copies or substantial portions of the Software.
+ *  
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+ * DEALINGS IN THE SOFTWARE.
+ *  
+ * Authors:
+ * Chaudhary Nalin (nalin.chaudhary@aalto.fi)
+ * Chao Wei (chao.wei@aalto.fi)
+ */
 package org.sizzlelab.contextlogger.android;
 
 import java.io.IOException;
@@ -13,6 +38,8 @@ import org.sizzlelab.contextlogger.android.model.ActionEvent;
 import org.sizzlelab.contextlogger.android.model.EventState;
 import org.sizzlelab.contextlogger.android.model.handler.ActionEventHandler;
 import org.sizzlelab.contextlogger.android.utils.Constants;
+import org.sizzlelab.contextlogger.android.widget.adapter.ActivityEventListAdapter;
+import org.sizzlelab.contextlogger.android.widget.adapter.ActivityEventListAdapter.OnActivityEventUpdateListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -37,7 +64,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.WazaBe.HoloEverywhere.widget.Button;
@@ -55,7 +81,7 @@ import fi.aalto.chaow.android.app.BaseFragmentActivity.OnSupportFragmentListener
 import fi.aalto.chaow.android.utils.TextHelper;
 
 public class LoggerPanelFragment extends SherlockListFragment implements OnClickListener, Constants, OnContextLoggerStatusChangeListener,
-																				OnCheckedChangeListener,
+																				OnCheckedChangeListener, OnActivityEventUpdateListener,
 											com.WazaBe.HoloEverywhere.widget.AdapterView.OnItemSelectedListener {
 	private Handler mHandler = new Handler();
 	private Runnable mTimedTask = new Runnable(){
@@ -64,7 +90,7 @@ public class LoggerPanelFragment extends SherlockListFragment implements OnClick
 			if((mShownContent != null) && (mAdapter != null) && mIsRunning){
 				for(int i = 0; i < mActionEventList.size(); i++){
 					ActionEvent ae = mActionEventList.get(i);
-					mShownContent.get(i).put("Duartion", ae.getDuration());
+					mShownContent.get(i).put("Duration", ae.getDuration());
 				}	
 				mAdapter.notifyDataSetChanged();
 			}
@@ -73,10 +99,10 @@ public class LoggerPanelFragment extends SherlockListFragment implements OnClick
 	};
 	
 	private OnSupportFragmentListener mListener = null;
-
+	
 	private ArrayList<ActionEvent> mActionEventList = new ArrayList<ActionEvent>();
 	
-	private SimpleAdapter mAdapter = null;
+	private ActivityEventListAdapter mAdapter = null;
 	private ArrayList<HashMap<String, Object>> mShownContent = null;
 	private String[] mTagArray = null;
 	
@@ -88,6 +114,7 @@ public class LoggerPanelFragment extends SherlockListFragment implements OnClick
 	private TextView mTextViewStatus = null;
 	private String mCurrentTag = null;
 	private View mNoData = null;
+	private Switch mLoggerSwitch = null;
 	private HashSet<String> mEventTagList = new HashSet<String>();
 	
 	private String mCountWords = null;
@@ -157,6 +184,7 @@ public class LoggerPanelFragment extends SherlockListFragment implements OnClick
 		});
 		updateUI();
 		mTextViewStatus.requestFocus();
+		mLoggerSwitch = (Switch)getSherlockActivity().getSupportActionBar().getCustomView().findViewById(R.id.logger_switcher);
 		return view;
 	}
 
@@ -201,13 +229,14 @@ public class LoggerPanelFragment extends SherlockListFragment implements OnClick
        		HashMap<String, Object> data = new HashMap<String, Object>();
        		data.put("DateTime", ActionEvent.getTimeToString(ae.getStartTimestamp())); 
     		data.put("Event", ae.getActionEventName());
-    		data.put("Duartion", ae.getDuration());
+    		data.put("Duration", ae.getDuration());
     		mShownContent.add(data);
 		}
-		mAdapter =  new SimpleAdapter(getSherlockActivity().getApplicationContext(), mShownContent, 
-									R.layout.event_list_item, new String[]{"DateTime", "Event" , "Duartion"}, 
-									new int[]{R.id.text_view_event_start_datetime, R.id.text_view_event_tag_name,
-									R.id.text_view_event_duration});
+
+		mAdapter = new ActivityEventListAdapter(getSherlockActivity(), mShownContent, R.layout.event_list_item,
+												new String[]{"DateTime", "Event" , "Duration"},
+												new int[]{R.id.text_view_event_start_datetime, R.id.text_view_event_tag_name,
+												R.id.text_view_event_duration, R.id.image_button_activity_stop}, this);
 
 		getListView().setAdapter(mAdapter);
 		registerForContextMenu(getListView());
@@ -241,8 +270,6 @@ public class LoggerPanelFragment extends SherlockListFragment implements OnClick
 		}
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getSherlockActivity().getApplicationContext(),
 															R.layout.spinner_item, list);
-//															android.R.layout.simple_spinner_item, list);
-//		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mSpinner.setAdapter(dataAdapter);
 		final String firstTag = list.get(0);
 		for(String tag : mEventTagList){
@@ -346,9 +373,24 @@ public class LoggerPanelFragment extends SherlockListFragment implements OnClick
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.menu, menu);
+		updateMenuItem(menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		updateMenuItem(menu);
+	}
+
+	private void updateMenuItem(Menu menu){
+		MenuItem item = menu.findItem(R.id.menu_toggle_service);
+		if(MainPipeline.isEnabled(getSherlockActivity().getApplicationContext())){
+			item.setTitle(R.string.btn_stop_service);			
+		}else {
+			item.setTitle(R.string.btn_start_service);
+		}
+	}	
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int itemId = item.getItemId();
@@ -388,6 +430,11 @@ public class LoggerPanelFragment extends SherlockListFragment implements OnClick
 				}
 			}).show(getFragmentManager(), "QuitApp");
 			return true;
+		}else if(itemId == R.id.menu_toggle_service){
+			if(mLoggerSwitch != null){
+				mLoggerSwitch.setChecked(!mIsRunning);
+			} 
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -399,13 +446,9 @@ public class LoggerPanelFragment extends SherlockListFragment implements OnClick
 	}
 	
 	private void quitApp(){
-		final View view = getSherlockActivity().getSupportActionBar().getCustomView();
-		if(view != null){
-			Switch sw = (Switch)view.findViewById(R.id.logger_switcher);
-			if(sw != null){
-				sw.setChecked(false);
-			}			
-		}
+		if(mLoggerSwitch != null){
+			mLoggerSwitch.setChecked(false);
+		} 
 		stopService();
 		getSherlockActivity().finish();
 	}
@@ -497,6 +540,23 @@ public class LoggerPanelFragment extends SherlockListFragment implements OnClick
 		}				
 	}
 
+	@Override
+	public void onStopButtonClick(int position) {
+		ActionEvent ae = mActionEventList.get(position);
+		ae.setState(EventState.STOP);
+		for(String tag : mEventTagList){
+			if(tag.equals(ae.getActionEventName())){
+				mEventTagList.remove(tag);
+				break;
+			}
+		}
+		ae.confirmBreakTimestamp();
+		ActionEventHandler.getInstance().update(getSherlockActivity().getApplicationContext(), ae);
+		notifyEvent(ae);
+		updateEventList();
+		refreshSpinner();
+	}
+	
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		if(buttonView.getId() == R.id.logger_switcher){

@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--  
 /**
  * Copyright (c) 2012 Aalto University and the authors
  *
@@ -24,14 +22,52 @@
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
--->
-<TextView  
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="45dp"
-    android:textSize="20sp"
-    android:gravity="left"  
-    android:textColor="#FFFFFF"         
-    android:padding="5dp"
-	/>
+package org.sizzlelab.contextlogger.android.model;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class EventInfo extends EventTimeUtil implements Comparable<EventInfo>{
+	
+	private long mEventTime = -1;
+	private String mEventAndNote = "";
+	private String mEventState = "";
+	
+	public EventInfo(final long time, final String eventNote, final String state){
+		mEventTime = time;
+		mEventAndNote = eventNote;
+		mEventState = state;
+	}
+
+	public final String getTimeToString(){
+		return getTimeToStringBase(mEventTime);
+	}
+	
+	public final String getEventAndNote(){
+		return mEventAndNote;
+	}
+	
+	public final String getState(){
+		return mEventState;
+	}
+	
+	protected final long getTime(){
+		return mEventTime;
+	}
+
+	@Override
+	public int compareTo(EventInfo another) {
+		return new Long(mEventTime).compareTo(new Long(another.getTime()));
+	}
+
+	/**
+	 * sort the object list
+	 * @param ArrayList<EventInfo> eventInfoList
+	 */
+	public static void sortList(final ArrayList<EventInfo> eventInfoList){
+		if(!eventInfoList.isEmpty()){
+			Collections.sort(eventInfoList, new EventInfoComparator());
+			Collections.reverse(eventInfoList);
+		}
+	}
+}
