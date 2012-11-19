@@ -1,10 +1,10 @@
 {       
   "name": "ContextLoggerConfig",
   "version":1,
-  "configUpdateUrl":"http:\/\/jimu.cs.hut.fi:8080\/SQLiteDBFileReceiver\/receiver?type=tConfig",
+  "configUpdateUrl":"http:\/\/192.168.11.4:8080\/SQLiteDBFileReceiver\/receiver?type=clConfig",
   "configUpdatePeriod":36000,
   "dataArchivePeriod":1800,
-  "dataUploadUrl":"http:\/\/jimu.cs.hut.fi:8080\/SQLiteDBFileReceiver\/receiver",
+  "dataUploadUrl":"http:\/\/192.168.11.4:8080\/SQLiteDBFileReceiver\/receiver",
   "dataUploadPeriod":36000,
   "dataRequests":{
     "edu.mit.media.funf.probe.builtin.LocationProbe": [
