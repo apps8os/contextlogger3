@@ -3,7 +3,7 @@
     <string name="app_name">ContextLogger demo application</string>
     <string name="service_status">ContextLogger status:</string>
     <string name="start_service_instr">Press \'Start service\' to start the ContextLogger service with the configured sensors.</string>
-	<string name="choose_activity_instr">Start/Stop an activity</string>
+  	<string name="choose_activity_instr">Start/Stop an activity</string>
     <string name="service_running">Running</string>
     <string name="service_stopped">Stopped</string>
     <string name="btn_start_service">Start service</string>
@@ -24,4 +24,17 @@
         <item>In a subway</item>
         <item>Taking a taxi</item>
     </string-array>
+    
+    <string name="event_stop">Stop</string>    
+    <string name="event_cancel">Cancel</string>    
+    <string name="view_history">View history</string>
+    <string name="select_activity_instr">Start an activity</string>  
+    <string name="add_tag">Add event name</string> 
+    <string name="add_tag_hint">input event name</string> 
+	<string name="save">Save</string>  
+	<string name="no_data">There is no event data yet.</string>   
+	<string name="ok">OK</string> 
+	<string name="app_quit_title">Quit</string> 
+	<string name="app_quit_content">The event list data including history will be discarded.</string> 
+		
 </resources>

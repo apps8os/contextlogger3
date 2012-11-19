@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:orientation="vertical" >
+   
+    <LinearLayout 
+		android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_marginTop="1dp"
+    	android:layout_marginBottom="5dp"
+    	android:layout_marginLeft="5dp"
+    	android:layout_marginRight="5dp"
+    	android:orientation="horizontal"
+        >
+        
+		<TextView  
+		    android:layout_height="wrap_content" 
+		    android:layout_width="wrap_content"
+		    android:text="@string/service_status" 
+			android:textSize="18sp"
+			/>        
+	    <TextView
+	        android:id="@+id/text_view_service_state"
+		    android:layout_height="wrap_content" 
+		    android:layout_width="wrap_content" 
+		    android:layout_marginLeft="5dp"
+		    android:textSize="18sp"
+			/>
+
+    </LinearLayout>
+
+	 <TextView  
+	    android:layout_height="wrap_content" 
+	    android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+    	android:layout_marginRight="5dp"
+	    android:text="@string/select_activity_instr" 
+		android:textSize="18sp"
+		/>
+	
+	<LinearLayout 
+		android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_marginTop="1dp"
+    	android:layout_marginBottom="5dp"
+    	android:layout_marginLeft="5dp"
+    	android:layout_marginRight="5dp"    	
+    	android:layout_gravity="center"
+    	android:orientation="horizontal"	    
+	    >
+		    
+		<Spinner 
+			android:id="@+id/spinner_action_list"
+			android:layout_width="wrap_content"
+			android:minWidth="200dp"
+			android:layout_height="wrap_content"
+			android:prompt="@string/activity_prompt"
+			/>	    
+	    
+		<Button 
+		    android:id="@+id/button_start_event" 
+		    android:layout_height="wrap_content" 
+		    android:layout_width="wrap_content" 
+	        android:layout_marginLeft="3dp"
+    		android:layout_marginRight="3dp"		    
+		    android:text="@string/btn_start_activity"
+		    />		
+		
+	</LinearLayout> 
+	 
+	<TextView 
+	    android:id="@+id/text_veiw_data_count" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+    	android:layout_marginLeft="10dp"
+    	android:layout_marginRight="10dp"		
+		android:textSize="18sp"
+		/>	
+
+	<FrameLayout 
+  		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+	    >
+		<ListView 
+		    android:id="@id/android:list"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginLeft="10dp"
+	    	android:layout_marginRight="10dp"
+	    	android:dividerHeight="2dp"
+			android:drawSelectorOnTop="false"
+			android:cacheColorHint="#00000000"/>		    
+	    
+		 <TextView  
+		    android:id="@+id/text_veiw_no_data" 
+		    android:layout_height="wrap_content" 
+		    android:layout_width="wrap_content"
+	        android:layout_margin="10dp"
+		    android:text="@string/no_data" 
+		    android:visibility="gone"
+			android:textSize="25sp"
+			/>		
+	</FrameLayout>
+	
+
+	
+</LinearLayout>

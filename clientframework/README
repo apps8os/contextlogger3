@@ -5,4 +5,6 @@ Date        Author          Change
 ====        ======          ======
 24.08.2012  Nalin Chaudhary Client sensing framework is uploaded to github first time. It is
                             developed as part of Master's thesis work of Nalin Chaudhary.
-30.09.2012  Nalin Chaudhary Introducing trigger handling on application events. 
+23.09.2012  Chao Wei	      UI modification. Adding multiple event tag support. Version code:1.2.
+30.09.2012  Nalin Chaudhary Introducing trigger handling on application events.
+19.11.2012	Nalin Chaudhary	Updates in configuration file for Amazon instance (AMI) on Amazon EC2 
