@@ -27,15 +27,16 @@ package org.sizzlelab.contextlogger.android.model;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 abstract class EventTimeUtil {
 
 	protected static String getTimeToStringBase(long time){
 		if(isToday(time)) {
-			return new String (new SimpleDateFormat("HH:mm").format(new Date(time)));
+			return new String (new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(time)));
 		}else{
-			return new String (new SimpleDateFormat("dd MMM").format(new Date(time)));
+			return new String (new SimpleDateFormat("dd MMM", Locale.getDefault()).format(new Date(time)));
 		}
 	}
 	

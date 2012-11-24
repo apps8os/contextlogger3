@@ -24,6 +24,8 @@
  */
 package org.sizzlelab.contextlogger.android.test;
 
+import java.util.Locale;
+
 import org.sizzlelab.contextlogger.android.R;
 import org.sizzlelab.contextlogger.android.CustomProbe.ApplicationProbe;
 import org.sizzlelab.contextlogger.android.io.MainPipeline;
@@ -37,6 +39,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -291,10 +294,10 @@ public class Main extends Activity implements OnSharedPreferenceChangeListener, 
 	private String getActionTag(String action)
 	{
 		String ret = "";
-		if (action != null && !action.isEmpty())
+		if (!TextUtils.isEmpty(action))
 		{
 			action = action.replaceAll(" ", "_");
-			ret = action.toUpperCase();
+			ret = action.toUpperCase(Locale.getDefault());
 		}
 		
 		return ret;

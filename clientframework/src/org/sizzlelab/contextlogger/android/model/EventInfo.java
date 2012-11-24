@@ -57,7 +57,7 @@ public class EventInfo extends EventTimeUtil implements Comparable<EventInfo>{
 
 	@Override
 	public int compareTo(EventInfo another) {
-		return new Long(mEventTime).compareTo(new Long(another.getTime()));
+		return Long.valueOf(mEventTime).compareTo(Long.valueOf(another.getTime()));
 	}
 
 	/**

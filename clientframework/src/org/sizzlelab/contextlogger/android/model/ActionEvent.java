@@ -24,6 +24,8 @@
  */
 package org.sizzlelab.contextlogger.android.model;
 
+import java.util.Locale;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
@@ -85,7 +87,7 @@ public class ActionEvent extends EventTimeUtil implements Parcelable{
 		}catch(NullPointerException e){
 			return msg;
 		}
-		return msg.toUpperCase();
+		return msg.toUpperCase(Locale.getDefault());
 	}
 	
 	public final long getStartTimestamp(){
