@@ -85,7 +85,6 @@ public class MainPipeline extends ConfiguredPipeline {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		System.out.println("MainPipeline: onHandleIntent: intent: " + intent.getAction());
 		if (ACTION_UPDATE_TRIGGERS_CONFIG.equals(intent.getAction()))
 		{
 			if ( TriggerManager.isEnabled())

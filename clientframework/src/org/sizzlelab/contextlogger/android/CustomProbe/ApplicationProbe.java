@@ -113,10 +113,6 @@ public class ApplicationProbe extends Probe implements ApplicationSensorKeys, Co
 				Bundle data = new Bundle();
 				data.putString(APPLICATION_ACTION, appAction);
 				data.putString(APPLICATION_DATA, appData);
-				
-				System.out.println("APPLICATION_ACTION: " + appAction);
-				System.out.println("APPLICATION_DATA: " + appData);
-				
 				sendProbeData(Utils.getTimestamp(), data);
 				
 				m_lA = appAction;

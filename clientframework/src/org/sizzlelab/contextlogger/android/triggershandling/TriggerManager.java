@@ -35,6 +35,7 @@ import org.json.JSONObject;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 public class TriggerManager extends BroadcastReceiver 
 {
@@ -97,7 +98,7 @@ public class TriggerManager extends BroadcastReceiver
 				{
 					String action = tp.getAction();
 					String config = tp.getConfig();
-					if (action != null && !action.isEmpty() && config != null && !config.isEmpty())
+					if ((!TextUtils.isEmpty(action)) && (!TextUtils.isEmpty(config)))
 					{
 						mTMap.put(action, config);
 					}
