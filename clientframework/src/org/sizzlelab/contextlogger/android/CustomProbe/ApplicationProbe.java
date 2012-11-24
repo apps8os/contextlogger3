@@ -46,7 +46,7 @@ public class ApplicationProbe extends Probe implements ApplicationSensorKeys, Co
 	private static final String CUSTOM_INTENT_ACTION = "org.sizzlelab.contextlogger.android.customIntentAction";
 	private TriggerManager mTMgr = null;
 	private static final String TRIGGERS_INTENT_ACTION = "org.sizzlelab.contextlogger.android.triggersIntentAction";
-	
+
 	@Override
 	public String[] getRequiredPermissions() {
 		return new String[]{};
@@ -70,7 +70,7 @@ public class ApplicationProbe extends Probe implements ApplicationSensorKeys, Co
 		air = new ApplicationIntentReceiver();
 		IntentFilter intentFilter = new IntentFilter(CUSTOM_INTENT_ACTION);
 		registerReceiver(air, intentFilter);
-		
+
 		mTMgr = TriggerManager.getInstance();
 		IntentFilter if2 = new IntentFilter(TRIGGERS_INTENT_ACTION);
 		registerReceiver(mTMgr, if2);
@@ -101,7 +101,7 @@ public class ApplicationProbe extends Probe implements ApplicationSensorKeys, Co
 	}
 
 	private class ApplicationIntentReceiver extends BroadcastReceiver {
-		
+
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			final String intentAction = intent.getAction();
@@ -109,15 +109,19 @@ public class ApplicationProbe extends Probe implements ApplicationSensorKeys, Co
 			{
 				String appAction = intent.getExtras().getString("APPLICATION_ACTION");
 				String appData = intent.getExtras().getString("APPLICATION_DATA");
-				
+
 				Bundle data = new Bundle();
 				data.putString(APPLICATION_ACTION, appAction);
 				data.putString(APPLICATION_DATA, appData);
+
+				System.out.println("APPLICATION_ACTION: " + appAction);
+				System.out.println("APPLICATION_DATA: " + appData);
+
 				sendProbeData(Utils.getTimestamp(), data);
-				
+
 				m_lA = appAction;
 				m_lAD = appData;
-				
+
 				if (TriggerManager.isEnabled())
 				{
 					mTMgr.handleAction(appAction);
@@ -125,7 +129,7 @@ public class ApplicationProbe extends Probe implements ApplicationSensorKeys, Co
 			}
 		}
 	}
-	
+
 	public static String getLastAction() {
 		return m_lA;
 	}
