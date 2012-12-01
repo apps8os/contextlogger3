@@ -294,17 +294,10 @@ public class Main extends Activity implements OnSharedPreferenceChangeListener, 
 	private String getActionTag(String action)
 	{
 		String ret = "";
-<<<<<<< HEAD
-		if (action != null && !action.isEmpty())
-		{
-			action = action.replaceAll(" ", "_");
-			ret = action.toUpperCase();
-=======
 		if (!TextUtils.isEmpty(action))
 		{
 			action = action.replaceAll(" ", "_");
 			ret = action.toUpperCase(Locale.getDefault());
->>>>>>> chao_develop
 		}
 		
 		return ret;

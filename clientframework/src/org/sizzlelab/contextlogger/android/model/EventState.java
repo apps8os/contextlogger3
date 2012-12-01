@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-package org.sizzlelab.contextlogger.android.model;
-
-public enum EventState {
-	UNKNOWN, START, STOP, CANCEL
-}
-=======
 /**
  * Copyright (c) 2012 Aalto University and the authors
  *
@@ -34,4 +27,3 @@ package org.sizzlelab.contextlogger.android.model;
 public enum EventState {
 	UNKNOWN, START, STOP, INVALIDATE
 }
->>>>>>> chao_develop
