@@ -25,6 +25,7 @@
 package org.sizzlelab.contextlogger.android.io;
 
 import static edu.mit.media.funf.AsyncSharedPrefs.async;
+import static edu.mit.media.funf.Utils.TAG;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,6 +86,7 @@ public class MainPipeline extends ConfiguredPipeline {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
+//		System.out.println("MainPipeline: onHandleIntent: " + ((intent == null) ? "null" : intent.getAction()));
 		if (ACTION_UPDATE_TRIGGERS_CONFIG.equals(intent.getAction()))
 		{
 			if ( TriggerManager.isEnabled())
@@ -233,6 +235,7 @@ public class MainPipeline extends ConfiguredPipeline {
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) 
 	{
+		Log.i(TAG, "MainPipeline: Shared Prefs changed...........................................key: " + key);
 		if (sharedPreferences.equals(getTriggersConfig().getPrefs()) && TriggersConfig.TRIGGERS_CONFIG_UPDATE_PERIOD_KEY.equals(key))
 		{
 			cancelTriggersAlarm(ACTION_UPDATE_TRIGGERS_CONFIG);
@@ -240,7 +243,26 @@ public class MainPipeline extends ConfiguredPipeline {
 		}
 		else
 		{
-			super.onSharedPreferenceChanged(sharedPreferences, key);			
+			/* Nalin: 08.12.2012: Fixing the issue of scheduling.
+			 * Issue: method 'onSharedPreferenceChanged' in super class schedules
+			 * jobs using alarmManager.setInexactRepeating which is not setting (overriding) 
+			 * alarms due to same requestCode. 
+			 * Fix (a bit of hack): As super class ConfiguredPipeline is part of Funf jar, 
+			 * 'onSharedPreferenceChanged' from super is not called and corresponding 
+			 * implementation is done in this class to avoid changes in the funf jar.
+			 * - Below call of super class is commented and
+			 * - New methods are added as follows,
+			 *    - onSharedPreferenceChangedFromSuper()
+			 *    - scheduleMyAlarms()
+			 *    - scheduleMyAlarm()
+			 *    - cancelMyAlarm()
+			 *    - ensureServicesAreRunning()
+			 *    - ensureServicesAreRunningFromSuper()
+			 *    - reload()
+			 */
+//			 super.onSharedPreferenceChanged(sharedPreferences, key);			
+			
+			onSharedPreferenceChangedFromSuper(sharedPreferences, key);
 		}
 	}
 	
@@ -261,7 +283,7 @@ public class MainPipeline extends ConfiguredPipeline {
 			AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 			long delayInMilliseconds = Utils.secondsToMillis(delayInSeconds);
 			long startTimeInMilliseconds = System.currentTimeMillis() + delayInMilliseconds;
-			Log.i(LOGGER_CLASS, "Scheduling alarm for '" + action + "' at " + Utils.millisToSeconds(startTimeInMilliseconds) + " and every " + delayInSeconds  + " seconds");
+			Log.i(LOGGER_CLASS, "MainPipeline: Scheduling alarm for '" + action + "' at " + Utils.millisToSeconds(startTimeInMilliseconds) + " and every " + delayInSeconds  + " seconds");
 			alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, startTimeInMilliseconds, delayInMilliseconds, pi);
 		}
 	}
@@ -425,5 +447,142 @@ public class MainPipeline extends ConfiguredPipeline {
 			}
 		}
 		return bundle;
+	}
+	
+	/* *************************** Fix for scheduling (Nalin: 08.12.2012) *************************** */
+	/* requestCodes for below alarms
+	 * 1. ACTION_UPDATE_CONFIG = 1001
+	 * 2. ACTION_ARCHIVE_DATA = 1002
+	 * 3. ACTION_UPLOAD_DATA = 1003
+	 */
+	private static final int ACTION_UPDATE_CONFIG_REQCODE = 1001;
+	private static final int ACTION_ARCHIVE_DATA_REQCODE = 1002;
+	private static final int ACTION_UPLOAD_DATA_REQCODE = 1003;
+	
+	public void onSharedPreferenceChangedFromSuper (SharedPreferences sharedPreferences, String key) {
+//		Log.i(TAG, "MainPipeline: Shared Prefs changed...........................................key: " + key);
+		if (sharedPreferences.equals(getConfig().getPrefs())) 
+		{
+			Log.i(TAG, "MainPipeline: Configuration changed. isEnabled: " + isEnabled());
+			onConfigChange(getConfig().toString(true));			// Public method from super must be called
+			if (FunfConfig.isDataRequestKey(key)) 
+			{
+				if (isEnabled()) {
+					String probeName = FunfConfig.keyToProbename(key);
+					sendProbeRequest(probeName);				// Public method from super must be called
+				}
+			} else if (FunfConfig.CONFIG_UPDATE_PERIOD_KEY.equals(key)) {
+//				Log.i(TAG, "MainPipeline: cancelAlarm for: " + ACTION_UPDATE_CONFIG);
+				cancelMyAlarm(ACTION_UPDATE_CONFIG, ACTION_UPDATE_CONFIG_REQCODE);
+				if (isEnabled()) {
+					long configUpdatePeriod = getConfig().getConfigUpdatePeriod();
+					if (configUpdatePeriod > 0)
+					{
+						scheduleMyAlarm(ACTION_UPDATE_CONFIG, configUpdatePeriod, ACTION_UPDATE_CONFIG_REQCODE);
+					}
+				}
+			} else if (FunfConfig.DATA_ARCHIVE_PERIOD_KEY.equals(key)) {
+//				Log.i(TAG, "MainPipeline: cancelAlarm for: " + ACTION_ARCHIVE_DATA);
+				cancelMyAlarm(ACTION_ARCHIVE_DATA, ACTION_ARCHIVE_DATA_REQCODE);
+				if (isEnabled()) {
+					long dataArchivePeriod = getConfig().getDataArchivePeriod();
+					if (dataArchivePeriod > 0)
+					{
+						scheduleMyAlarm(ACTION_ARCHIVE_DATA, dataArchivePeriod, ACTION_ARCHIVE_DATA_REQCODE);
+					}
+				}
+			} else if (FunfConfig.DATA_UPLOAD_PERIOD_KEY.equals(key)) {
+//				Log.i(TAG, "MainPipeline: cancelAlarm for: " + ACTION_UPLOAD_DATA);
+				cancelMyAlarm(ACTION_UPLOAD_DATA, ACTION_UPLOAD_DATA_REQCODE);
+				if (isEnabled()) {
+					long dataUploadPeriod = getConfig().getDataUploadPeriod();
+					if (dataUploadPeriod > 0)
+					{
+						scheduleMyAlarm(ACTION_UPLOAD_DATA, dataUploadPeriod, ACTION_UPLOAD_DATA_REQCODE);
+					}
+				}
+			}
+			// Nalin (08.12.2012): commenting as doing samething above
+//			if (isEnabled()) {
+//				Log.i(TAG, "MainPipeline: scheduling alarms");
+//				scheduleAlarmsFromSuper();
+//			}
+			
+		} else if (sharedPreferences.equals(getSystemPrefs()) && ENABLED_KEY.equals(key)) {
+			Log.i(TAG, "MainPipeline: System prefs changed. calling reload()");
+			reload();
+		}
+	}
+	
+	private void scheduleMyAlarm(String action, long delayInSeconds, int requestCode) {
+		Intent i = new Intent(this, getClass());
+		i.setAction(action);
+		boolean noAlarmExists = (PendingIntent.getService(this, requestCode, i, PendingIntent.FLAG_NO_CREATE) == null);
+//		System.out.println("MainPipeline: scheduleMyAlarm: action: " + action + ", delayInSeconds: " + delayInSeconds + ", requestCode: " + requestCode + ", noAlarmExists: " + noAlarmExists);
+		if (noAlarmExists) {
+			AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+			PendingIntent pi = PendingIntent.getService(this, requestCode, i, PendingIntent.FLAG_UPDATE_CURRENT);
+						
+			long delayInMilliseconds = Utils.secondsToMillis(delayInSeconds);
+			long startTimeInMilliseconds = System.currentTimeMillis() + delayInMilliseconds;
+			
+			Log.i(TAG, "MainPipeline: Scheduling alarm for '" + action + "' at " + Utils.millisToSeconds(startTimeInMilliseconds) + " and every " + delayInSeconds  + " seconds");
+			
+			// Inexact repeating doesn't work unlesss interval is 15, 30 min, or 1, 6, or 24 hours
+			alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, startTimeInMilliseconds, delayInMilliseconds, pi);
+		}
+	}
+	
+	private void cancelMyAlarm(String action, int requestCode) {
+//		System.out.println("MainPipeline: cancelAlarmFromSuper(): action: " + action);
+		Intent i = new Intent(this, getClass());
+		i.setAction(action);
+		PendingIntent pi = PendingIntent.getService(this, requestCode, i, PendingIntent.FLAG_NO_CREATE);
+		if (pi != null) {
+			AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+			alarmManager.cancel(pi);
+			pi.cancel();
+		}
+	}
+	
+	@Override
+	public void ensureServicesAreRunning() {
+//		System.out.println("MainPipeline: ensureServicesAreRunning...");
+		ensureServicesAreRunningFromSuper();
+	}
+	
+	private void ensureServicesAreRunningFromSuper() {
+//		System.out.println("MainPipeline: ensureServicesAreRunning()...");
+
+		if (isEnabled()) {
+			scheduleMyAlarms();
+			sendProbeRequests();		// <--- It is OK to use the method from super class
+		}
+	}
+	
+	private void scheduleMyAlarms() {
+//		System.out.println("MainPipeline: scheduleAlarms()...");
+		
+		FunfConfig config = getConfig();
+		scheduleMyAlarm(ACTION_UPDATE_CONFIG, config.getConfigUpdatePeriod(), ACTION_UPDATE_CONFIG_REQCODE);
+		scheduleMyAlarm(ACTION_ARCHIVE_DATA, config.getDataArchivePeriod(), ACTION_ARCHIVE_DATA_REQCODE);
+		long uploadPeriod = config.getDataUploadPeriod();
+		if (uploadPeriod > 0) {
+			scheduleMyAlarm(ACTION_UPLOAD_DATA, config.getDataUploadPeriod(), ACTION_UPLOAD_DATA_REQCODE);
+		}
+		
+		scheduleTriggersAlarms();
+	}
+
+	@Override
+	public void reload() {
+		
+		// cancel my alarms if exists
+		cancelMyAlarm(ACTION_UPDATE_CONFIG, ACTION_UPDATE_CONFIG_REQCODE);
+		cancelMyAlarm(ACTION_ARCHIVE_DATA, ACTION_ARCHIVE_DATA_REQCODE);
+		cancelMyAlarm(ACTION_UPLOAD_DATA, ACTION_UPLOAD_DATA_REQCODE);
+		cancelTriggersAlarm(ACTION_UPDATE_TRIGGERS_CONFIG);
+		
+		super.reload();
 	}
 }
