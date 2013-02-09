@@ -1,0 +1,85 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.sizzlelab.contextlogger.android"
+    android:installLocation="preferExternal"
+    android:versionCode="14"
+    android:versionName="1.4" >
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_HISTORY_BOOKMARKS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <application
+        android:name=".travel.TravelApp"
+        android:allowBackup="false"
+        android:icon="@drawable/icon"
+        android:label="@string/travel_app_name"
+        android:theme="@style/Holo.Theme.Light.DarkActionBar" >
+        <uses-library
+            android:name="com.google.gson"
+            android:required="false" />
+        <uses-library
+            android:name="edu.mit.media.funf"
+            android:required="false" />
+
+        <activity
+            android:name=".travel.TravelActivity"
+            android:label="@string/travel_app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.contextlogger.action.START" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service android:name="edu.mit.media.funf.probe.builtin.CellProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.WifiProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.LocationProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.OrientationSensorProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.AccelerometerSensorProbe" />
+        <service android:name="org.sizzlelab.contextlogger.android.customProbe.ApplicationProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.BatteryProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.HardwareInfoProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.BluetoothProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.GravitySensorProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.LinearAccelerationSensorProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.GyroscopeSensorProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.RotationVectorSensorProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.LightSensorProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.ProximitySensorProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.MagneticFieldSensorProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.PressureSensorProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.TemperatureSensorProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.ScreenProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.BrowserSearchesProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.RunningApplicationsProbe" />
+        <service android:name="edu.mit.media.funf.probe.builtin.AndroidInfoProbe" />
+
+        <!-- Framework services -->
+        <service android:name="org.sizzlelab.contextlogger.android.io.MainPipeline" />
+        <service android:name="edu.mit.media.funf.storage.NameValueDatabaseService" />
+        <service android:name="edu.mit.media.funf.storage.HttpUploadService" />
+    </application>
+
+</manifest>

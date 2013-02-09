@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FCFCFC"
+    android:isScrollContainer="true"
+>
+<TextView  
+    android:layout_height="wrap_content" 
+    android:layout_width="wrap_content"
+    android:id="@+id/label" 
+    android:text="@string/service_status" 
+    android:layout_marginRight="10dip"
+	android:layout_marginTop="2dip"
+	android:layout_marginLeft="10dip"
+	android:textColor="#003399"
+	android:textSize="9pt"
+/>
+
+<TextView  
+    android:layout_height="wrap_content" 
+    android:layout_width="wrap_content"
+    android:id="@+id/label_start_service" 
+    android:text="@string/start_service_instr" 
+    android:layout_marginRight="10dip"
+	android:layout_marginTop="2dip"
+	android:layout_marginLeft="10dip"
+	android:layout_below="@+id/label"
+	android:textColor="#000000"
+	android:textSize="9pt"
+/>
+
+<Button 
+    android:layout_height="wrap_content" 
+    android:layout_width="wrap_content" 
+    android:id="@+id/btn_toggle" 
+    android:text="@string/btn_start_service"
+	android:layout_marginRight="10dip"
+	android:layout_marginTop="5dip"
+	android:layout_marginLeft="10dip"
+	android:layout_below="@+id/label_start_service"
+	android:layout_alignParentRight="true" 
+    android:onClick="btnToggleClicked">
+</Button>
+
+<TextView  
+    android:layout_height="wrap_content" 
+    android:layout_width="wrap_content"
+    android:id="@+id/label_choose_activity" 
+    android:text="@string/choose_activity_instr" 
+    android:layout_marginRight="10dip"
+	android:layout_marginTop="10dip"
+	android:layout_marginLeft="10dip"
+	android:layout_below="@+id/btn_toggle"
+	android:textColor="#000000"
+	android:textSize="9pt"
+/>
+
+<Spinner 
+	android:id="@+id/activity_spinner"
+	android:layout_width="200dip"
+	android:layout_height="wrap_content"
+	android:entries="@array/activity_array"
+	android:prompt="@string/activity_prompt"
+	android:layout_below="@+id/label_choose_activity"
+	android:layout_marginRight="2dip"
+	android:layout_marginTop="5dip"
+	android:layout_marginLeft="10dip"
+/>
+
+<Button 
+    android:layout_height="wrap_content" 
+    android:layout_width="wrap_content" 
+    android:id="@+id/btn_toggle_activity" 
+    android:text="@string/btn_start_activity"
+	android:layout_toRightOf="@+id/activity_spinner"
+	android:layout_alignTop="@+id/activity_spinner"
+    android:onClick="btnActivityClicked">
+</Button>
+
+<TextView
+   android:id="@+id/tv_message"
+   android:layout_width="fill_parent"
+   android:layout_height="wrap_content" 
+   android:layout_alignParentLeft="true"
+   android:layout_below="@id/activity_spinner"
+   android:layout_marginRight="2dip"
+   android:layout_marginTop="5dip"
+   android:layout_marginLeft="10dip"
+   android:textColor="#990033"
+	android:textSize="9pt"
+   android:text=""/>
+
+<TextView 
+    android:id="@+id/dataCountText" 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content"
+	android:layout_alignParentLeft="true"
+	android:layout_below="@+id/tv_message"
+    android:layout_marginRight="2dip"
+    android:layout_marginTop="2dip"
+    android:layout_marginLeft="10dip"
+	android:textColor="#003399"
+	android:textSize="8pt"
+/>
+
+<TextView
+    android:layout_height="wrap_content" 
+    android:layout_width="wrap_content" 
+    android:layout_toRightOf="@+id/label" 
+    android:layout_alignBottom="@+id/label" 
+    android:id="@+id/lbl_status">
+</TextView>
+
+<Button
+    android:layout_alignParentBottom="true" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:id="@+id/btn_export" 
+    android:text="@string/btn_export"
+    android:onClick="btn_export_clicked">
+</Button>
+
+<!--
+<Button 
+    android:layout_alignParentBottom="true" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/btn_export"
+    android:id="@+id/btn_upload"
+    android:text="@string/btn_upload" 
+    android:layout_marginLeft="10dip"
+	android:layout_alignParentRight="true" 
+    android:onClick="btn_upload_clicked">
+</Button>
+-->
+</RelativeLayout>

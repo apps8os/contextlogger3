@@ -1,0 +1,6 @@
+[submodule "traveldiary/ActionBarSherlock"]
+	path = traveldiary/ActionBarSherlock
+	url = git@github.com:chaow/ActionBarSherlock.git
+[submodule "traveldiary/HoloEverywhere"]
+	path = traveldiary/HoloEverywhere
+	url = git@github.com:chaow/HoloEverywhere.git
