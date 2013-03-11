@@ -46,7 +46,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import fi.aalto.chaow.android.app.BaseFragmentActivity;
 import fi.aalto.chaow.android.app.BaseFragmentActivity.OnSupportFragmentListener;
-
+@Deprecated 
 public class MainActivity extends BaseFragmentActivity implements OnSupportFragmentListener, 
 																Constants, OnSharedPreferenceChangeListener{
 	

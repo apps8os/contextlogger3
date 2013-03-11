@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.sizzlelab.contextlogger.android"
     android:installLocation="preferExternal"
-    android:versionCode="14"
-    android:versionName="1.4" >
+    android:versionCode="15"
+    android:versionName="1.4.1" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -58,7 +58,7 @@
         <service android:name="edu.mit.media.funf.probe.builtin.LocationProbe" />
         <service android:name="edu.mit.media.funf.probe.builtin.OrientationSensorProbe" />
         <service android:name="edu.mit.media.funf.probe.builtin.AccelerometerSensorProbe" />
-        <service android:name="org.sizzlelab.contextlogger.android.customProbe.ApplicationProbe" />
+        <service android:name="org.sizzlelab.contextlogger.android.CustomProbe.ApplicationProbe" />
         <service android:name="edu.mit.media.funf.probe.builtin.BatteryProbe" />
         <service android:name="edu.mit.media.funf.probe.builtin.HardwareInfoProbe" />
         <service android:name="edu.mit.media.funf.probe.builtin.BluetoothProbe" />

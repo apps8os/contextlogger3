@@ -27,7 +27,7 @@ package org.sizzlelab.contextlogger.android.test;
 import java.util.Locale;
 
 import org.sizzlelab.contextlogger.android.R;
-import org.sizzlelab.contextlogger.android.customProbe.ApplicationProbe;
+import org.sizzlelab.contextlogger.android.CustomProbe.ApplicationProbe;
 import org.sizzlelab.contextlogger.android.io.MainPipeline;
 import org.sizzlelab.contextlogger.android.utils.Constants;
 

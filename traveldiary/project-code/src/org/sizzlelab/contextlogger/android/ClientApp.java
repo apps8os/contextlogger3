@@ -42,7 +42,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.Gravity;
 import android.widget.Toast;
-
+@Deprecated 
 public class ClientApp extends Application{
 
 	private static ClientApp mInstance = null;

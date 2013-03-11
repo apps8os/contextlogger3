@@ -80,7 +80,7 @@ import fi.aalto.chaow.android.app.BaseAlertDialog;
 import fi.aalto.chaow.android.app.BaseAlertDialog.AlertDialogListener;
 import fi.aalto.chaow.android.app.BaseFragmentActivity.OnSupportFragmentListener;
 import fi.aalto.chaow.android.utils.TextHelper;
-
+@Deprecated 
 public class LoggerPanelFragment extends ListFragment implements OnClickListener, Constants, OnContextLoggerStatusChangeListener,
 																				OnCheckedChangeListener, OnActivityEventUpdateListener,
 																				OnItemSelectedListener {

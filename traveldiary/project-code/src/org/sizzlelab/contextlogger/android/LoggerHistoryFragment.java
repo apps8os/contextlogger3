@@ -38,7 +38,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SimpleAdapter;
-
+@Deprecated 
 public class LoggerHistoryFragment extends ListFragment{
 
 	private ArrayList<HashMap<String, Object>> mShownContent = null;
