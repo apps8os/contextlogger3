@@ -8,3 +8,12 @@ Folder structure:
 * loggerui -- UI for self logging your daily activities and contexts
 * traveldiary -- an app for logging trips incl. transport modes that were used
 * database -- code for integrating data into database and processing it
+
+
+Note after clone the project:
+* update submodules (logger and travlediary)
+  -git submodule init
+  -git submodule sync
+  -git submodule update
+* update the android-suport-v4.jar, if Eclipse complain about the library mismatching.
+  
