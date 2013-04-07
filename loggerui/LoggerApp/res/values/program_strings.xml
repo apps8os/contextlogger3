@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="event_json_file_name_en">event_tag_en.json</string>
+    <string name="event_json_file_name_cn">event_tag_cn.json</string>
+    <string name="event_json_file_name_fi">event_tag_fi.json</string>
+    <string name="event_json_first_tag">eventTags</string>
+    <string name="event_json_second_tag">name</string>
+    <string name="img_desc">image</string>
+
+    <string name="lang_cn">zho</string>
+    <string name="lang_fi">fin</string>
+    <string name="lang_en">eng</string>
+</resources>
