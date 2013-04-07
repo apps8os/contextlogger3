@@ -4,3 +4,4 @@
 [submodule "traveldiary/HoloEverywhere"]
 	path = traveldiary/HoloEverywhere
 	url = git@github.com:chaow/HoloEverywhere.git
+
