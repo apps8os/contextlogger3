@@ -12,8 +12,10 @@ Folder structure:
 
 Note after clone the project:
 * update submodules (logger and travlediary)
-  -git submodule init
-  -git submodule sync
-  -git submodule update
+``` 
+  git submodule init
+  git submodule sync
+  git submodule update
+``` 
 * update the android-suport-v4.jar, if Eclipse complain about the library mismatching.
   
