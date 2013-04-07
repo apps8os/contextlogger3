@@ -12,6 +12,7 @@ Folder structure:
 
 Note after clone the project:
 * update submodules (logger and travlediary)
+
 ``` 
   git submodule init
   git submodule sync
