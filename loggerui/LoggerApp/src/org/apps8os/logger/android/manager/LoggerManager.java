@@ -106,7 +106,7 @@ public final class LoggerManager implements Constants {
 		Intent intent = new Intent();
 		intent.setAction(CUSTOM_INTENT_ACTION);
 		intent.putExtra("APPLICATION_ACTION", actionPayload);
-		if(!TextUtils.isEmpty(actionPayload)){
+		if(!TextUtils.isEmpty(data)){
 			intent.putExtra("APPLICATION_DATA", data);			
 		}
 		context.sendBroadcast(intent);
