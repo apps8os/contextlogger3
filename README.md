@@ -18,5 +18,6 @@ contextlogger3
   cd contextlogger3
   git submodule update --init --recursive
 ``` 
+* import the project and its submodules as Android project (File -> Import -> Android -> Existing Android Code Into Workspace).
 * update the android-suport-v4.jar, if Eclipse complain about the library mismatching.
   
