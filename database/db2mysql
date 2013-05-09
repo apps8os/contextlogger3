@@ -1,0 +1,85 @@
+#!/bin/bash
+# show commands being executed, per debug
+set -x
+
+# define database connectivity
+_db="import"
+_db_user="root"
+_db_password="XTGCxtgc"
+
+# define directory containing CSV files
+_csv_directory="/root/scripts"
+
+#备db文件
+cp /var/www/html/uploads/*.db /var/www/dbbackup/
+mv /var/www/html/uploads/*.db /var/www/tmp/
+# go into directory
+cd $_csv_directory
+
+# 解密压缩db文件
+python dbdecrypt.py /var/www/tmp/*.db
+python dbmerge.py /var/www/tmp/*.db
+rm -f /var/www/tmp/*
+
+# db2csv
+python db2csv.py merged_*.db
+rm -f merged_*.db
+
+
+#remove utf8 BOM
+sed -i -e '1s/^\xef\xbb\xbf//' *.csv
+
+# get a list of CSV files in directory
+_csv_files=`ls -1 *.csv`
+
+for _csv_file in ${_csv_files[@]}
+do
+  # remove file extension$
+  _csv_file_extensionless=`echo $_csv_file | sed 's/\(.*\)\..*/\1/'`
+  #rename csv
+  mv $_csv_file ${_csv_file_extensionless##*.}.csv
+  
+ 
+done
+
+# get a list of CSV files in directory
+_csv_files=`ls -1 *.csv`
+
+# loop through csv files
+for _csv_file in ${_csv_files[@]}
+do
+    
+  # remove file extension
+  _csv_file_extensionless=`echo $_csv_file | sed 's/\(.*\)\..*/\1/'`
+  
+  # define table name
+  _table_name="${_csv_file_extensionless}"
+  
+  # get header columns from CSV file
+  _header_columns=`head -1 $_csv_directory/$_csv_file | tr ',' '\n' | sed 's/^"//' | sed 's/"$//' | sed 's/ /_/g' | sed 's/-//g' | sed 's/\r//g'`
+  _header_columns_string=`head -1 $_csv_directory/$_csv_file | sed 's/ /_/g' | sed 's/"//g' | sed 's/-//g' | sed 's/\r//g'`
+  
+  # ensure table exists
+  mysql -u $_db_user -p$_db_password $_db << eof
+    CREATE TABLE IF NOT EXISTS \`$_table_name\` (
+      id0 int(11) NOT NULL auto_increment,
+      PRIMARY KEY  (id0)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+eof
+  
+  #loop through header columns
+  for _header in ${_header_columns[@]}
+  do
+
+    # add column
+    mysql -u $_db_user -p$_db_password $_db --execute="alter table \`$_table_name\` add column \`${_header//dataRequests_edu.mit.media.funf.probe.builtin./}\` text"
+
+  done
+
+  #import csv into mysql
+mysqlimport --fields-enclosed-by='"' --fields-terminated-by=',' --ignore-lines=1 --default-character-set=utf8 --lines-terminated-by="\n" --columns=${_header_columns_string//dataRequests_edu.mit.media.funf.probe.builtin./} --local -u $_db_user -p$_db_password $_db $_csv_directory/$_csv_file  
+  done
+#删除csv文件
+rm -f *.csv
+date
+exit
