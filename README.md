@@ -14,7 +14,7 @@ contextlogger3
 * You should clone git repo, init and update submodules
 
 ``` 
-  git clone git@github.com:sizzlelab/contextlogger3.git
+  git clone git@github.com:apps8os/contextlogger3.git
   cd contextlogger3
   git submodule update --init --recursive
 ``` 
