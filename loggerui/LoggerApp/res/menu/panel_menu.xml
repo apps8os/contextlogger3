@@ -33,6 +33,12 @@
  		android:icon="@android:drawable/ic_menu_view"
     	/>    
 
+     <item
+        android:id="@+id/menu_history2"
+    	android:title="@string/view_history2"
+ 		android:icon="@android:drawable/ic_menu_view"
+    	/>  
+    	     
     <item
         android:id="@+id/menu_toggle_service"
  		android:icon="@android:drawable/ic_menu_manage"

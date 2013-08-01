@@ -93,22 +93,26 @@
         	android:clickable="true"  
         	android:scaleType="fitCenter"
         	android:visibility="gone" 
+            android:paddingLeft="16dp"
+            android:paddingRight="8dp"
             android:contentDescription="@string/img_desc" 
             android:src="@android:drawable/ic_menu_edit"
-            android:background="@android:color/white"
+            android:background="@android:color/transparent"
             />        
         
         <ImageView 
             android:id="@+id/image_view_delete"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-        	android:clickable="true"   
+        	android:clickable="true" 
+        	android:focusable="true"  
         	android:scaleType="fitCenter"
             android:visibility="gone"
-            android:layout_marginLeft="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:contentDescription="@string/img_desc" 
             android:src="@android:drawable/ic_menu_delete"
-            android:background="@android:color/white"
+            android:background="@android:color/transparent"
             />
         
     </LinearLayout>

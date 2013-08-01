@@ -1,5 +1,3 @@
-package org.apps8os.logger.android.manager;
-
 /**
  * Copyright (c) 2013 Aalto University and the authors
  *
@@ -24,6 +22,7 @@ package org.apps8os.logger.android.manager;
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
+package org.apps8os.logger.android.manager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,14 +32,32 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
 import org.apps8os.logger.android.LoggerApp;
+import org.apps8os.logger.android.MainActivity;
+import org.apps8os.logger.android.NfcMainActivity;
+import org.apps8os.logger.android.R;
+import org.apps8os.logger.android.model.ActionEvent;
+import org.apps8os.logger.android.storage.ActionEventCursor;
+import org.apps8os.logger.android.util.AndroidVersionHelper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
@@ -52,7 +69,7 @@ import android.util.DisplayMetrics;
  * @author Chao Wei
  *
  */
-public final class AppManager {
+public final class AppManager extends LoggerWrapper {
 
 	private AppManager(){
 	}
@@ -60,6 +77,7 @@ public final class AppManager {
 	private static String mISO3Lang = null;;
 	
 	private static int mPreCount = 0;
+
 	
 	/**
 	 * Get the total number of the pre-defined actions (activities)
@@ -109,8 +127,6 @@ public final class AppManager {
 	/**
 	 * Get the action events (activities) from the pre-defined file.
 	 * 
-	 * <p><b>To be changed still.</b></p>
-	 * 
 	 * @param context
 	 * @param jsonFileNameResId
 	 * @param eventTagNameResId
@@ -119,16 +135,21 @@ public final class AppManager {
 	 * @throws JSONException
 	 * @throws IOException
 	 */
-	@Deprecated
-	public static final ArrayList<String> getEventTagsFromAsset(final Context context, final int jsonFileNameResId, 
-									final int eventTagNameResId, final int nameResId) throws JSONException, IOException{
+	public static final ArrayList<String> getEventTagsFromAsset(final Context context, 
+																final int jsonFileNameResId, 
+																final int eventTagNameResId, 
+																final int nameResId) 
+																		throws JSONException, IOException {
 		return parsingJsonToList(getJSONString(context, jsonFileNameResId), 
 						getString(context, eventTagNameResId), getString(context, nameResId));
 	}
 	
 	private static final ArrayList<String> parsingJsonToList(final String jsonString, 
-										final String eventTagName, final String name) throws JSONException{
-		if(TextUtils.isEmpty(jsonString) || TextUtils.isEmpty(eventTagName) || TextUtils.isEmpty(name)){
+															final String eventTagName, 
+															final String name) throws JSONException {
+		if(TextUtils.isEmpty(jsonString) 
+				|| TextUtils.isEmpty(eventTagName) 
+				|| TextUtils.isEmpty(name)){
 			throw new IllegalArgumentException("Invalid parameters");
 		}
 		ArrayList<String> array = null;
@@ -149,51 +170,49 @@ public final class AppManager {
 		return array;
 	}
 	
-	private static final String getJSONString(final Context context, final int jsonFileNameResId) throws IOException{
+	private static final String getJSONString(final Context context,
+												final int jsonFileNameResId) throws IOException {
 		InputStream is = null;
 		String jsonString = null;
-		try {
-			is = context.getAssets().open(getString(context, jsonFileNameResId));
-			Writer w = new StringWriter();
-			char[] buffer = new char[1024];
-			Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"), 8000);
-			int n;
-			while((n = reader.read(buffer)) != -1){
-				w.write(buffer, 0, n);
-			}
-			jsonString = w.toString();
-		} catch (IOException e) {
-			throw new IOException(e.getMessage());
-		}finally{
-			if(is != null){
-				try {
-					is.close();
-				} catch (IOException e) {
-					throw new IOException(e.getMessage());
-				}
-			}
+		is = context.getApplicationContext().getAssets().open(getString(context, jsonFileNameResId));
+		Writer w = new StringWriter();
+		char[] buffer = new char[1024];
+		Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"), 8000);
+		int n;
+		while((n = reader.read(buffer)) != -1){
+			w.write(buffer, 0, n);
+		}
+		jsonString = w.toString();
+		if(is != null){
+			is.close();
 		}
 		return jsonString;
 	}
 	
-	private static final String getString(final Context context, final int resId){
-		return context.getResources().getString(resId);
-	}
-
-	/**
-	 * Check if the device OS is Honeycomb (API level 11 or 12).
-	 * 
-	 * @return
-	 */
-	public static final boolean isHoneycomb(){
-		boolean ret = false;
-		final int sdkInt = android.os.Build.VERSION.SDK_INT;
-		try{
-			ret = ((sdkInt == android.os.Build.VERSION_CODES.HONEYCOMB_MR2)
-					|| (sdkInt == android.os.Build.VERSION_CODES.HONEYCOMB_MR1));
-		} catch (Exception e){ 
+	public static List<HashMap<String, String>> getLoggerNfcDemoList(final Context context,
+												final int jsonFileNameResId) throws IOException, JSONException {
+		JSONObject jsonData = new JSONObject(getJSONString(context, jsonFileNameResId));
+		if(jsonData.has("contextLogger3NfcDemoList")) {
+			ArrayList<HashMap<String, String>> ret = new ArrayList<HashMap<String,String>>();
+			JSONArray jsonArray = jsonData.getJSONArray("contextLogger3NfcDemoList");
+			for(int i = 0; i < jsonArray.length(); i++) {
+				HashMap<String, String> data = new HashMap<String, String>();
+				JSONObject jo = jsonArray.getJSONObject(i);
+				Iterator<?> keys = jo.keys();
+		        while(keys.hasNext()) {
+		            String key = (String)keys.next();
+					data.put(key, jo.getString(key));		            
+		        }
+		        ret.add(data);
+			}
+			return ret;
 		}
-		return ret;
+		return Collections.emptyList();
+	}
+	
+	
+	private static final String getString(final Context context, final int resId){
+		return context.getApplicationContext().getResources().getString(resId);
 	}
 	
 	/**
@@ -205,6 +224,122 @@ public final class AppManager {
 	public static final boolean isLowDensityDevice(Context context){
 		return (context.getResources().getDisplayMetrics().widthPixels <= 300) 
 				&& (context.getResources().getDisplayMetrics().densityDpi == DisplayMetrics.DENSITY_LOW);
+	}
+	
+	public static ArrayList<ActionEvent> getAllHistoryEvents() {
+		return getEvents(true);
+	}
+	
+	public static ArrayList<ActionEvent> getAllLiveEvents() {
+		return getEvents(false);
+	}
+
+	private static ArrayList<ActionEvent> getEvents(boolean history) {
+		ArrayList<ActionEvent> aeList = new ArrayList<ActionEvent>();
+		ActionEventCursor aec =  getActionEventDatabase().getAllActionEventCursor(history);
+		if((aec != null) && (aec.getCount() > 0)) {
+			while(aec.moveToNext()) {
+				aeList.add(new ActionEvent(aec.getActionName(), aec.getStartTimestamp(), 
+											aec.getBreakTimestamp(), aec.getEventState(),
+											aec.getNoteContent(), aec.isHistory(), 
+											aec.getStartDelay(), aec.getBreakDelay()));
+			}
+			aec.close();
+		}
+		return aeList;
+	}
+	
+	public static void addALiveEvent(final ActionEvent ae) {
+		getActionEventDatabase().add(ae);
+	}
+	
+	public static void updateLiveEvent(final ActionEvent ae) {
+		getActionEventDatabase().updateActionEventBreak(ae);
+	}
+	
+//	public static void addEventNote(final ActionEvent ae) {
+//		getActionEventDatabase().addActionEventNote(ae);
+//	}
+	
+	public static void sendNfcTagEvent(Context context, String eventName) {
+		if(TextUtils.isEmpty(eventName)) return;
+		Intent it = new Intent(AppManager.LOGGER_INTENT_FILTER);
+		it.putExtra(LoggerNFCBroadcastReceiver.NFC_MESSAGE, eventName);
+		LocalBroadcastManager.getInstance(context).sendBroadcast(it);
+	}
+	
+	
+	public static class LoggerNotificationBroadcastReceiver extends BroadcastReceiver {
+
+		public static final String NOTIFICATION_MESSAGE = "notificationMessage";
+		
+		private static int NOTIF_LOGGER_ID = 0x911;
+		private static NotificationManager mNotificationManager = null;
+		private static Context mContext = null;
+		
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if(mNotificationManager == null) {
+				mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);				
+			}
+			mContext = context;
+			if(intent.hasExtra(NOTIFICATION_MESSAGE)) {
+				if(intent.getBooleanExtra(NOTIFICATION_MESSAGE, false)) {
+					createLoggerNotification();
+				} else {
+					cancelLoggerNotification();
+				}				
+			}
+		}
+		
+		private void createLoggerNotification() {
+			Builder notificationBuilder = new NotificationCompat.Builder(mContext);
+			notificationBuilder.setContentTitle(mContext.getResources().getString(R.string.app_name));
+			notificationBuilder.setContentText(mContext.getResources().getString(R.string.app_running_notification));
+			notificationBuilder.setSmallIcon(R.drawable.ic_launcher);
+			notificationBuilder.setOngoing(true);
+			Intent notificationIntent = new Intent(mContext, 
+					AndroidVersionHelper.isHoneycombAbove() ? NfcMainActivity.class : MainActivity.class);
+			PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
+			notificationBuilder.setContentIntent(contentIntent);
+			Notification notification = notificationBuilder.build();
+			mNotificationManager.notify(NOTIF_LOGGER_ID, notification);
+		}
+		
+		private void cancelLoggerNotification() {
+			mNotificationManager.cancel(NOTIF_LOGGER_ID);
+		}
+	}
+	
+	public static abstract class LoggerNFCBroadcastReceiver extends BroadcastReceiver {
+
+		public static final String NFC_MESSAGE = "nfcMessage";
+		
+		private static final long NEXT_MESSAGE_DELAY = 1000L;
+		
+		private long mReceivingTime = -1L;
+		
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if(intent.hasExtra(NFC_MESSAGE)) {
+				final String eventName = intent.getStringExtra(NFC_MESSAGE);
+				if(!TextUtils.isEmpty(eventName)) {
+					if(mReceivingTime < 0 ) {
+						mReceivingTime = System.currentTimeMillis();						
+					} else {
+						if((System.currentTimeMillis() - mReceivingTime) 
+								< NEXT_MESSAGE_DELAY) {
+							return;
+						} else {
+							mReceivingTime = System.currentTimeMillis();													
+						}
+					}
+					handleNfcTagEvent(eventName);
+				}				
+			}
+		}
+		
+		public abstract void handleNfcTagEvent(String eventName);
 	}
 	
 }

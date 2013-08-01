@@ -32,7 +32,7 @@
   	android:layout_marginRight="8dp"
     android:orientation="vertical" >
     
-	<ListView 
+	<org.apps8os.logger.android.widget.LessScrollableListView
 	    android:id="@id/android:list"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -45,11 +45,11 @@
 	    android:layout_height="wrap_content" 
 	    android:layout_width="wrap_content"
         android:layout_margin="10dp"
+        android:layout_gravity="center_vertical"
 	    android:text="@string/no_data" 
    	    android:textColor="@android:color/black"
 	    android:visibility="gone"
 		android:textSize="22sp"
 		/>		
 
-</FrameLayout>    
-    
+</FrameLayout>   

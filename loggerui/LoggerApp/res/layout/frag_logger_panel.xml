@@ -42,7 +42,7 @@
         android:focusable="true"
         android:orientation="horizontal" >
     
-	    <ListView
+	    <org.apps8os.logger.android.widget.LessScrollableListView
 	        android:id="@id/android:list"
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"

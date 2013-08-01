@@ -1,4 +1,3 @@
-package org.apps8os.logger.android.manager;
 /**
  * Copyright (c) 2013 Aalto University and the authors
  *
@@ -23,6 +22,7 @@ package org.apps8os.logger.android.manager;
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
+package org.apps8os.logger.android.manager;
 
 import org.sizzlelab.contextlogger.android.io.MainPipeline;
 import org.sizzlelab.contextlogger.android.utils.Constants;
@@ -35,16 +35,18 @@ import android.text.TextUtils;
  * Helper methods for the application that 
  * handle the record framework.
  * 
- * <p><b>To be changed still.</b></p>
- * 
  * @author Chao Wei
  *
  */
-public final class LoggerManager implements Constants {
+final class LoggerManager implements Constants {
 
 	private static boolean mIsRunning = false;
 
 	private LoggerManager(){
+	}
+
+	public static void init(final Context context) {
+		startLogger(context);
 	}
 	
 	/**
@@ -52,7 +54,7 @@ public final class LoggerManager implements Constants {
 	 * 
 	 * @param context
 	 */
-	public static void startLogger(final Context context){
+	private static void startLogger(final Context context) {
 		toggleService(context, true);
 	}
 	
@@ -62,11 +64,11 @@ public final class LoggerManager implements Constants {
 	 * @param context
 	 * @param enabled
 	 */
-	public static void toggleService(Context context, final boolean enabled){
+	public static void toggleService(Context context, final boolean enabled) {
 		invokeLoggerService(context, enabled ? MainPipeline.ACTION_ENABLE : MainPipeline.ACTION_DISABLE);
 	}
 	
-	private static void invokeLoggerService(Context context, final String action){
+	private static void invokeLoggerService(Context context, final String action) {
 		Intent archiveIntent = new Intent(context, MainPipeline.class);
 		archiveIntent.setAction(action);
 		context.startService(archiveIntent);		
@@ -77,7 +79,7 @@ public final class LoggerManager implements Constants {
 	 * 
 	 * @param context
 	 */
-	public static void exportData(Context context){
+	public static void exportData(Context context) {
 		invokeLoggerService(context, MainPipeline.ACTION_ARCHIVE_DATA);
 	}
 	
@@ -87,8 +89,8 @@ public final class LoggerManager implements Constants {
 	 * @param context
 	 * @return
 	 */
-	public static final boolean isRunning(Context context){
-		mIsRunning = MainPipeline.isEnabled(context);
+	public static final boolean isRunning(Context context) {
+		mIsRunning = MainPipeline.isEnabled(context);			
 		return mIsRunning;
 	}
 	
@@ -99,7 +101,7 @@ public final class LoggerManager implements Constants {
 	 * @param actionPayload
 	 * @param data
 	 */
-	public static void sendEventBoradcast(Context context, final String actionPayload, final String data){
+	public static void sendEventBoradcast(Context context, final String actionPayload, final String data) {
 		if(TextUtils.isEmpty(actionPayload)){
 			throw new IllegalArgumentException("Invalid action payload");
 		}

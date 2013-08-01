@@ -1,4 +1,3 @@
-package org.apps8os.logger.android;
 /**
  * Copyright (c) 2013 Aalto University and the authors
  *
@@ -23,22 +22,17 @@ package org.apps8os.logger.android;
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
+package org.apps8os.logger.android;
+
 import java.util.Locale;
 
+import org.apps8os.logger.android.app.BaseApplication;
 import org.apps8os.logger.android.manager.AppManager;
-import org.apps8os.logger.android.manager.LoggerManager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
-import fi.aalto.chaow.android.app.BaseApplication;
 
 /**
  * The logger application itself, and also
@@ -47,7 +41,7 @@ import fi.aalto.chaow.android.app.BaseApplication;
  * @author Chao Wei
  *
  */
-public class LoggerApp extends BaseApplication{
+public class LoggerApp extends BaseApplication {
 
 	private static LoggerApp mInstance = null;
 
@@ -65,9 +59,6 @@ public class LoggerApp extends BaseApplication{
 	public void onCreate() {
 		super.onCreate();
 		mInstance = this;
-		
-		// ensure the service always starts
-		LoggerManager.startLogger(this);
 	}
 	
 	@Override
@@ -133,27 +124,9 @@ public class LoggerApp extends BaseApplication{
 		editor.putString(EVENT_TAG, tag);
 		editor.commit();
 	}
-	
-	public void showToastMessage(final int msgResId){
-		Toast t = Toast.makeText(getApplicationContext(), msgResId, Toast.LENGTH_LONG);
-		t.setGravity(Gravity.CENTER, 0, 0);
-		t.show();
-	}
 
-	public void showToastMessage(final String msg){
-		Toast t = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG);
-		t.setGravity(Gravity.CENTER, 0, 0);
-		t.show();
+	@Override
+	protected String getClassName() {
+		return LoggerApp.class.getSimpleName();
 	}
-	
-	public String getVersionName() {
-	    try {
-	        PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
-	        return pInfo.versionName;
-	    } catch (NameNotFoundException e) {
-	        Log.e(this.getClass().getSimpleName(), "Name not found", e);
-	    }
-	    return "";
-	}
-	
 }

@@ -1,0 +1,20 @@
+{
+	"contextLogger3NfcDemoList":
+	[
+		{
+			"nfcTagId":"040d72b27d2280","zho":"工作", "eng":"At work"
+		},
+		{
+			"nfcTagId":"041971b27d2280","zho":"在家", "eng":"At home"
+		},
+		{
+			"nfcTagId":"044872b27d2280","zho":"走路", "eng":"Walking"
+		},
+		{
+			"nfcTagId":"043a72b27d2280","zho":"骑自行车", "eng":"Cycling"
+		},
+		{
+			"nfcTagId":"042b72b27d2280","zho":"乘公共汽车", "eng":"In a bus"
+		}		
+	]
+}

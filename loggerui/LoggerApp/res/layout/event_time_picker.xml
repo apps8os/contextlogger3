@@ -28,26 +28,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minWidth="160dp"
+    android:minWidth="180dp"
     android:minHeight="300dp"
     android:gravity="center"
     android:orientation="vertical" >
 
-	<org.holoeverywhere.widget.Button 
-	    android:id="@+id/button_reset_time_now"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_margin="10dp"
-	    android:text="@string/now"
-	    />
+    <LinearLayout 
+        android:id="@+id/layout_event_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+        
+	    <org.holoeverywhere.widget.TimePicker
+		    android:id="@+id/event_time_picker"
+		    android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+			android:padding="16dp"
+			/>
+		
+		<ImageButton 
+		    android:id="@+id/button_reset_time_now"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:minWidth="48dp"
+		    android:minHeight="48dp"
+		    android:contentDescription="@string/img_desc"
+		    android:layout_marginLeft="16dp"
+		    android:src="@android:drawable/ic_lock_idle_alarm"
+		    />	 
+    </LinearLayout>
     
-	<org.holoeverywhere.widget.TimePicker
-	    android:id="@+id/event_time_picker"
-	    android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:layout_marginTop="10dp"
-	    android:layout_marginLeft="10dp"
-	    android:layout_marginRight="10dp"
-	    android:layout_marginBottom="30dp"
-		/>
+
+    <org.holoeverywhere.widget.CheckBox 
+        android:id="@+id/check_box_discard_activty_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+    	android:visibility="gone"
+    	android:text="@string/discard_activity_event"
+    	android:checked="false"
+        />
+    
 </LinearLayout>
