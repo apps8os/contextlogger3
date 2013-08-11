@@ -24,8 +24,8 @@
  */
 package org.apps8os.logger.android.manager;
 
-import org.sizzlelab.contextlogger.android.io.MainPipeline;
-import org.sizzlelab.contextlogger.android.utils.Constants;
+import org.apps8os.contextlogger.android.io.MainPipeline;
+import org.apps8os.contextlogger.android.utils.Constants;
 
 import android.content.Context;
 import android.content.Intent;

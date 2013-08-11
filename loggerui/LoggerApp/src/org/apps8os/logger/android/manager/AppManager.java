@@ -60,6 +60,7 @@ import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 /**
  * Helper methods for the application ONLY on some 
@@ -71,6 +72,8 @@ import android.util.DisplayMetrics;
  */
 public final class AppManager extends LoggerWrapper {
 
+	private static final String TAG = AppManager.class.getSimpleName();
+	
 	private AppManager(){
 	}
 	
@@ -236,15 +239,25 @@ public final class AppManager extends LoggerWrapper {
 
 	private static ArrayList<ActionEvent> getEvents(boolean history) {
 		ArrayList<ActionEvent> aeList = new ArrayList<ActionEvent>();
-		ActionEventCursor aec =  getActionEventDatabase().getAllActionEventCursor(history);
-		if((aec != null) && (aec.getCount() > 0)) {
+		ActionEventCursor aec = null;
+		try {
+			aec =  getActionEventDatabase().getAllActionEventCursor(history);			
 			while(aec.moveToNext()) {
 				aeList.add(new ActionEvent(aec.getActionName(), aec.getStartTimestamp(), 
 											aec.getBreakTimestamp(), aec.getEventState(),
 											aec.getNoteContent(), aec.isHistory(), 
 											aec.getStartDelay(), aec.getBreakDelay()));
+			}	
+		} catch (Exception e) {
+			Log.e(TAG, "we got error: ", e);
+		} finally {
+			if(aec != null) {
+				try {
+					aec.close();
+				} catch (Exception e) {
+					Log.e(TAG, "we got error: ", e);		
+				}
 			}
-			aec.close();
 		}
 		return aeList;
 	}

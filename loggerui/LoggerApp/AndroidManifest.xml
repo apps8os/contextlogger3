@@ -29,12 +29,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.apps8os.logger.android"
     android:installLocation="preferExternal"
-    android:versionCode="13"
-    android:versionName="0.9.2" >
+    android:versionCode="14"
+    android:versionName="0.9.3" >
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -114,7 +114,7 @@
         <service android:name="edu.mit.media.funf.probe.builtin.LocationProbe" />
         <service android:name="edu.mit.media.funf.probe.builtin.OrientationSensorProbe" />
         <service android:name="edu.mit.media.funf.probe.builtin.AccelerometerSensorProbe" />
-        <service android:name="org.sizzlelab.contextlogger.android.CustomProbe.ApplicationProbe" />
+        <service android:name="org.apps8os.contextlogger.android.CustomProbe.ApplicationProbe" />
         <service android:name="edu.mit.media.funf.probe.builtin.BatteryProbe" />
         <service android:name="edu.mit.media.funf.probe.builtin.HardwareInfoProbe" />
         <service android:name="edu.mit.media.funf.probe.builtin.BluetoothProbe" />
@@ -133,7 +133,7 @@
         <service android:name="edu.mit.media.funf.probe.builtin.AndroidInfoProbe" />
 
         <!-- Framework services -->
-        <service android:name="org.sizzlelab.contextlogger.android.io.MainPipeline" />
+        <service android:name="org.apps8os.contextlogger.android.io.MainPipeline" />
         <service android:name="edu.mit.media.funf.storage.NameValueDatabaseService" />
         <service android:name="edu.mit.media.funf.storage.HttpUploadService" />
     </application>
