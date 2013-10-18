@@ -4,6 +4,7 @@ contextlogger3
 ### Folder structure:
 * analysis -- analysis scipts (eg. identifying higher level context and mode of transport detection)
 * clientframework -- Client-side sensing framework for android devices. This framework is built on top of Funf Open Sensing Framework.
+                     clientframework/src/org/apps8os has the latest code for client framework (without any additional application specific code) with new packaging structure. A jar of client framework can be taken from this packaging structure and used with host android application.
 * demoserver -- example java based http server for uploading the data from the client
 * loggerui -- UI for self logging your daily activities and contexts
 * traveldiary -- an app for logging trips incl. transport modes that were used
