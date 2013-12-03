@@ -10,7 +10,6 @@ contextlogger3
 * traveldiary -- an app for logging trips incl. transport modes that were used
 * database -- code for integrating data into database and processing it
 
-
 ### How to start?
 * You should clone git repo, init and update submodules
 
@@ -22,3 +21,6 @@ contextlogger3
 * import the project and its submodules as Android project (File -> Import -> Android -> Existing Android Code Into Workspace).
 * update the android-suport-v4.jar, if Eclipse complain about the library mismatching.
   
+### Referring from scientific articles
+
+Mannonen, Petri, Kimmo Karhu, and Mikko Heiskala. “An Approach for Understanding Personal Mobile Ecosystem in Everyday Context.” In Effective, Agile and Trusted eServices Co-Creation – Proceedings of the 15th International Conference on Electronic Commerce ICEC 2013, 19:135–146. TUCS Lecture Notes. Turku, Finland: Turku Centre for Computer Science, 2013.http://www.doria.fi/bitstream/handle/10024/91642/LN19.digi.pdf.
