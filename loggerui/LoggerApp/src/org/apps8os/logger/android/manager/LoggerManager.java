@@ -24,8 +24,8 @@
  */
 package org.apps8os.logger.android.manager;
 
-import org.apps8os.contextlogger.android.io.MainPipeline;
-import org.apps8os.contextlogger.android.utils.Constants;
+import org.sizzlelab.contextlogger.android.io.MainPipeline;
+import org.sizzlelab.contextlogger.android.utils.Constants;
 
 import android.content.Context;
 import android.content.Intent;
@@ -41,7 +41,7 @@ import android.text.TextUtils;
 final class LoggerManager implements Constants {
 
 	private static boolean mIsRunning = false;
-
+	
 	private LoggerManager(){
 	}
 
@@ -68,12 +68,12 @@ final class LoggerManager implements Constants {
 		invokeLoggerService(context, enabled ? MainPipeline.ACTION_ENABLE : MainPipeline.ACTION_DISABLE);
 	}
 	
-	private static void invokeLoggerService(Context context, final String action) {
-		Intent archiveIntent = new Intent(context, MainPipeline.class);
-		archiveIntent.setAction(action);
-		context.startService(archiveIntent);		
-	}
-
+    private static void invokeLoggerService(Context context, final String action) {
+        Intent archiveIntent = new Intent(context, MainPipeline.class);
+        archiveIntent.setAction(action);
+        context.startService(archiveIntent);                
+    }
+	
 	/**
 	 * Ask to export the data from internal memory to SD-card
 	 * 
@@ -90,8 +90,8 @@ final class LoggerManager implements Constants {
 	 * @return
 	 */
 	public static final boolean isRunning(Context context) {
-		mIsRunning = MainPipeline.isEnabled(context);			
-		return mIsRunning;
+        mIsRunning = MainPipeline.isEnabled(context);                        
+        return mIsRunning;
 	}
 	
 	/**

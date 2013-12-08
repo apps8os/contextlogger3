@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--  
 /**
- * Copyright (c) 2013 Aalto University and the authors
+ * Copyright (c) 2012 Aalto University and the authors
  *
  * Permission is hereby granted, free of charge, to any person obtaining 
  * a copy of this software and associated documentation files (the "Software"),
@@ -22,24 +20,36 @@
  * DEALINGS IN THE SOFTWARE.
  *  
  * Authors:
- * Chao Wei (chao.wei@aalto.fi)
+ * Chaudhary Nalin (nalin.chaudhary@aalto.fi) - Class is adapted from Funf 
+ * example's source code.
  */
--->
-<resources>
-    <string name="default_json_config_file_name">default_config.json</string>
-    
-    <string name="event_json_file_name_en">event_tag_en.json</string>
-    <string name="event_json_file_name_cn">event_tag_cn.json</string>
-    <string name="event_json_file_name_fi">event_tag_fi.json</string>   
-    <string name="event_json_first_tag">eventTags</string>
-    <string name="event_json_second_tag">name</string>
-    <string name="img_desc">image</string>
+package org.sizzlelab.contextlogger.android.io;
 
-    <string name="lang_cn">zho</string>
-    <string name="lang_fi">fin</string>
-    <string name="lang_en">eng</string>
-    
-    <string name="nfc_demo_list">nfc_demo.json</string>  
-    
-    <string name="cass_config_list">cass_config.json</string>
-</resources>
+
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+
+public class LauncherReceiver extends BroadcastReceiver {
+	private static boolean isLaunched = false;
+	
+	public static void launch(Context context) {
+		startService(context, MainPipeline.class);
+		isLaunched = true;
+	}
+	
+	public static void startService(Context context, Class<? extends Service> serviceClass) {
+		Intent i = new Intent(context.getApplicationContext(), serviceClass);
+		context.getApplicationContext().startService(i);
+	}
+	
+	public static boolean isLaunched() {
+		return isLaunched;
+	}
+	
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		launch(context);
+	}
+}

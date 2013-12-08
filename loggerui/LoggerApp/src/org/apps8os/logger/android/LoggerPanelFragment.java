@@ -43,6 +43,7 @@ import org.apps8os.logger.android.app.BaseAlertDialogFragment.AlertDialogListene
 import org.apps8os.logger.android.manager.AppManager;
 import org.apps8os.logger.android.manager.AppManager.LoggerNFCBroadcastReceiver;
 import org.apps8os.logger.android.model.ActionEvent;
+import org.apps8os.logger.android.model.ActionEvent.EventState;
 import org.apps8os.logger.android.util.AndroidVersionHelper;
 import org.apps8os.logger.android.widget.adapter.ActionEventListAdapter;
 import org.apps8os.logger.android.widget.adapter.ActionEventListAdapter.OnCustomEventChangeListener;
@@ -212,9 +213,9 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
         	actionbar.setCustomView(mSwitcherView, lp);
     		actionbar.setTitle(R.string.app_name);
     		
-			if(AndroidVersionHelper.isICSAbove()) {
-				actionbar.setSubtitle(R.string.ui_demo);
-			}
+//			if(AndroidVersionHelper.isICSAbove()) {
+//				actionbar.setSubtitle(R.string.ui_demo);
+//			}
 		}	
 	}
 	
@@ -325,12 +326,12 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 
 	void handleLoggerData(final String eventName, HashMap<String, Object> data) {
 		ActionEvent actionEvent = null;
-		if(!TextUtils.isEmpty(eventName)){
+		if(!TextUtils.isEmpty(eventName)) {
 			boolean hasEvent = false;
 			List<ActionEvent> aeList = AppManager.getAllLiveEvents();
 			if(!aeList.isEmpty()){
 				for(ActionEvent ae : aeList){
-					if(ae.getActionEventName().equals(eventName)){
+					if(ae.getActionEventName().equals(eventName)) {
 						hasEvent = true;
 						actionEvent = ae;
 						break;
@@ -338,7 +339,7 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 				}
 			}
 			
-			if(hasEvent){
+			if(hasEvent) {
 				// stop the event
 				actionEvent.confirmBreakTimestamp();
 				actionEvent.setState(ActionEvent.EventState.STOP);
@@ -348,7 +349,7 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 				// clear the time  
 				data.put(ActionEventListAdapter.DURATION, "");
 				data.put(ActionEventListAdapter.CHECK, false);
-			}else{
+			} else {
 				// start the event
 				actionEvent = new ActionEvent(eventName, System.currentTimeMillis());
 				actionEvent.setState(ActionEvent.EventState.START);
@@ -357,6 +358,8 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 				data.put(ActionEventListAdapter.CHECK, true);
 			}
 			AppManager.sendEventBoradcast(getApplicationContext(), actionEvent.getMessagePayload(), null);
+			AppManager.scheduleCass(getApplicationContext(), actionEvent.getActionEventName(), 
+					(actionEvent.getEventState().equals(EventState.START.toString()) ? true : false));
 			mAdapter.notifyDataSetChanged();
 		}
 	}
@@ -545,6 +548,7 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 			ae.confirmBreakTimestamp();
 			AppManager.updateLiveEvent(ae);
 			AppManager.sendEventBoradcast(getApplicationContext(), ae.getMessagePayload(), null);
+			AppManager.scheduleCass(getApplicationContext(), ae.getActionEventName(), false);
 			clearEventDuration(ae);
 			mActionEventList.remove(ae);	
 		}
@@ -562,7 +566,7 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 			AppManager.addALiveEvent(actionEvent);
 			mActionEventList.add(actionEvent);
 			event = actionEvent;
-		}else if(em == EventTimeMode.STOP){
+		} else if(em == EventTimeMode.STOP){
 			// stop the event
 			event.setState(ActionEvent.EventState.STOP);
 			event.setBreakTimestamp(timestamp);
@@ -572,6 +576,8 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 			mActionEventList.remove(event);	
 		}
 		AppManager.sendEventBoradcast(getApplicationContext(), event.getMessagePayload(), null);
+		AppManager.scheduleCass(getApplicationContext(), event.getActionEventName(), 
+						(event.getEventState().equals(EventState.START.toString()) ? true : false));
 		mAdapter.notifyDataSetChanged();
 	}
 
@@ -584,6 +590,7 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 		mAdapter.notifyDataSetChanged();
 		mActionEventList.remove(event);
 		AppManager.sendEventBoradcast(getApplicationContext(), event.getMessagePayload(), null);
+		AppManager.scheduleCass(getApplicationContext(), event.getActionEventName(), false);
 	}
 
 	private void clearEventDuration(final ActionEvent event){

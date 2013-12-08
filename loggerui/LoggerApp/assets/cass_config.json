@@ -1,0 +1,47 @@
+{
+	"CassiConfig":
+	[
+		{
+			"name":"At work",
+			"requestId":"1",
+			"delay":"10",
+			"interval":"20"
+		},
+		{
+			"name":"At home",
+			"requestId":"2",
+			"delay":"20",
+			"interval":"40"
+		},
+		{
+			"name":"Walking",
+			"requestId":"3",
+			"delay":"30",
+			"interval":"60"
+		},
+		{
+			"name":"Cycling",
+			"requestId":"4",
+			"delay":"40",
+			"interval":"20"
+		},
+		{
+			"name":"In a bus",
+			"requestId":"5",
+			"delay":"50",
+			"interval":"20"
+		},
+		{
+			"name":"In a train",
+			"requestId":"6",
+			"delay":"60",
+			"interval":"20"
+		},
+		{
+			"name":"Driving a car",
+			"requestId":"7",
+			"delay":"70",
+			"interval":"20"
+		}		
+	]
+}

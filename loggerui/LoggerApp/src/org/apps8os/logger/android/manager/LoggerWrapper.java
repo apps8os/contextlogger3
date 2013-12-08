@@ -26,18 +26,17 @@ package org.apps8os.logger.android.manager;
 
 import org.apps8os.logger.android.manager.AppManager.LoggerNotificationBroadcastReceiver;
 import org.apps8os.logger.android.storage.ActionEventDatabase;
-import org.apps8os.logger.android.util.AndroidVersionHelper;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 
-abstract class LoggerWrapper {
+abstract class LoggerWrapper extends CassManager {
 
 	public static final String LOGGER_INTENT_FILTER = "Logger-Intent-Filter";
 	
-	private static ActionEventDatabase mDatabase = null;
+	private static ActionEventDatabase mActionEventDatabase = null;
 	
 	public static void init(final Context context) {
 		new Handler().postDelayed(new Runnable() {
@@ -47,10 +46,10 @@ abstract class LoggerWrapper {
 			}
 		}, 100L);
 
-		if(mDatabase == null) {
-			mDatabase = new ActionEventDatabase(context.getApplicationContext());			
+		if(mActionEventDatabase == null) {
+			mActionEventDatabase = new ActionEventDatabase(context.getApplicationContext());			
 		}
-		if(AndroidVersionHelper.isICSAbove()) 	return;
+//		if(AndroidVersionHelper.isICSAbove()) 	return;
 		LoggerManager.init(context);
 	}
 	
@@ -66,7 +65,7 @@ abstract class LoggerWrapper {
 	
 	public static void toggleService(Context context, final boolean enabled) {
 		sendLocalNotificationBroadcast(context, enabled);
-		if(AndroidVersionHelper.isICSAbove()) 	return;
+//		if(AndroidVersionHelper.isICSAbove()) 	return;
 		LoggerManager.toggleService(context, enabled);
 	}
 	
@@ -75,19 +74,20 @@ abstract class LoggerWrapper {
 	}
 	
 	public static final boolean isRunning(Context context) {
-		return AndroidVersionHelper.isICSAbove() ? false : LoggerManager.isRunning(context);
+		return LoggerManager.isRunning(context);
+//		return AndroidVersionHelper.isICSAbove() ? false : LoggerManager.isRunning(context);
 	}
 	
 	public static void sendEventBoradcast(Context context, final String actionPayload, final String data) {
-		if(AndroidVersionHelper.isICSAbove()) 	return;
+//		if(AndroidVersionHelper.isICSAbove()) 	return;
 		LoggerManager.sendEventBoradcast(context, actionPayload, data);
 	}
 	
 	public static ActionEventDatabase getActionEventDatabase() {
-		if(mDatabase == null) {
+		if(mActionEventDatabase == null) {
 			throw new IllegalStateException("Database object must be initialized first!");
 		}
-		return mDatabase;
+		return mActionEventDatabase;
 	}
 	
 }

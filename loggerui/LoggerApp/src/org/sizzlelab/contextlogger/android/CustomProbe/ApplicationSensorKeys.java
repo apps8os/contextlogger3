@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--  
 /**
- * Copyright (c) 2013 Aalto University and the authors
+ * Copyright (c) 2012 Aalto University and the authors
  *
  * Permission is hereby granted, free of charge, to any person obtaining 
  * a copy of this software and associated documentation files (the "Software"),
@@ -22,24 +20,13 @@
  * DEALINGS IN THE SOFTWARE.
  *  
  * Authors:
- * Chao Wei (chao.wei@aalto.fi)
+ * Chaudhary Nalin (nalin.chaudhary@aalto.fi)
  */
--->
-<resources>
-    <string name="default_json_config_file_name">default_config.json</string>
-    
-    <string name="event_json_file_name_en">event_tag_en.json</string>
-    <string name="event_json_file_name_cn">event_tag_cn.json</string>
-    <string name="event_json_file_name_fi">event_tag_fi.json</string>   
-    <string name="event_json_first_tag">eventTags</string>
-    <string name="event_json_second_tag">name</string>
-    <string name="img_desc">image</string>
+package org.sizzlelab.contextlogger.android.CustomProbe;
 
-    <string name="lang_cn">zho</string>
-    <string name="lang_fi">fin</string>
-    <string name="lang_en">eng</string>
-    
-    <string name="nfc_demo_list">nfc_demo.json</string>  
-    
-    <string name="cass_config_list">cass_config.json</string>
-</resources>
+import edu.mit.media.funf.probe.builtin.ProbeKeys.SensorKeys;
+
+public interface ApplicationSensorKeys extends SensorKeys {
+	public static final String APPLICATION_ACTION = "APPLICATION_ACTION",
+								APPLICATION_DATA = "APPLICATION_DATA";
+}

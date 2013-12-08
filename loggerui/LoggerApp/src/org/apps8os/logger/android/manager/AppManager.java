@@ -24,13 +24,7 @@
  */
 package org.apps8os.logger.android.manager;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -45,6 +39,7 @@ import org.apps8os.logger.android.R;
 import org.apps8os.logger.android.model.ActionEvent;
 import org.apps8os.logger.android.storage.ActionEventCursor;
 import org.apps8os.logger.android.util.AndroidVersionHelper;
+import org.apps8os.logger.android.util.IOUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -143,7 +138,7 @@ public final class AppManager extends LoggerWrapper {
 																final int eventTagNameResId, 
 																final int nameResId) 
 																		throws JSONException, IOException {
-		return parsingJsonToList(getJSONString(context, jsonFileNameResId), 
+		return parsingJsonToList(IOUtil.getJSONString(context.getApplicationContext().getAssets().open(getString(context, jsonFileNameResId))), 
 						getString(context, eventTagNameResId), getString(context, nameResId));
 	}
 	
@@ -172,29 +167,10 @@ public final class AppManager extends LoggerWrapper {
 		}
 		return array;
 	}
-	
-	private static final String getJSONString(final Context context,
-												final int jsonFileNameResId) throws IOException {
-		InputStream is = null;
-		String jsonString = null;
-		is = context.getApplicationContext().getAssets().open(getString(context, jsonFileNameResId));
-		Writer w = new StringWriter();
-		char[] buffer = new char[1024];
-		Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"), 8000);
-		int n;
-		while((n = reader.read(buffer)) != -1){
-			w.write(buffer, 0, n);
-		}
-		jsonString = w.toString();
-		if(is != null){
-			is.close();
-		}
-		return jsonString;
-	}
-	
+
 	public static List<HashMap<String, String>> getLoggerNfcDemoList(final Context context,
 												final int jsonFileNameResId) throws IOException, JSONException {
-		JSONObject jsonData = new JSONObject(getJSONString(context, jsonFileNameResId));
+		JSONObject jsonData = new JSONObject(IOUtil.getJSONString(context.getApplicationContext().getAssets().open(getString(context, jsonFileNameResId))));
 		if(jsonData.has("contextLogger3NfcDemoList")) {
 			ArrayList<HashMap<String, String>> ret = new ArrayList<HashMap<String,String>>();
 			JSONArray jsonArray = jsonData.getJSONArray("contextLogger3NfcDemoList");

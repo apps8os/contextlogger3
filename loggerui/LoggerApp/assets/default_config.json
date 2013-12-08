@@ -7,29 +7,14 @@
   "dataUploadUrl":"http:\/\/46.137.181.14:8080\/SQLiteDBFileReceiver\/receiver",
   "dataUploadPeriod":3600,
   "dataRequests":{
-    "edu.mit.media.funf.probe.builtin.LocationProbe": [
-      { "PERIOD": 900, "DURATION": 30 }
-    ],
     "edu.mit.media.funf.probe.builtin.WifiProbe": [
       { "PERIOD": 900 }
     ],
     "edu.mit.media.funf.probe.builtin.CellProbe": [
       { "PERIOD": 900 }
     ],
-    "edu.mit.media.funf.probe.builtin.OrientationSensorProbe": [
-      { "PERIOD": 900 }
-    ],
-    "edu.mit.media.funf.probe.builtin.AccelerometerSensorProbe": [
-      { "PERIOD": 900, "DURATION": 30 }
-    ],
     "org.sizzlelab.contextlogger.android.CustomProbe.ApplicationProbe": [
       {}
-    ],
-    "edu.mit.media.funf.probe.builtin.LinearAccelerationSensorProbe": [
-      { "PERIOD": 900, "DURATION": 30 }
-    ],
-    "edu.mit.media.funf.probe.builtin.RunningApplicationsProbe": [
-      { "PERIOD": 900, "DURATION": 30 }
     ]
   }
 }
