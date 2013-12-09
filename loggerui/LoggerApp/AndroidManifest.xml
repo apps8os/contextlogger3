@@ -29,8 +29,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.apps8os.logger.android"
     android:installLocation="preferExternal"
-    android:versionCode="01103"
-    android:versionName="0.11.03">
+    android:versionCode="01104"
+    android:versionName="0.11.04">
 
     <uses-sdk
         android:minSdkVersion="7"

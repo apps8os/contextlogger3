@@ -35,7 +35,7 @@ abstract class CassManager {
 		}
 	}
 	
-	private static void initCassCofig(Context context) {
+	private static void initCassConfig(Context context) {
 		if(CassiConfigs == null) {
 			CassiConfigs = new HashSet<HashMap<String,String>>();
 			// read content out
@@ -113,7 +113,7 @@ abstract class CassManager {
 	public static void scheduleCass(Context context, String eventName, boolean start) {
 		if(TextUtils.isEmpty(eventName)) return;
 		
-		initCassCofig(context);
+		initCassConfig(context);
 		
 		initCassDatabase(context);
 		
@@ -132,7 +132,7 @@ abstract class CassManager {
 			if(eventName.equals(data.get("name"))) {
 				
 				String time = null;
-				time = data.get("interval");
+				time = data.get("delay");
 				int delaySeconds = -1;
 				int requestCode = -1;
 				try {
@@ -188,7 +188,7 @@ abstract class CassManager {
 	public static void rescheduleCass(Context context, String eventName) {
 		if(TextUtils.isEmpty(eventName)) return;
 		
-		initCassCofig(context);
+		initCassConfig(context);
 		
 		initCassDatabase(context);
 		
@@ -196,7 +196,7 @@ abstract class CassManager {
 			if(eventName.equals(data.get("name"))) {
 			
 				String time = null;
-				time = data.get("delay");
+				time = data.get("interval");
 				int delaySeconds = -1;
 				int requestCode = -1;
 				try {
