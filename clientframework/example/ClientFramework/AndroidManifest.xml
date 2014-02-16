@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.apps8os.contextlogger3.android"
+    android:versionCode="1"
+    android:versionName="0.1" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+    <!-- Launching -->
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+   
+    <!-- All probes -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- Storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> 
+      
+    <!-- Location probe -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>  
+
+    <!-- Wifi probe -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="org.apps8os.contextlogger3.android.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <service android:name="edu.mit.media.funf.FunfManager">
+		    <meta-data android:name="default" android:value="@string/default_pipeline"/>
+		</service>
+		<receiver android:name="edu.mit.media.funf.Launcher" android:enabled="true">
+		    <intent-filter>
+		        <action android:name="android.intent.action.BATTERY_CHANGED" />
+		        <action android:name="android.intent.action.BOOT_COMPLETED" />
+		        <action android:name="android.intent.action.DOCK_EVENT" />
+		        <action android:name="android.intent.action.ACTION_SCREEN_ON" />
+		        <action android:name="android.intent.action.USER_PRESENT" />
+		    </intent-filter>
+		</receiver>
+        
+    </application>
+
+</manifest>
