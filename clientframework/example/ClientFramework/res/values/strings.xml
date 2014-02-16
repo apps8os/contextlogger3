@@ -3,7 +3,7 @@
 
     <string name="app_name">ClientFramework</string>
     <string name="default_pipeline">       
-        {"@type":"org.apps8os.contextlogger3.android.pipleline.MainPipeline",
+        {"@type":"org.apps8os.contextlogger3.android.pipeline.MainPipeline",
         "name":"default",
         "archive": {
                 "@schedule": {"interval": 500},

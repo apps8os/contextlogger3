@@ -1,7 +1,7 @@
 package org.apps8os.contextlogger3.android;
 
-import org.apps8os.contextlogger3.android.pipleline.MainPipeline;
-import org.apps8os.contextlogger3.android.pipleline.MainPipeline.ContextLogger3ServiceConnection;
+import org.apps8os.contextlogger3.android.pipeline.MainPipeline;
+import org.apps8os.contextlogger3.android.pipeline.MainPipeline.ContextLogger3ServiceConnection;
 import org.apps8os.contextlogger3.android.probe.AppProbe;
 
 import android.app.Activity;
@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
 				Bundle b = new Bundle();
 				b.putString("A", "AALTO");
 				b.putString("B", "TKK");
-				b.putString("C", "SCE");
+				b.putString("C", "CSE");
 				b.putString("D", "SDK");
 				Postman.getInstance().send(v.getContext().getApplicationContext(), AppProbe.INTENT_ACTION, b);
 			}

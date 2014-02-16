@@ -23,7 +23,7 @@
  * Chao Wei (chao.wei@aalto.fi)
  */
 
-package org.apps8os.contextlogger3.android.pipleline;
+package org.apps8os.contextlogger3.android.pipeline;
 
 import org.apps8os.contextlogger3.android.probe.AppProbe;
 import org.apps8os.contextlogger3.android.probe.GoogleLocationProbe;
