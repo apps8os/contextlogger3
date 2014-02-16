@@ -24,10 +24,17 @@
  */
 package org.apps8os.logger.android.manager;
 
+import org.apps8os.contextlogger3.android.Postman;
 import org.apps8os.contextlogger3.android.pipeline.MainPipeline;
+import org.apps8os.contextlogger3.android.pipeline.MainPipeline.ContextLogger3ServiceConnection;
+import org.apps8os.contextlogger3.android.probe.AppProbe;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 /**
  * Helper methods for the application that 
@@ -77,8 +84,25 @@ final class LoggerManager {
 	 * 
 	 * @param context
 	 */
-	public static void exportData(Context context) {
-//		invokeLoggerService(context, MainPipeline.ACTION_ARCHIVE_DATA);
+	public static void exportData(final Context context) {
+		if(context == null) return;
+		MainPipeline mp = ContextLogger3ServiceConnection.getInstance().getMainPipeline();
+		if(mp != null) {
+			if (mp.isEnabled()) {
+				mp.onRun(MainPipeline.ACTION_ARCHIVE, null);
+
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						Toast.makeText(context, "Archived!", Toast.LENGTH_SHORT).show();
+					}
+				}, 500L);
+			} else {
+				Toast.makeText(context, "Pipeline is not enabled.", Toast.LENGTH_SHORT).show();
+			}					
+		} else {
+			Toast.makeText(context, "Pipeline is not available.", Toast.LENGTH_SHORT).show();
+		}
 	}
 	
 	/**
@@ -100,16 +124,14 @@ final class LoggerManager {
 	 * @param data
 	 */
 	public static void sendEventBoradcast(Context context, final String actionPayload, final String data) {
-//		if(TextUtils.isEmpty(actionPayload)){
-//			throw new IllegalArgumentException("Invalid action payload");
-//		}
-//		Intent intent = new Intent();
-//		intent.setAction(CUSTOM_INTENT_ACTION);
-//		intent.putExtra("APPLICATION_ACTION", actionPayload);
-//		if(!TextUtils.isEmpty(data)){
-//			intent.putExtra("APPLICATION_DATA", data);			
-//		}
-//		context.sendBroadcast(intent);
+		if(TextUtils.isEmpty(actionPayload)) return;
+		
+		Bundle bundle = new Bundle();
+		bundle.putString("APPLICATION_ACTION", actionPayload);
+		if(!TextUtils.isEmpty(data)){
+			bundle.putString("APPLICATION_DATA", data);			
+		}
+		Postman.getInstance().send(context, AppProbe.INTENT_ACTION, bundle);
 	}
 	
 }
