@@ -141,7 +141,9 @@ public class MainPipeline extends BasicPipeline {
 				
 				// Custom probes
 				mAppProb.registerListener(mMainPipeline);
-				mGoogleLocationProbe.registerListener(mMainPipeline);
+				if(mGoogleLocationProbe != null) {
+					mGoogleLocationProbe.registerListener(mMainPipeline);					
+				}
 				
 				// Built-in probes
 				/*
