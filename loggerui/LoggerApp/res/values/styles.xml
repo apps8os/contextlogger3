@@ -26,15 +26,13 @@
 -->
 <resources>
 
-    <style name="AppBaseTheme" parent="Holo.Theme.Light.DarkActionBar" />
-
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
+    <style name="AppTheme" parent="Holo.Theme.Light.DarkActionBar">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
     <!-- Application theme. -->
-    <style name="AppNfcReadingTheme" parent="AppBaseTheme">
+    <style name="AppNfcReadingTheme" parent="Holo.Theme.Light.DarkActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>

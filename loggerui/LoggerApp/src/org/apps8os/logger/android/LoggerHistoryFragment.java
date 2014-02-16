@@ -36,13 +36,12 @@ import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.app.Activity;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
 
 /**
  * Display the record history in a list view

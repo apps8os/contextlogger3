@@ -24,12 +24,10 @@
  */
 package org.apps8os.logger.android.manager;
 
-import org.sizzlelab.contextlogger.android.io.MainPipeline;
-import org.sizzlelab.contextlogger.android.utils.Constants;
+import org.apps8os.contextlogger3.android.pipeline.MainPipeline;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
 
 /**
  * Helper methods for the application that 
@@ -38,7 +36,7 @@ import android.text.TextUtils;
  * @author Chao Wei
  *
  */
-final class LoggerManager implements Constants {
+final class LoggerManager {
 
 	private static boolean mIsRunning = false;
 	
@@ -65,7 +63,7 @@ final class LoggerManager implements Constants {
 	 * @param enabled
 	 */
 	public static void toggleService(Context context, final boolean enabled) {
-		invokeLoggerService(context, enabled ? MainPipeline.ACTION_ENABLE : MainPipeline.ACTION_DISABLE);
+//		invokeLoggerService(context, enabled ? MainPipeline.ACTION_ENABLE : MainPipeline.ACTION_DISABLE);
 	}
 	
     private static void invokeLoggerService(Context context, final String action) {
@@ -80,7 +78,7 @@ final class LoggerManager implements Constants {
 	 * @param context
 	 */
 	public static void exportData(Context context) {
-		invokeLoggerService(context, MainPipeline.ACTION_ARCHIVE_DATA);
+//		invokeLoggerService(context, MainPipeline.ACTION_ARCHIVE_DATA);
 	}
 	
 	/**
@@ -90,7 +88,7 @@ final class LoggerManager implements Constants {
 	 * @return
 	 */
 	public static final boolean isRunning(Context context) {
-        mIsRunning = MainPipeline.isEnabled(context);                        
+//        mIsRunning = MainPipeline.isEnabled(context);                        
         return mIsRunning;
 	}
 	
@@ -102,16 +100,16 @@ final class LoggerManager implements Constants {
 	 * @param data
 	 */
 	public static void sendEventBoradcast(Context context, final String actionPayload, final String data) {
-		if(TextUtils.isEmpty(actionPayload)){
-			throw new IllegalArgumentException("Invalid action payload");
-		}
-		Intent intent = new Intent();
-		intent.setAction(CUSTOM_INTENT_ACTION);
-		intent.putExtra("APPLICATION_ACTION", actionPayload);
-		if(!TextUtils.isEmpty(data)){
-			intent.putExtra("APPLICATION_DATA", data);			
-		}
-		context.sendBroadcast(intent);
+//		if(TextUtils.isEmpty(actionPayload)){
+//			throw new IllegalArgumentException("Invalid action payload");
+//		}
+//		Intent intent = new Intent();
+//		intent.setAction(CUSTOM_INTENT_ACTION);
+//		intent.putExtra("APPLICATION_ACTION", actionPayload);
+//		if(!TextUtils.isEmpty(data)){
+//			intent.putExtra("APPLICATION_DATA", data);			
+//		}
+//		context.sendBroadcast(intent);
 	}
 	
 }

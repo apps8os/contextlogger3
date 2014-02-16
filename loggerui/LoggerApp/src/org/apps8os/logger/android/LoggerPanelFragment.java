@@ -32,11 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apps8os.logger.android.IDialogFragment.ActivityNameDeletionDialogFragment;
-import org.apps8os.logger.android.IDialogFragment.ActivityNamingDialogFragment;
 import org.apps8os.logger.android.IDialogFragment.ActivityNamingDialogFragment.ActivityNamingListener;
-import org.apps8os.logger.android.IDialogFragment.EventTimePickerDialogFragment;
-import org.apps8os.logger.android.IDialogFragment.EventTimePickerDialogFragment.EventTimeMode;
-import org.apps8os.logger.android.IDialogFragment.EventTimePickerDialogFragment.OnEventTimeChangedListener;
 import org.apps8os.logger.android.IDialogFragment.LanguageSettingDialogFragment;
 import org.apps8os.logger.android.IDialogFragment.QuitAppDialogFragment;
 import org.apps8os.logger.android.app.BaseAlertDialogFragment.AlertDialogListener;
@@ -57,8 +53,12 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -69,11 +69,6 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 
 public class LoggerPanelFragment extends LoggerBaseFragment implements OnCheckedChangeListener, 
 																ActivityNamingListener, OnItemClickListener, 
@@ -212,10 +207,6 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
         if(actionbar != null) {
         	actionbar.setCustomView(mSwitcherView, lp);
     		actionbar.setTitle(R.string.app_name);
-    		
-//			if(AndroidVersionHelper.isICSAbove()) {
-//				actionbar.setSubtitle(R.string.ui_demo);
-//			}
 		}	
 	}
 	
@@ -366,67 +357,67 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-		if(mShownContent != null){
-			if(pos == mShownContent.size() - 1){
-				ActivityNamingDialogFragment.newInstance((ActivityNamingListener) this,
-						new AlertDialogListener() {
-							@Override
-							public void onPositiveClick() {
-							}
-							@Override
-							public void onNegativeClick() {
-							}
-							@Override
-							public void onCancel() {
-							}
-						}).show(getFragmentManager());
-				return;
-			} else {
-				// check flag
-				HashMap<String, Object> data = mShownContent.get(pos);
-				final String eventName = String.valueOf(data.get(ActionEventListAdapter.EVENT));
-				ActionEvent actionEvent = null;
-				if(!TextUtils.isEmpty(eventName)){
-					boolean hasEvent = false;
-					List<ActionEvent> aeList = AppManager.getAllLiveEvents();
-					if(!aeList.isEmpty()){
-						for(ActionEvent ae : aeList){
-							if(ae.getActionEventName().equals(eventName)){
-								hasEvent = true;
-								actionEvent = ae;
-								break;
-							}
-						}
-					}
-					// in case, no match found, so create a new one
-					if((actionEvent == null) && !hasEvent){
-						actionEvent =  new ActionEvent(eventName, System.currentTimeMillis());
-					}
-					
-					final EventTimeMode em = hasEvent ? EventTimeMode.STOP : EventTimeMode.START;
-					final ActionEvent para = actionEvent;
-					EventTimePickerDialogFragment.newInstance(new OnEventTimeChangedListener(){
-						@Override
-						public void onPositiveClick() {
-						}
-						@Override
-						public void onNegativeClick() {
-						}
-						@Override
-						public void onCancel() {
-						}
-						@Override
-						public void onConfirmed(long timestamp) {
-							onEventConfirmed(em, para, timestamp);
-						}
-						@Override
-						public void onDiscard() {
-							onEventDiscard(em, para);
-						}
-					}, em, actionEvent).show(getFragmentManager());
-				}
-			}
-		}
+//		if(mShownContent != null){
+//			if(pos == mShownContent.size() - 1){
+//				ActivityNamingDialogFragment.newInstance((ActivityNamingListener) this,
+//						new AlertDialogListener() {
+//							@Override
+//							public void onPositiveClick() {
+//							}
+//							@Override
+//							public void onNegativeClick() {
+//							}
+//							@Override
+//							public void onCancel() {
+//							}
+//						}).show(getFragmentManager());
+//				return;
+//			} else {
+//				// check flag
+//				HashMap<String, Object> data = mShownContent.get(pos);
+//				final String eventName = String.valueOf(data.get(ActionEventListAdapter.EVENT));
+//				ActionEvent actionEvent = null;
+//				if(!TextUtils.isEmpty(eventName)){
+//					boolean hasEvent = false;
+//					List<ActionEvent> aeList = AppManager.getAllLiveEvents();
+//					if(!aeList.isEmpty()){
+//						for(ActionEvent ae : aeList){
+//							if(ae.getActionEventName().equals(eventName)){
+//								hasEvent = true;
+//								actionEvent = ae;
+//								break;
+//							}
+//						}
+//					}
+//					// in case, no match found, so create a new one
+//					if((actionEvent == null) && !hasEvent){
+//						actionEvent =  new ActionEvent(eventName, System.currentTimeMillis());
+//					}
+//					
+//					final EventTimeMode em = hasEvent ? EventTimeMode.STOP : EventTimeMode.START;
+//					final ActionEvent para = actionEvent;
+//					EventTimePickerDialogFragment.newInstance(new OnEventTimeChangedListener(){
+//						@Override
+//						public void onPositiveClick() {
+//						}
+//						@Override
+//						public void onNegativeClick() {
+//						}
+//						@Override
+//						public void onCancel() {
+//						}
+//						@Override
+//						public void onConfirmed(long timestamp) {
+//							onEventConfirmed(em, para, timestamp);
+//						}
+//						@Override
+//						public void onDiscard() {
+//							onEventDiscard(em, para);
+//						}
+//					}, em, actionEvent).show(getFragmentManager());
+//				}
+//			}
+//		}
 	}
 
 	@Override
@@ -556,42 +547,42 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 	}
 	
 
-	void onEventConfirmed(EventTimeMode em, ActionEvent event, long timestamp) {
-		if((em == null) || (event == null) || (timestamp <= 0)) return;
-		ActionEvent actionEvent = null;
-		if(em == EventTimeMode.START){
-			// start the event
-			actionEvent = new ActionEvent(event.getActionEventName(), timestamp);
-			actionEvent.setState(ActionEvent.EventState.START);
-			AppManager.addALiveEvent(actionEvent);
-			mActionEventList.add(actionEvent);
-			event = actionEvent;
-		} else if(em == EventTimeMode.STOP){
-			// stop the event
-			event.setState(ActionEvent.EventState.STOP);
-			event.setBreakTimestamp(timestamp);
-			AppManager.updateLiveEvent(event);
-			// clear the time 
-			clearEventDuration(event);		
-			mActionEventList.remove(event);	
-		}
-		AppManager.sendEventBoradcast(getApplicationContext(), event.getMessagePayload(), null);
-		AppManager.scheduleCass(getApplicationContext(), event.getActionEventName(), 
-						(event.getEventState().equals(EventState.START.toString()) ? true : false));
-		mAdapter.notifyDataSetChanged();
-	}
+//	void onEventConfirmed(EventTimeMode em, ActionEvent event, long timestamp) {
+//		if((em == null) || (event == null) || (timestamp <= 0)) return;
+//		ActionEvent actionEvent = null;
+//		if(em == EventTimeMode.START){
+//			// start the event
+//			actionEvent = new ActionEvent(event.getActionEventName(), timestamp);
+//			actionEvent.setState(ActionEvent.EventState.START);
+//			AppManager.addALiveEvent(actionEvent);
+//			mActionEventList.add(actionEvent);
+//			event = actionEvent;
+//		} else if(em == EventTimeMode.STOP){
+//			// stop the event
+//			event.setState(ActionEvent.EventState.STOP);
+//			event.setBreakTimestamp(timestamp);
+//			AppManager.updateLiveEvent(event);
+//			// clear the time 
+//			clearEventDuration(event);		
+//			mActionEventList.remove(event);	
+//		}
+//		AppManager.sendEventBoradcast(getApplicationContext(), event.getMessagePayload(), null);
+//		AppManager.scheduleCass(getApplicationContext(), event.getActionEventName(), 
+//						(event.getEventState().equals(EventState.START.toString()) ? true : false));
+//		mAdapter.notifyDataSetChanged();
+//	}
 
-	void onEventDiscard(EventTimeMode em, ActionEvent event) {
-		if(event == null) return;
-		event.confirmBreakTimestamp();
-		event.setState(ActionEvent.EventState.INVALIDATE);
-		AppManager.updateLiveEvent(event);
-		clearEventDuration(event);
-		mAdapter.notifyDataSetChanged();
-		mActionEventList.remove(event);
-		AppManager.sendEventBoradcast(getApplicationContext(), event.getMessagePayload(), null);
-		AppManager.scheduleCass(getApplicationContext(), event.getActionEventName(), false);
-	}
+//	void onEventDiscard(EventTimeMode em, ActionEvent event) {
+//		if(event == null) return;
+//		event.confirmBreakTimestamp();
+//		event.setState(ActionEvent.EventState.INVALIDATE);
+//		AppManager.updateLiveEvent(event);
+//		clearEventDuration(event);
+//		mAdapter.notifyDataSetChanged();
+//		mActionEventList.remove(event);
+//		AppManager.sendEventBoradcast(getApplicationContext(), event.getMessagePayload(), null);
+//		AppManager.scheduleCass(getApplicationContext(), event.getActionEventName(), false);
+//	}
 
 	private void clearEventDuration(final ActionEvent event){
 		if((mShownContent != null) && !mShownContent.isEmpty()){

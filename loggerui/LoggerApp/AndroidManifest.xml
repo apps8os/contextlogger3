@@ -29,29 +29,49 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.apps8os.logger.android"
     android:installLocation="preferExternal"
-    android:versionCode="01104"
-    android:versionName="0.11.04">
+    android:versionCode="01200"
+    android:versionName="0.12.00">
 
     <uses-sdk
-        android:minSdkVersion="7"
+        android:minSdkVersion="8"
         android:targetSdkVersion="19" />
+    
+    <!-- Launching -->
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+   
+    <!-- All probes -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- Storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> 
+      
+    <!-- Location probe -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>  
+
+    <!-- Wifi probe -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>    
     
     <uses-permission android:name="android.permission.VIBRATE" /> 
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
     <uses-permission android:name="android.permission.INTERNET" />
+    
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.BATTERY_STATS" />
+
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    
     <uses-permission android:name="android.permission.READ_HISTORY_BOOKMARKS" />
+    
     <uses-permission android:name="android.permission.GET_TASKS" />
     
     <!-- NFC permission and feature -->
@@ -74,7 +94,7 @@
             android:name="edu.mit.media.funf"
             android:required="false" />
 
-		<receiver android:name="org.apps8os.logger.android.CassReceiver" >
+		<receiver android:name="org.apps8os.logger.android.CassReceiver" android:exported="false" >
            <intent-filter android:priority="9999"> 
            		<action android:name="org.apps8os.logger.android.CASS_ALARM"/>
            		<action android:name="android.media.VOLUME_CHANGED_ACTION"/>
@@ -117,34 +137,25 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>        
-        
-        <service android:name="edu.mit.media.funf.probe.builtin.CellProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.WifiProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.LocationProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.OrientationSensorProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.AccelerometerSensorProbe" />
-        <service android:name="org.sizzlelab.contextlogger.android.CustomProbe.ApplicationProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.BatteryProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.HardwareInfoProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.BluetoothProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.GravitySensorProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.LinearAccelerationSensorProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.GyroscopeSensorProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.RotationVectorSensorProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.LightSensorProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.ProximitySensorProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.MagneticFieldSensorProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.PressureSensorProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.TemperatureSensorProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.ScreenProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.BrowserSearchesProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.RunningApplicationsProbe" />
-        <service android:name="edu.mit.media.funf.probe.builtin.AndroidInfoProbe" />
 
-        <!-- Framework services -->
-        <service android:name="org.sizzlelab.contextlogger.android.io.MainPipeline" />
-        <service android:name="edu.mit.media.funf.storage.NameValueDatabaseService" />
-        <service android:name="edu.mit.media.funf.storage.HttpUploadService" />
+        <service android:name="edu.mit.media.funf.FunfManager" >
+            <meta-data
+                android:name="default"
+                android:value="@string/default_pipeline" />
+        </service>
+
+        <receiver
+            android:name="edu.mit.media.funf.Launcher"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.DOCK_EVENT" />
+                <action android:name="android.intent.action.ACTION_SCREEN_ON" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

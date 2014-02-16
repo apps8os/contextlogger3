@@ -34,8 +34,8 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 
-import com.actionbarsherlock.view.MenuItem;
 
 
 /**
@@ -64,15 +64,15 @@ public class MainActivity extends AbstractMainActivity implements OnSupportFragm
 	}
 
 	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		final int itemId = item.getItemId();
-		if(itemId == android.R.id.home){
+		if (itemId == android.R.id.home) {
 			popBackStack();
 			return true;
 		}
-		return super.onMenuItemSelected(featureId, item);
+		return super.onOptionsItemSelected(item);
 	}
-
+	
 	@Override
 	public void onFragmentChanged(int layoutResId, Bundle bundle) {
 		if(layoutResId == R.layout.frag_logger_panel) {

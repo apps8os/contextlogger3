@@ -28,9 +28,8 @@ import org.apps8os.logger.android.manager.AppManager;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
+import android.support.v7.app.ActionBar;
 import android.view.View;
-
-import com.actionbarsherlock.app.ActionBar;
 
 public abstract class AbstractMainActivity extends LoggerBaseActivity implements OnBackStackChangedListener {
 
