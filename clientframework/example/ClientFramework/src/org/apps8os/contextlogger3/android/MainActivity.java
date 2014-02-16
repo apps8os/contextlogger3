@@ -73,4 +73,12 @@ public class MainActivity extends Activity {
 		 bindService(new Intent(getApplicationContext(), FunfManager.class), 
 				 ContextLogger3ServiceConnection.getInstance(), BIND_AUTO_CREATE);
 	}
+
+
+	@Override
+	protected void onDestroy() {
+		unbindService(ContextLogger3ServiceConnection.getInstance());
+		super.onDestroy();
+	}
+
 }
