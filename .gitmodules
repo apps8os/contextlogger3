@@ -5,9 +5,6 @@
 	path = traveldiary/HoloEverywhere
 	url = git@github.com:chaow/HoloEverywhere.git
 
-[submodule "loggerui/ActionBarSherlock"]
-	path = loggerui/ActionBarSherlock
-	url = git@github.com:chaow/ActionBarSherlock.git
 [submodule "loggerui/HoloEverywhere"]
 	path = loggerui/HoloEverywhere
 	url = git@github.com:chaow/HoloEverywhere.git
