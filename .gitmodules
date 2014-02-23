@@ -7,7 +7,7 @@
 
 [submodule "loggerui/ActionBarSherlock"]
 	path = loggerui/ActionBarSherlock
-	url = https:/github.com/chaow/ActionBarSherlock.git
+	url = https://github.com/chaow/ActionBarSherlock.git
 [submodule "loggerui/HoloEverywhere"]
 	path = loggerui/HoloEverywhere
-	url = https:/github.com/chaow/HoloEverywhere.git
+	url = https://github.com/chaow/HoloEverywhere.git
