@@ -1,10 +1,10 @@
 [submodule "traveldiary/ActionBarSherlock"]
 	path = traveldiary/ActionBarSherlock
-	url = git@github.com:chaow/ActionBarSherlock.git
+	url = https://github.com/chaow/ActionBarSherlock.git
 [submodule "traveldiary/HoloEverywhere"]
 	path = traveldiary/HoloEverywhere
-	url = git@github.com:chaow/HoloEverywhere.git
+	url = https://github.com/chaow/HoloEverywhere.git
 
 [submodule "loggerui/HoloEverywhere"]
 	path = loggerui/HoloEverywhere
-	url = git@github.com:chaow/HoloEverywhere.git
+	url = https://github.com/chaow/HoloEverywhere.git
