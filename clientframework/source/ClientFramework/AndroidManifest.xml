@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="org.apps8os.contextlogger3.android"
-      android:versionCode="1"
-      android:versionName="0.1">
+      android:versionCode="2"
+      android:versionName="0.2">
 <!--  
 /**
  * Copyright (c) 2014 Aalto University and the authors

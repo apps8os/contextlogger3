@@ -26,7 +26,7 @@
 package org.apps8os.contextlogger3.android.pipeline;
 
 import org.apps8os.contextlogger3.android.probe.AppProbe;
-import org.apps8os.contextlogger3.android.probe.GoogleLocationProbe;
+import org.apps8os.contextlogger3.android.probe.GoogleActivityRecognitionProbe;
 
 import android.content.ComponentName;
 import android.content.ServiceConnection;
@@ -87,7 +87,7 @@ public class MainPipeline extends BasicPipeline {
 		
 		// Custom probes
 		private AppProbe mAppProb = null;
-		private GoogleLocationProbe mGoogleLocationProbe = null;
+		private GoogleActivityRecognitionProbe mGoogleActivityRecognitionProbe = null;
 		
 		@Override
 		public void onDataCompleted(IJsonObject arg0, JsonElement arg1) {
@@ -117,7 +117,7 @@ public class MainPipeline extends BasicPipeline {
 				
 				// Custom probes
 				if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD) {
-					mGoogleLocationProbe = gson.fromJson(new JsonObject(), GoogleLocationProbe.class);
+					mGoogleActivityRecognitionProbe = gson.fromJson(new JsonObject(), GoogleActivityRecognitionProbe.class);
 				}
 				mAppProb = gson.fromJson(new JsonObject(), AppProbe.class);
 				
@@ -141,8 +141,8 @@ public class MainPipeline extends BasicPipeline {
 				
 				// Custom probes
 				mAppProb.registerListener(mMainPipeline);
-				if(mGoogleLocationProbe != null) {
-					mGoogleLocationProbe.registerListener(mMainPipeline);					
+				if(mGoogleActivityRecognitionProbe != null) {
+					mGoogleActivityRecognitionProbe.registerListener(mMainPipeline);					
 				}
 				
 				// Built-in probes
