@@ -43,6 +43,9 @@ import com.google.android.gms.location.DetectedActivity;
 
 public class ActivityRecognitionService extends IntentService {
 
+	/**
+	 * Similar activity type like {@link DetectedActivity }
+	 */
 	static enum ActivityType {
 		IN_VEHICLE, ON_BICYCLE, ON_FOOT, STILL, TILTING, UNKNOWN;
 

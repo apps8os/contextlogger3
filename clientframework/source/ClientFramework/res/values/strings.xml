@@ -26,4 +26,5 @@
  */
  -->
 <resources>
+    <string name="context_logger3_google_config_json_file_name">context_logger3_google_config.json</string>  
 </resources>

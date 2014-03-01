@@ -28,6 +28,7 @@ package org.apps8os.contextlogger3.android;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 
@@ -46,17 +47,22 @@ public final class Postman {
 	}
 	
 	/**
+	 * Send the message out via local broadcast
 	 * 
 	 * @param context
 	 * @param intentAction
 	 * @param data
 	 */
-	public void send(Context context, String intentAction, Bundle data) {
+	public void send(final Context context, final String intentAction, final Bundle data) {
 		if(TextUtils.isEmpty(intentAction) || (data == null) || (context == null)) return;
 		
-		Intent intent = new Intent(intentAction);
-		intent.putExtras(data);
-		LocalBroadcastManager.getInstance(context).sendBroadcast(intent);			
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				Intent intent = new Intent(intentAction);
+				intent.putExtras(data);
+				LocalBroadcastManager.getInstance(context).sendBroadcast(intent);			
+			}
+		}, 10L);
 	}
-	
 }

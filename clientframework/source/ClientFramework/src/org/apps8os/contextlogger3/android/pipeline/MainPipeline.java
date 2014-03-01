@@ -32,6 +32,7 @@ import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -48,6 +49,10 @@ public class MainPipeline extends BasicPipeline {
 		return "default";
 	}
 	
+	/**
+	 * Service connection 
+	 *
+	 */
 	public static final class ContextLogger3ServiceConnection extends AbstractProbeServiceConnection implements ServiceConnection {
 
 		private static ContextLogger3ServiceConnection mConnection = null;
@@ -71,12 +76,22 @@ public class MainPipeline extends BasicPipeline {
 		public void onServiceDisconnected(ComponentName name) {
 			destory();
 		}
+
+		@Override
+		protected String getClassName() {
+			return ContextLogger3ServiceConnection.class.getSimpleName();
+		}
 	}
 	
-	static class AbstractProbeServiceConnection implements DataListener {
+	/**
+	 * Service connection base
+	 */
+	static abstract class AbstractProbeServiceConnection implements DataListener {
 
 		private FunfManager mFunfManager = null;
 		private MainPipeline mMainPipeline = null;
+		
+		protected abstract String getClassName();
 		
 		// Built-in probes 
 		/*
@@ -110,6 +125,7 @@ public class MainPipeline extends BasicPipeline {
 		}
 
 		void initialize(FunfManager manager) {
+			Log.v(getClassName(), "initialize");
 			mFunfManager = manager;
 			if(mFunfManager != null) {
 				
@@ -117,6 +133,7 @@ public class MainPipeline extends BasicPipeline {
 				
 				// Custom probes
 				if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD) {
+					// TODO load configuration file?
 					mGoogleActivityRecognitionProbe = gson.fromJson(new JsonObject(), GoogleActivityRecognitionProbe.class);
 				}
 				mAppProb = gson.fromJson(new JsonObject(), AppProbe.class);
@@ -136,6 +153,7 @@ public class MainPipeline extends BasicPipeline {
 		}
 		
 		private void registerProbes() {
+			Log.v(getClassName(), "register probes");
 			if(mFunfManager != null) {
 				// register probes
 				
