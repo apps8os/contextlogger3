@@ -1,4 +1,4 @@
-<!--  
+<!--
 /**
  * Copyright (c) 2013 Aalto University and the authors
  *
@@ -22,7 +22,7 @@
  *  
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
- */
+ */
 -->
 <resources>
 
@@ -39,6 +39,14 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!--
+	time picker 
+	Legacy code from Holoeverywhere project version 1.6.8
+    -->
+    <style name="Holo.TimePicker">
+        <item name="layout">@layout/time_picker_holo</item>
     </style>
 
 </resources>

@@ -22,11 +22,12 @@
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
-package org.apps8os.logger.android;
+package org.apps8os.logger.android.fragment;
 
 import java.util.Observable;
 import java.util.Observer;
 
+import org.apps8os.logger.android.R;
 import org.apps8os.logger.android.app.BaseFragment;
 import org.apps8os.logger.android.manager.AppManager;
 import org.apps8os.logger.android.storage.AbstractCursorLoader;
@@ -49,8 +50,6 @@ import android.widget.ListView;
 /**
  * Display the record history in a list view
  * 
- * @author Chao Wei
- *
  */
 public class LoggerHistoryFragment2 extends BaseFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 	

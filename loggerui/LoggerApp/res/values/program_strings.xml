@@ -26,6 +26,7 @@
  */
 -->
 <resources>
+
     <string name="event_json_file_name_en">event_tag_en.json</string>
     <string name="event_json_file_name_cn">event_tag_cn.json</string>
     <string name="event_json_file_name_fi">event_tag_fi.json</string>   
@@ -51,9 +52,9 @@
         "version":1,
         "data":[
         	"org.apps8os.contextlogger3.android.probe.AppProbe",
-        	"org.apps8os.contextlogger3.android.probe.GoogleLocationProbe",
-           {"@type": edu.mit.media.funf.probe.builtin.WifiProbe",
-           	"@schedule": {"interval": 500, "duration": 10, "strict": true}
+            "org.apps8os.contextlogger3.android.probe.GoogleActivityRecognitionProbe",
+           {"@type": "edu.mit.media.funf.probe.builtin.WifiProbe",
+           	"@schedule": {"interval": 20, "duration": 5, "strict": true}
            },
            {"@type": "edu.mit.media.funf.probe.builtin.AccelerometerSensorProbe",
             "@schedule": {"interval": 500, "duration": 5, "strict": true}
@@ -62,5 +63,17 @@
         ]
        }
      </string>    
-    
+
+	<!-- 
+	time picker 
+	Legacy code from Holoeverywhere project version 1.6.8
+	-->
+    <string name="time_picker_separator">:</string>
+    <string name="time_picker_decrement_hour_button">Decrease hour</string>
+    <string name="time_picker_decrement_minute_button">Decrease minute</string>
+    <string name="time_picker_decrement_set_am_button">Set AM</string>
+    <string name="time_picker_dialog_title">Set time</string>
+    <string name="time_picker_increment_hour_button">Increase hour</string>
+    <string name="time_picker_increment_minute_button">Increase minute</string>
+    <string name="time_picker_increment_set_pm_button">Set PM</string>	
 </resources>

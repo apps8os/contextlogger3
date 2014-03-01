@@ -7,10 +7,11 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.apps8os.contextlogger3.android.utils.IOUtil;
 import org.apps8os.logger.android.CassReceiver;
+import org.apps8os.logger.android.LoggerApp;
 import org.apps8os.logger.android.R;
 import org.apps8os.logger.android.storage.CassCaseDatabase;
-import org.apps8os.logger.android.util.IOUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -41,7 +42,8 @@ abstract class CassManager {
 			// read content out
 			String jsonString = null;
 			try {
-				jsonString = IOUtil.getJSONString(context.getApplicationContext().getAssets().open(context.getResources().getString(R.string.cass_config_list)));
+				String filename = context.getResources().getString(R.string.cass_config_list);
+				jsonString = IOUtil.getJSONString(context.getApplicationContext().getAssets().open(filename));
 				if(!TextUtils.isEmpty(jsonString)) {
 					JSONObject jsonData = new JSONObject(jsonString);
 					if(jsonData.has("CassiConfig")) {
@@ -111,6 +113,8 @@ abstract class CassManager {
 	}
 	
 	public static void scheduleCass(Context context, String eventName, boolean start) {
+		if(!LoggerApp.getInstance().isCassRelease()) return;
+		
 		if(TextUtils.isEmpty(eventName)) return;
 		
 		initCassConfig(context);
@@ -186,6 +190,8 @@ abstract class CassManager {
 	}
 	
 	public static void rescheduleCass(Context context, String eventName) {
+		if(!LoggerApp.getInstance().isCassRelease()) return;
+		
 		if(TextUtils.isEmpty(eventName)) return;
 		
 		initCassConfig(context);
@@ -254,6 +260,8 @@ abstract class CassManager {
 	}
 
 	public static void launchCass(Context context, Intent intent) {
+		if(!LoggerApp.getInstance().isCassRelease()) return;
+		
 		String eventName = intent.getStringExtra("eventName");
 		if(TextUtils.isEmpty(eventName)) return;
 				

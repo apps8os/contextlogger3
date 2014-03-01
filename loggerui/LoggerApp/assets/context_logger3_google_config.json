@@ -1,0 +1,21 @@
+{
+	"context_logger3_google_config.json":
+	[
+		{
+			"GoogleActivityRecognitionProbe":
+			[
+				{
+					"detectionInterval": "5"
+				}
+			]
+		},
+		{
+			"Google":
+			[
+				{
+					"detectionInterval": "5"
+				}
+			]
+		}
+	]
+}

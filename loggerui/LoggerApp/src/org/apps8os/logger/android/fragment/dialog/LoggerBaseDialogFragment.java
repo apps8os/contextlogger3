@@ -22,7 +22,7 @@
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
-package org.apps8os.logger.android;
+package org.apps8os.logger.android.fragment.dialog;
 
 import org.apps8os.logger.android.app.BaseAlertDialogFragment;
 

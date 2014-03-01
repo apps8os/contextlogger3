@@ -22,11 +22,12 @@
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
-package org.apps8os.logger.android;
+package org.apps8os.logger.android.fragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apps8os.logger.android.R;
 import org.apps8os.logger.android.app.BaseFragment;
 import org.apps8os.logger.android.manager.AppManager;
 import org.apps8os.logger.android.model.ActionEvent;
@@ -46,8 +47,6 @@ import android.widget.SimpleAdapter;
 /**
  * Display the record history in a list view
  * 
- * @author Chao Wei
- *
  */
 public class LoggerHistoryFragment extends BaseFragment {
 	

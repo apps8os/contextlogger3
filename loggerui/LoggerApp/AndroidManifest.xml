@@ -29,12 +29,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.apps8os.logger.android"
     android:installLocation="preferExternal"
-    android:versionCode="01200"
-    android:versionName="0.12.00">
+    android:versionCode="01201"
+    android:versionName="0.12.01">
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
+    
+    
+    <!-- Google activity recognition -->
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
     
     <!-- Launching -->
     <uses-permission android:name="android.permission.BATTERY_STATS" />
@@ -156,6 +160,10 @@
             </intent-filter>
         </receiver>
 
+        <service android:name="org.apps8os.contextlogger3.android.ActivityRecognitionService" 
+            android:exported="false" android:label="@string/app_name"
+            />      
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

@@ -39,9 +39,6 @@ import android.widget.Toast;
 /**
  * Helper methods for the application that 
  * handle the record framework.
- * 
- * @author Chao Wei
- *
  */
 final class LoggerManager {
 

@@ -24,10 +24,12 @@
  */
 package org.apps8os.logger.android;
 
-
 import java.util.Locale;
 
 import org.apps8os.logger.android.app.BaseFragmentActivity.OnSupportFragmentListener;
+import org.apps8os.logger.android.fragment.LoggerHistoryFragment;
+import org.apps8os.logger.android.fragment.LoggerHistoryFragment2;
+import org.apps8os.logger.android.fragment.LoggerPanelFragment;
 import org.apps8os.logger.android.manager.AppManager;
 
 import android.content.pm.ActivityInfo;
@@ -36,13 +38,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
-
-
 /**
- * 
  * Main activity (starting point) for the application.
- * 
- * @author Chao Wei
  *
  */
 public class MainActivity extends AbstractMainActivity implements OnSupportFragmentListener {
