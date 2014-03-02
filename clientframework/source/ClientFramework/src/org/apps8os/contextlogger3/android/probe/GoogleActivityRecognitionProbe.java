@@ -83,7 +83,9 @@ public class GoogleActivityRecognitionProbe extends ContextLogger3Probe implemen
 				}
 			}
 		} catch (Exception e) {
-				Log.e(getClassName(), "Read detectionInterval value failed", e);
+			Log.e(getClassName(), "Read detectionInterval value failed", e);
+		} catch (NoSuchFieldError e) {
+			Log.e(getClassName(), "Configration is unavailable", e);
 		}
 		registerGoogleActivityRecognitionClient();
 	}
@@ -122,9 +124,9 @@ public class GoogleActivityRecognitionProbe extends ContextLogger3Probe implemen
 	 * unregister Google activity recognition client
 	 */
 	public void unregisterGoogleActivityRecognitionClient() {
-		if((mActivityRecognitionClient != null) && (mActivityRecognitionClient.isConnected())) {
+		if((mActivityRecognitionClient != null) 
+			&& (mActivityRecognitionClient.isConnected())) {
 			mActivityRecognitionClient.disconnect();
-			mActivityRecognitionClient = null;
 		}
 	}
 	

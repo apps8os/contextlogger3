@@ -22,7 +22,6 @@
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
-
 package org.apps8os.contextlogger3.android;
 
 import java.util.List;
