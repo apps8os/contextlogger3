@@ -8,3 +8,9 @@
 [submodule "loggerui/HoloEverywhere"]
 	path = loggerui/HoloEverywhere
 	url = https://github.com/chaow/HoloEverywhere.git
+[submodule "loggerui/google-play-services_lib"]
+	path = loggerui/google-play-services_lib
+	url = https://github.com/chaow/google-play-services_lib.git
+[submodule "clientframework/google-play-services_lib"]
+	path = clientframework/google-play-services_lib
+	url = https://github.com/chaow/google-play-services_lib.git
