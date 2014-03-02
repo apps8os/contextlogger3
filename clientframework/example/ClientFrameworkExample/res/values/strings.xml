@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ClientFramework</string>
-    <string name="default_pipeline">       
+    <string name="app_name">ClientFrameworkExample</string>
+	<string name="default_pipeline">       
         {"@type":"org.apps8os.contextlogger3.android.pipeline.MainPipeline",
         "name":"default",
         "archive": {
@@ -12,9 +12,9 @@
         "version":1,
         "data":[
         	"org.apps8os.contextlogger3.android.probe.AppProbe",
-        	"org.apps8os.contextlogger3.android.probe.GoogleLocationProbe",
-           {"@type": edu.mit.media.funf.probe.builtin.WifiProbe",
-           	"@schedule": {"interval": 500, "duration": 10, "strict": true}
+            "org.apps8os.contextlogger3.android.probe.GoogleActivityRecognitionProbe",
+           {"@type": "edu.mit.media.funf.probe.builtin.WifiProbe",
+           	"@schedule": {"interval": 20, "duration": 5, "strict": true}
            },
            {"@type": "edu.mit.media.funf.probe.builtin.AccelerometerSensorProbe",
             "@schedule": {"interval": 500, "duration": 5, "strict": true}
@@ -22,6 +22,6 @@
            "edu.mit.media.funf.probe.builtin.LocationProbe"
         ]
        }
-     </string>
+     </string> 
 
 </resources>

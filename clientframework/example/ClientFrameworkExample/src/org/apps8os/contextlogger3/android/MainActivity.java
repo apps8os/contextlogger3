@@ -42,7 +42,6 @@ public class MainActivity extends Activity {
 
 		// Runs an archive if pipeline is enabled
 		archiveButton = (Button) findViewById(R.id.archiveButton);
-//		archiveButton.setEnabled(false);
 		archiveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -74,11 +73,9 @@ public class MainActivity extends Activity {
 				 ContextLogger3ServiceConnection.getInstance(), BIND_AUTO_CREATE);
 	}
 
-
 	@Override
 	protected void onDestroy() {
 		unbindService(ContextLogger3ServiceConnection.getInstance());
 		super.onDestroy();
 	}
-
 }
