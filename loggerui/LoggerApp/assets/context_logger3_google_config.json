@@ -8,14 +8,6 @@
 					"detectionInterval": "5"
 				}
 			]
-		},
-		{
-			"Google":
-			[
-				{
-					"detectionInterval": "5"
-				}
-			]
 		}
 	]
 }
