@@ -112,7 +112,13 @@ abstract class ContextLogger3Probe extends Base {
 	protected final JSONArray getConfigurationContent() {
 		JSONArray ja = null;
 		try {
-			String filename = getContext().getString(R.string.context_logger3_google_config_json_file_name);
+			String filename = null;
+			try {
+				filename = getContext().getString(R.string.context_logger3_google_config_json_file_name);				
+			} catch(NoClassDefFoundError e) {
+				Log.e(getClassName(), "can not get the file name from R class", e);
+				filename = "context_logger3_google_config.json";
+			}
 			String json = IOUtil.getJSONString(getContext().getAssets().open(filename));			
 			if(!TextUtils.isEmpty(json)) {
 				try {

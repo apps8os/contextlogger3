@@ -78,6 +78,7 @@ public class GoogleActivityRecognitionProbe extends ContextLogger3Probe implemen
 					JSONObject jobject = ja.getJSONObject(i);
 					if(jobject.has("detectionInterval")) {
 						detectionInterval = Integer.parseInt(jobject.getString("detectionInterval"));
+						Log.i(getClassName(), "new detection interval is " + detectionInterval + " seconds");
 						break;
 					}
 				}
