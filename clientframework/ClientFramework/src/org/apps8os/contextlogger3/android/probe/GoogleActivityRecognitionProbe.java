@@ -32,6 +32,7 @@ import org.json.JSONObject;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -101,9 +102,16 @@ public class GoogleActivityRecognitionProbe extends ContextLogger3Probe implemen
 			mActivityRecognitionClient = new ActivityRecognitionClient(getContext().getApplicationContext(), this, this);
 			mActivityRecognitionClient.connect();
 		} else {
-			Toast.makeText(getContext(), "Please install Google Play Service.", Toast.LENGTH_SHORT).show();
+		    final Handler handler = new Handler(getContext().getMainLooper());
+		    handler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(getContext(), 
+							"Please install Google Play Service.", Toast.LENGTH_SHORT).show();	
+				}
+			}, 5L);
 			
-			// TODO make an interface that allow user to install Google play service package,
+			// TODO make an interface that would allow user to install Google play service package,
 			// and after that, re-register Google activity recognition client.
 		}		
 	}

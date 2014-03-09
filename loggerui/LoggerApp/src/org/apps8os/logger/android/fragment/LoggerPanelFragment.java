@@ -51,6 +51,7 @@ import org.apps8os.logger.android.widget.adapter.ActionEventListAdapter;
 import org.apps8os.logger.android.widget.adapter.ActionEventListAdapter.OnCustomEventChangeListener;
 import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.widget.ListView;
 import org.holoeverywhere.widget.Switch;
 import org.json.JSONException;
 
@@ -73,7 +74,6 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class LoggerPanelFragment extends LoggerBaseFragment implements OnCheckedChangeListener, 

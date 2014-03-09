@@ -27,10 +27,12 @@ package org.apps8os.logger.android.widget;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.holoeverywhere.widget.ListView;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.ListView;
+
 
 /**
  * ListView without Samsung over-scroll feature
