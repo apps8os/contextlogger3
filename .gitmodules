@@ -1,7 +1,7 @@
 [submodule "HoloEverywhere"]
-	path = loggerui/HoloEverywhere
+	path = HoloEverywhere
 	url = https://github.com/apps8os/HoloEverywhere.git
 [submodule "google-play-services_lib"]
-	path = loggerui/google-play-services_lib
+	path = google-play-services_lib
 	url = https://github.com/apps8os/google-play-services_lib.git
 
