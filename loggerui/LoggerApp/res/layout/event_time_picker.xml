@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
 /**
  * Copyright (c) 2013 Aalto University and the authors
  *
@@ -23,52 +23,47 @@
  *  
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
- */
+ */
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minWidth="180dp"
-    android:minHeight="300dp"
     android:gravity="center"
+    android:minHeight="300dp"
+    android:minWidth="180dp"
     android:orientation="vertical" >
 
-    <LinearLayout 
+    <LinearLayout
         android:id="@+id/layout_event_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal"
-        >
-        
-	    <org.holoeverywhere.widget.TimePicker
-		    android:id="@+id/event_time_picker"
-		    android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-			android:padding="16dp"
-			/>
-		
-		<ImageButton 
-		    android:id="@+id/button_reset_time_now"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:minWidth="48dp"
-		    android:minHeight="48dp"
-		    android:contentDescription="@string/img_desc"
-		    android:layout_marginLeft="16dp"
-		    android:src="@android:drawable/ic_lock_idle_alarm"
-		    />	 
-    </LinearLayout>
-    
+        android:orientation="horizontal" >
 
-    <org.holoeverywhere.widget.CheckBox 
+        <org.apps8os.logger.android.widget.legacy.TimePicker
+            android:id="@+id/event_time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp" />
+
+        <ImageButton
+            android:id="@+id/button_reset_time_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:contentDescription="@string/img_desc"
+            android:minHeight="48dp"
+            android:minWidth="48dp"
+            android:src="@android:drawable/ic_lock_idle_alarm" />
+    </LinearLayout>
+
+    <org.holoeverywhere.widget.CheckBox
         android:id="@+id/check_box_discard_activty_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-    	android:visibility="gone"
-    	android:text="@string/discard_activity_event"
-    	android:checked="false"
-        />
-    
+        android:checked="false"
+        android:text="@string/discard_activity_event"
+        android:visibility="gone" />
+
 </LinearLayout>

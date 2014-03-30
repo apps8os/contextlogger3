@@ -24,25 +24,22 @@
  */
 package org.apps8os.logger.android;
 
-
 import java.util.Locale;
 
 import org.apps8os.logger.android.app.BaseFragmentActivity.OnSupportFragmentListener;
+import org.apps8os.logger.android.fragment.LoggerHistoryFragment;
+import org.apps8os.logger.android.fragment.LoggerHistoryFragment2;
+import org.apps8os.logger.android.fragment.LoggerPanelFragment;
 import org.apps8os.logger.android.manager.AppManager;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
-
-import com.actionbarsherlock.view.MenuItem;
-
+import android.view.MenuItem;
 
 /**
- * 
  * Main activity (starting point) for the application.
- * 
- * @author Chao Wei
  *
  */
 public class MainActivity extends AbstractMainActivity implements OnSupportFragmentListener {
@@ -64,15 +61,15 @@ public class MainActivity extends AbstractMainActivity implements OnSupportFragm
 	}
 
 	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		final int itemId = item.getItemId();
-		if(itemId == android.R.id.home){
+		if (itemId == android.R.id.home) {
 			popBackStack();
 			return true;
 		}
-		return super.onMenuItemSelected(featureId, item);
+		return super.onOptionsItemSelected(item);
 	}
-
+	
 	@Override
 	public void onFragmentChanged(int layoutResId, Bundle bundle) {
 		if(layoutResId == R.layout.frag_logger_panel) {

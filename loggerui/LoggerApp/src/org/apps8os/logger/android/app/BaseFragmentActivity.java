@@ -79,8 +79,6 @@ public abstract class BaseFragmentActivity extends Activity {
 	/**
 	 * Fragment changed listener
 	 * 
-	 * @author Chao Wei
-	 * 
 	 */
 	public interface OnSupportFragmentListener {
 

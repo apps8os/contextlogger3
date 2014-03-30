@@ -49,7 +49,6 @@ abstract class LoggerWrapper extends CassManager {
 		if(mActionEventDatabase == null) {
 			mActionEventDatabase = new ActionEventDatabase(context.getApplicationContext());			
 		}
-//		if(AndroidVersionHelper.isICSAbove()) 	return;
 		LoggerManager.init(context);
 	}
 	
@@ -65,7 +64,6 @@ abstract class LoggerWrapper extends CassManager {
 	
 	public static void toggleService(Context context, final boolean enabled) {
 		sendLocalNotificationBroadcast(context, enabled);
-//		if(AndroidVersionHelper.isICSAbove()) 	return;
 		LoggerManager.toggleService(context, enabled);
 	}
 	
@@ -75,11 +73,9 @@ abstract class LoggerWrapper extends CassManager {
 	
 	public static final boolean isRunning(Context context) {
 		return LoggerManager.isRunning(context);
-//		return AndroidVersionHelper.isICSAbove() ? false : LoggerManager.isRunning(context);
 	}
 	
 	public static void sendEventBoradcast(Context context, final String actionPayload, final String data) {
-//		if(AndroidVersionHelper.isICSAbove()) 	return;
 		LoggerManager.sendEventBoradcast(context, actionPayload, data);
 	}
 	

@@ -24,9 +24,11 @@
  */
 package org.apps8os.logger.android;
 
+import org.apps8os.contextlogger3.android.pipeline.MainPipeline.ContextLogger3ServiceConnection;
 import org.apps8os.logger.android.util.AndroidVersionHelper;
 
 import android.content.Intent;
+import edu.mit.media.funf.FunfManager;
 
 public class SplashScreenActivty extends LoggerBaseActivity {
 
@@ -42,6 +44,16 @@ public class SplashScreenActivty extends LoggerBaseActivity {
 					AndroidVersionHelper.isHoneycombAbove() 
 								? NfcMainActivity.class 
 								: MainActivity.class));
+		
+		// Bind to the service, to create the connection with FunfManager
+		 bindService(new Intent(getApplicationContext(), FunfManager.class), 
+				 ContextLogger3ServiceConnection.getInstance(), BIND_AUTO_CREATE);
 		finish();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		unbindService(ContextLogger3ServiceConnection.getInstance());
+		super.onDestroy();
 	}
 }

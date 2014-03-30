@@ -14,6 +14,8 @@ public class CassReceiver extends BroadcastReceiver {
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		if(!LoggerApp.getInstance().isCassRelease()) return;
+		
 		final String intentAction = intent.getAction();	
 		if(ALARM_INTENT.equals(intentAction)) {
 			AppManager.launchCass(context, intent);

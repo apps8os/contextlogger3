@@ -33,16 +33,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.text.TextUtils;
+import android.util.Log;
 
 /**
  * The logger application itself, and also
  * contains some helper methods.
- * 
- * @author Chao Wei
  *
  */
 public class LoggerApp extends BaseApplication {
 
+	public static enum ReleaseType {
+		NORMAL, DEVELOPMENT, CASS, OTHER
+	}
+	
 	private static LoggerApp mInstance = null;
 
 	private static final String PREFS_NAME = "ClientPrefs";
@@ -50,6 +53,12 @@ public class LoggerApp extends BaseApplication {
 	private static final String EVENT_TAG = "eventTag";
 	
 	private static final String LANGUANG_SETTING = "languageSetting";
+	
+	private ReleaseType mReleaseType = ReleaseType.DEVELOPMENT;
+
+	public final boolean isCassRelease() {
+		return (mReleaseType == ReleaseType.CASS);
+	}
 	
 	public static LoggerApp getInstance(){
 		return mInstance;
@@ -59,6 +68,8 @@ public class LoggerApp extends BaseApplication {
 	public void onCreate() {
 		super.onCreate();
 		mInstance = this;
+
+		Log.i(LoggerApp.class.getSimpleName(), "Release type is " + mReleaseType.toString());
 	}
 	
 	@Override

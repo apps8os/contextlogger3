@@ -29,11 +29,8 @@ import org.apps8os.logger.android.storage.IActionEventDatebase.ActionEventTable;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.text.TextUtils;
-import android.util.Log;
 
 public class ActionEventCursor extends CursorWrapper {
-
-	private static final String TAG = ActionEventCursor.class.getSimpleName();
 	
 	private final int colId;
 	private final int colActionName;
@@ -106,6 +103,5 @@ public class ActionEventCursor extends CursorWrapper {
 	@Override
 	public void close() {
 		super.close();
-		Log.v(TAG, "Cursor close"); 
 	}
 }

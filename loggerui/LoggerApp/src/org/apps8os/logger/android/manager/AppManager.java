@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import org.apps8os.contextlogger3.android.utils.IOUtil;
 import org.apps8os.logger.android.LoggerApp;
 import org.apps8os.logger.android.MainActivity;
 import org.apps8os.logger.android.NfcMainActivity;
@@ -39,7 +40,6 @@ import org.apps8os.logger.android.R;
 import org.apps8os.logger.android.model.ActionEvent;
 import org.apps8os.logger.android.storage.ActionEventCursor;
 import org.apps8os.logger.android.util.AndroidVersionHelper;
-import org.apps8os.logger.android.util.IOUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
