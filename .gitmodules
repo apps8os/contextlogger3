@@ -1,15 +1,7 @@
-[submodule "traveldiary/ActionBarSherlock"]
-	path = traveldiary/ActionBarSherlock
-	url = https://github.com/chaow/ActionBarSherlock.git
-[submodule "traveldiary/HoloEverywhere"]
-	path = traveldiary/HoloEverywhere
-	url = https://github.com/chaow/HoloEverywhere.git
-[submodule "loggerui/HoloEverywhere"]
+[submodule "HoloEverywhere"]
 	path = loggerui/HoloEverywhere
-	url = https://github.com/chaow/HoloEverywhere.git
-[submodule "loggerui/google-play-services_lib"]
+	url = https://github.com/apps8os/HoloEverywhere.git
+[submodule "google-play-services_lib"]
 	path = loggerui/google-play-services_lib
-	url = https://github.com/chaow/google-play-services_lib.git
-[submodule "clientframework/google-play-services_lib"]
-	path = clientframework/google-play-services_lib
-	url = https://github.com/chaow/google-play-services_lib.git
+	url = https://github.com/apps8os/google-play-services_lib.git
+
