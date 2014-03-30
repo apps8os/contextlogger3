@@ -24,10 +24,10 @@
  */
 package org.apps8os.logger.android.manager;
 
-import org.apps8os.contextlogger3.android.Postman;
-import org.apps8os.contextlogger3.android.pipeline.MainPipeline;
-import org.apps8os.contextlogger3.android.pipeline.MainPipeline.ContextLogger3ServiceConnection;
-import org.apps8os.contextlogger3.android.probe.AppProbe;
+import org.apps8os.contextlogger3.android.clientframework.Postman;
+import org.apps8os.contextlogger3.android.clientframework.pipeline.MainPipeline;
+import org.apps8os.contextlogger3.android.clientframework.pipeline.MainPipeline.ContextLogger3ServiceConnection;
+import org.apps8os.contextlogger3.android.clientframework.probe.AppProbe;
 
 import android.content.Context;
 import android.content.Intent;

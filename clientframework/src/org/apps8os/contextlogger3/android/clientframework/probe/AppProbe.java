@@ -23,46 +23,25 @@
  * Chao Wei (chao.wei@aalto.fi)
  */
 
-package org.apps8os.contextlogger3.android;
+package org.apps8os.contextlogger3.android.clientframework.probe;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.content.LocalBroadcastManager;
-import android.text.TextUtils;
+import edu.mit.media.funf.probe.Probe.Description;
+import edu.mit.media.funf.probe.Probe.DisplayName;
 
-public final class Postman {
-
-	private static Postman mPostman = null;
+@DisplayName("ContextLogger3 application probe")
+@Description("Record application data")
+public final class AppProbe extends ContextLogger3Probe {
 	
-	private Postman() {
+	public final static String INTENT_ACTION = "org.apps8os.contextlogger3.android.AppProbe";
+
+	@Override
+	String getIntentAction() {
+		return INTENT_ACTION;
 	}
 
-	public static Postman getInstance() {
-		if(mPostman == null) {
-			mPostman = new Postman();
-		}
-		return mPostman;
+	@Override
+	String getClassName() {
+		return AppProbe.class.getSimpleName();
 	}
-	
-	/**
-	 * Send the message out via local broadcast
-	 * 
-	 * @param context
-	 * @param intentAction
-	 * @param data
-	 */
-	public void send(final Context context, final String intentAction, final Bundle data) {
-		if(TextUtils.isEmpty(intentAction) || (data == null) || (context == null)) return;
-		
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				Intent intent = new Intent(intentAction);
-				intent.putExtras(data);
-				LocalBroadcastManager.getInstance(context).sendBroadcast(intent);			
-			}
-		}, 10L);
-	}
+
 }

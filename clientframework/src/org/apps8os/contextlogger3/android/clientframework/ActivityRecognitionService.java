@@ -22,11 +22,11 @@
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
-package org.apps8os.contextlogger3.android;
+package org.apps8os.contextlogger3.android.clientframework;
 
 import java.util.List;
 
-import org.apps8os.contextlogger3.android.probe.GoogleActivityRecognitionProbe;
+import org.apps8os.contextlogger3.android.clientframework.probe.GoogleActivityRecognitionProbe;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -23,7 +23,7 @@
  * Chao Wei (chao.wei@aalto.fi)
  */
 
-package org.apps8os.contextlogger3.android.probe;
+package org.apps8os.contextlogger3.android.clientframework.probe;
 
 import java.util.Set;
 

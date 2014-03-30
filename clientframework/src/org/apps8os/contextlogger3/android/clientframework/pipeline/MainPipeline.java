@@ -23,10 +23,10 @@
  * Chao Wei (chao.wei@aalto.fi)
  */
 
-package org.apps8os.contextlogger3.android.pipeline;
+package org.apps8os.contextlogger3.android.clientframework.pipeline;
 
-import org.apps8os.contextlogger3.android.probe.AppProbe;
-import org.apps8os.contextlogger3.android.probe.GoogleActivityRecognitionProbe;
+import org.apps8os.contextlogger3.android.clientframework.probe.AppProbe;
+import org.apps8os.contextlogger3.android.clientframework.probe.GoogleActivityRecognitionProbe;
 
 import android.content.ComponentName;
 import android.content.ServiceConnection;

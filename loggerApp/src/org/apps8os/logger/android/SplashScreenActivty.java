@@ -24,7 +24,7 @@
  */
 package org.apps8os.logger.android;
 
-import org.apps8os.contextlogger3.android.pipeline.MainPipeline.ContextLogger3ServiceConnection;
+import org.apps8os.contextlogger3.android.clientframework.pipeline.MainPipeline.ContextLogger3ServiceConnection;
 import org.apps8os.logger.android.util.AndroidVersionHelper;
 
 import android.content.Intent;

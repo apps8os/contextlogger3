@@ -23,9 +23,9 @@
  * Chao Wei (chao.wei@aalto.fi)
  */
 
-package org.apps8os.contextlogger3.android.probe;
+package org.apps8os.contextlogger3.android.clientframework.probe;
 
-import org.apps8os.contextlogger3.android.ActivityRecognitionService;
+import org.apps8os.contextlogger3.android.clientframework.ActivityRecognitionService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
