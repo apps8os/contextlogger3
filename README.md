@@ -14,8 +14,10 @@ contextlogger3
 ```
   [LINUX/MAC]
   $git clone git@github.com:apps8os/contextlogger3.git
+  
   [WINDOWS]
-  git clone https://github.com/apps8os/contextlogger3.git
+  $git clone https://github.com/apps8os/contextlogger3.git
+  
   $cd contextlogger3
   $git submodule update --init --recursive
 ```
