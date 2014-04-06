@@ -5,3 +5,6 @@
 	path = google-play-services_lib
 	url = https://github.com/apps8os/google-play-services_lib.git
 
+[submodule "Funf"]
+	path = Funf
+	url = https://github.com/apps8os/Funf.git
