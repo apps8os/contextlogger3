@@ -35,11 +35,11 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.IJsonObject;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import edu.mit.media.funf.FunfManager;
-import edu.mit.media.funf.json.IJsonObject;
 import edu.mit.media.funf.pipeline.BasicPipeline;
 import edu.mit.media.funf.probe.Probe.DataListener;
 
@@ -147,6 +147,9 @@ public class MainPipeline extends BasicPipeline {
 				
 				// get pipeline instance
 				mMainPipeline = (MainPipeline) mFunfManager.getRegisteredPipeline(MainPipeline.getPipelineName());
+				
+				// enable pipeline
+				mFunfManager.enablePipeline(MainPipeline.getPipelineName());
 			}
 			
 			registerProbes();
