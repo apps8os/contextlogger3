@@ -26,8 +26,6 @@
 package org.apps8os.contextlogger3.android.clientframework.probe;
 
 import org.apps8os.contextlogger3.android.clientframework.ActivityRecognitionService;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -41,6 +39,7 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
+import edu.mit.media.funf.Schedule;
 import edu.mit.media.funf.config.Configurable;
 import edu.mit.media.funf.probe.Probe.Description;
 import edu.mit.media.funf.probe.Probe.DisplayName;
@@ -49,47 +48,42 @@ import edu.mit.media.funf.probe.Probe.RequiredPermissions;
 @DisplayName("ContextLogger3 Google activity recognition probe")
 @Description("Record Google activity recognition data")
 @RequiredPermissions("com.google.android.gms.permission.ACTIVITY_RECOGNITION")
+@Schedule.DefaultSchedule(interval=60)
 public class GoogleActivityRecognitionProbe extends ContextLogger3Probe implements 
 										GooglePlayServicesClient.ConnectionCallbacks, 
 										GooglePlayServicesClient.OnConnectionFailedListener {
 	
 	private ActivityRecognitionClient mActivityRecognitionClient = null;
 	
-	// FIXME how to load the actual value from configuration 
 	@Configurable
-	private int detectionInterval = 60; // unit, second
+	private int interval = 60; // unit, second
 	
 	public int getDetectionInterval() {
-		return detectionInterval;
+		return interval;
 	}
 
-	public void setDetectionInterval(int interval) {
-		detectionInterval = interval;
-	}
-	
 	@Override
 	protected void onEnable() {
 		super.onEnable();
-		// TODO this is wrong way 
-		// load interval from json file
-		try {
-			JSONArray ja = getConfigurationContent();
-			if(ja != null) {
-				for (int i = 0; i < ja.length(); i++) {
-					JSONObject jobject = ja.getJSONObject(i);
-					if(jobject.has("detectionInterval")) {
-						detectionInterval = Integer.parseInt(jobject.getString("detectionInterval"));
-						Log.i(getClassName(), "new detection interval is " + detectionInterval + " seconds");
-						break;
-					}
-				}
-			}
-		} catch (Exception e) {
-			Log.e(getClassName(), "Read detectionInterval value failed", e);
-		} catch (NoSuchFieldError e) {
-			Log.e(getClassName(), "Configration is unavailable", e);
-		}
 		registerGoogleActivityRecognitionClient();
+	}
+	
+	@Override
+	protected void onDisable() {
+		super.onDisable();
+		
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		
 	}
 	
 	/**
@@ -125,8 +119,9 @@ public class GoogleActivityRecognitionProbe extends ContextLogger3Probe implemen
 		Intent intent = new Intent(getContext().getApplicationContext(), ActivityRecognitionService.class);
 		PendingIntent callbackIntent = PendingIntent.getService(getContext(), 0, 
 											intent, PendingIntent.FLAG_UPDATE_CURRENT);
-		mActivityRecognitionClient.requestActivityUpdates((detectionInterval * 1000L), callbackIntent);
+		mActivityRecognitionClient.requestActivityUpdates((interval * 1000L), callbackIntent);
 		Log.i(getClassName(), "Google Activity Recognition connect");
+		Log.i(getClassName(), "Google Activity Recognition detection interval " + interval);
 	}
 	
 	/**

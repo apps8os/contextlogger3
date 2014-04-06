@@ -27,9 +27,6 @@ package org.apps8os.contextlogger3.android.clientframework.probe;
 
 import java.util.Set;
 
-import org.apps8os.contextlogger3.android.R;
-import org.apps8os.contextlogger3.android.utils.IOUtil;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.BroadcastReceiver;
@@ -102,47 +99,6 @@ abstract class ContextLogger3Probe extends Base {
 	protected void onStop() {
 		super.onStop();
 		Log.i(getClassName(), "onStop");
-	}
-	
-	/**
-	 * Return the configuration content
-	 * 
-	 * @return
-	 */
-	protected final JSONArray getConfigurationContent() {
-		JSONArray ja = null;
-		try {
-			String filename = null;
-			try {
-				filename = getContext().getString(R.string.context_logger3_google_config_json_file_name);				
-			} catch(NoClassDefFoundError e) {
-				Log.e(getClassName(), "can not get the file name from R class", e);
-				filename = "context_logger3_google_config.json";
-			}
-			String json = IOUtil.getJSONString(getContext().getAssets().open(filename));			
-			if(!TextUtils.isEmpty(json)) {
-				try {
-					JSONObject jobject = new JSONObject(json);
-					if(jobject != null) {
-						JSONArray jarray = jobject.getJSONArray(filename);
-						if(jarray != null) {
-							for(int i = 0; i < jarray.length(); i++) {
-								JSONObject o = jarray.getJSONObject(i);
-								if(o.has(getClassName())) {
-									ja = o.getJSONArray(getClassName());
-									break;
-								}
-							}
-						}
-					}
-				} catch (Exception e) {
-					Log.e(getClassName(), "Read config details failed", e);
-				}
-			}
-		} catch (Exception e) {
-			Log.e(getClassName(), "Read config file failed", e);
-		}
-		return ja;
 	}
 	
 	static class ContextLogger3DataReceiver extends BroadcastReceiver {

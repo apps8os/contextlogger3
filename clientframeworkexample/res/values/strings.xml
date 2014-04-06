@@ -12,7 +12,9 @@
         "version":1,
         "data":[
         	"org.apps8os.contextlogger3.android.probe.AppProbe",
-            "org.apps8os.contextlogger3.android.probe.GoogleActivityRecognitionProbe",
+            {"@type": "org.apps8os.contextlogger3.android.clientframework.probe.GoogleActivityRecognitionProbe",
+           	"@schedule": {"interval": 5}
+           },
            {"@type": "edu.mit.media.funf.probe.builtin.WifiProbe",
            	"@schedule": {"interval": 20, "duration": 5, "strict": true}
            },
