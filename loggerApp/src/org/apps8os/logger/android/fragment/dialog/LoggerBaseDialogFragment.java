@@ -24,7 +24,7 @@
  */
 package org.apps8os.logger.android.fragment.dialog;
 
-import org.apps8os.logger.android.app.BaseAlertDialogFragment;
+import org.apps8os.contextlogger3.android.app.BaseAlertDialogFragment;
 
 public abstract class LoggerBaseDialogFragment extends BaseAlertDialogFragment {
 

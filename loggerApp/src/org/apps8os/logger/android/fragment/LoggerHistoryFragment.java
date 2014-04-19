@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apps8os.logger.android.R;
-import org.apps8os.logger.android.app.BaseFragment;
 import org.apps8os.logger.android.manager.AppManager;
 import org.apps8os.logger.android.model.ActionEvent;
 import org.apps8os.logger.android.model.ActionEvent.EventState;
@@ -48,7 +47,7 @@ import android.widget.SimpleAdapter;
  * Display the record history in a list view
  * 
  */
-public class LoggerHistoryFragment extends BaseFragment {
+public class LoggerHistoryFragment extends LoggerBaseFragment {
 	
 	private ArrayList<HashMap<String, Object>> mShownContent = null;
 	private SimpleAdapter mAdapter = null;

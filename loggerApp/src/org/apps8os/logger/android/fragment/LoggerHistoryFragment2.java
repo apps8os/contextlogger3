@@ -28,7 +28,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import org.apps8os.logger.android.R;
-import org.apps8os.logger.android.app.BaseFragment;
 import org.apps8os.logger.android.manager.AppManager;
 import org.apps8os.logger.android.storage.AbstractCursorLoader;
 import org.apps8os.logger.android.widget.adapter.ActionEventHistoryCursorAdapter;
@@ -51,7 +50,7 @@ import android.widget.ListView;
  * Display the record history in a list view
  * 
  */
-public class LoggerHistoryFragment2 extends BaseFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class LoggerHistoryFragment2 extends LoggerBaseFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 	
 	private static int LOGGER_HISTORY_LIST_LOADER_ID = 0x59100;
 

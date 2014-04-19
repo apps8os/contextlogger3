@@ -26,7 +26,7 @@ package org.apps8os.logger.android;
 
 import java.util.Locale;
 
-import org.apps8os.logger.android.app.BaseApplication;
+import org.apps8os.contextlogger3.android.app.BaseApplication;
 import org.apps8os.logger.android.manager.AppManager;
 
 import android.content.Context;

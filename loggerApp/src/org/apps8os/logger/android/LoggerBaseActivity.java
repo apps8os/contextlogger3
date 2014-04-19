@@ -24,7 +24,7 @@
  */
 package org.apps8os.logger.android;
 
-import org.apps8os.logger.android.app.BaseFragmentActivity;
+import org.apps8os.contextlogger3.android.app.BaseFragmentActivity;
 import org.apps8os.logger.android.manager.AppManager;
 import org.apps8os.logger.android.manager.AppManager.LoggerNotificationBroadcastReceiver;
 

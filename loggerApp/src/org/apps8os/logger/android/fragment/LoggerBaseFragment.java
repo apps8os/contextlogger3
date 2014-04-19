@@ -24,7 +24,7 @@
  */
 package org.apps8os.logger.android.fragment;
 
-import org.apps8os.logger.android.app.BaseFragment;
+import org.apps8os.contextlogger3.android.app.BaseFragment;
 
 public abstract class LoggerBaseFragment extends BaseFragment {
 

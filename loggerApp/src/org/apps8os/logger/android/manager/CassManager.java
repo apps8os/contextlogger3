@@ -292,6 +292,7 @@ abstract class CassManager {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private static boolean launch(Activity activity) {
 		boolean ret = false;
 		try {

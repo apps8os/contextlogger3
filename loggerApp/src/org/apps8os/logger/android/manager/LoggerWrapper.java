@@ -24,13 +24,18 @@
  */
 package org.apps8os.logger.android.manager;
 
+import org.apps8os.contextlogger3.android.clientframework.Postman;
+import org.apps8os.contextlogger3.android.clientframework.probe.AppProbe;
+import org.apps8os.logger.android.MainActivity;
 import org.apps8os.logger.android.manager.AppManager.LoggerNotificationBroadcastReceiver;
 import org.apps8os.logger.android.storage.ActionEventDatabase;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 
 abstract class LoggerWrapper extends CassManager {
 
@@ -39,7 +44,7 @@ abstract class LoggerWrapper extends CassManager {
 	private static ActionEventDatabase mActionEventDatabase = null;
 	
 	public static void init(final Context context) {
-		new Handler().postDelayed(new Runnable() {
+		new Handler(context.getMainLooper()).postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				sendLocalNotificationBroadcast(context, true);
@@ -49,7 +54,6 @@ abstract class LoggerWrapper extends CassManager {
 		if(mActionEventDatabase == null) {
 			mActionEventDatabase = new ActionEventDatabase(context.getApplicationContext());			
 		}
-		LoggerManager.init(context);
 	}
 	
 	public static void createLoggerNotification(final Context context) {
@@ -61,24 +65,66 @@ abstract class LoggerWrapper extends CassManager {
 		it.putExtra(LoggerNotificationBroadcastReceiver.NOTIFICATION_MESSAGE, enabled);
 		LocalBroadcastManager.getInstance(context).sendBroadcast(it);
 	}
-	
-	public static void toggleService(Context context, final boolean enabled) {
-		sendLocalNotificationBroadcast(context, enabled);
-		LoggerManager.toggleService(context, enabled);
+
+	/**
+	 * Toggle the logging service
+	 * 
+	 * @param activity
+	 * @param enabled
+	 */
+	public static <T extends MainActivity> void toggleService(T activity, final boolean enabled) {
+		sendLocalNotificationBroadcast(activity.getApplicationContext(), enabled);
+		invokeLoggerService(activity, enabled);
 	}
 	
-	public static void exportData(Context context) {
-		LoggerManager.exportData(context);
-	}
+    private static <T extends MainActivity> void invokeLoggerService(T activity, final boolean enabled) {
+    	if(activity instanceof MainActivity) {
+    		activity.togglePipeline(enabled);
+    	}                
+    }
 	
-	public static final boolean isRunning(Context context) {
-		return LoggerManager.isRunning(context);
-	}
+   /**
+	 * Ask to export the data from internal memory to SD-card
+	 * 
+	 * @param activity
+	 */
+    public static <T extends MainActivity> void exportData(T activity) {
+    	if(activity instanceof MainActivity) {
+			activity.exportData();
+    	} 	
+    }	
 	
+	/**
+	 * Whether FunfManager is running.
+	 * 
+	 * @return
+	 */
+    public static <T extends MainActivity> boolean isRunning(T activity) {
+    	if(activity instanceof MainActivity) {
+    		return activity.isRunning();
+    	} 
+    	return false;
+    }
+    
+    
+    /**
+	 * Notify the record framework that the data has been broadcast.
+	 * 
+	 * @param context
+	 * @param actionPayload
+	 * @param data
+	 */
 	public static void sendEventBoradcast(Context context, final String actionPayload, final String data) {
-		LoggerManager.sendEventBoradcast(context, actionPayload, data);
+		if(TextUtils.isEmpty(actionPayload)) return;
+		
+		Bundle bundle = new Bundle();
+		bundle.putString("APPLICATION_ACTION", actionPayload);
+		if(!TextUtils.isEmpty(data)){
+			bundle.putString("APPLICATION_DATA", data);			
+		}
+		Postman.getInstance().send(context, AppProbe.INTENT_ACTION, bundle);
 	}
-	
+
 	public static ActionEventDatabase getActionEventDatabase() {
 		if(mActionEventDatabase == null) {
 			throw new IllegalStateException("Database object must be initialized first!");

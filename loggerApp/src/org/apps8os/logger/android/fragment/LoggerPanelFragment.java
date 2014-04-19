@@ -31,9 +31,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apps8os.contextlogger3.android.app.BaseAlertDialogFragment.AlertDialogListener;
 import org.apps8os.logger.android.LoggerApp;
+import org.apps8os.logger.android.MainActivity;
 import org.apps8os.logger.android.R;
-import org.apps8os.logger.android.app.BaseAlertDialogFragment.AlertDialogListener;
 import org.apps8os.logger.android.fragment.dialog.ActivityNameDeletionDialogFragment;
 import org.apps8os.logger.android.fragment.dialog.ActivityNamingDialogFragment;
 import org.apps8os.logger.android.fragment.dialog.ActivityNamingDialogFragment.ActivityNamingListener;
@@ -445,9 +446,9 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		if (buttonView.getId() == R.id.logger_switcher) {
 			mSwitchCheckState = isChecked;
-			AppManager.toggleService(getApplicationContext(), isChecked);
+			AppManager.toggleService(((MainActivity) getActivity()), isChecked);
 			mListView.setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE); 
-			if(!isChecked){
+			if(!isChecked) {
 				// update database and UI
 				cleanUp();
 			}
@@ -457,18 +458,25 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int itemId = item.getItemId();
-		if(itemId == R.id.menu_shutdown){
-			QuitAppDialogFragment.newInstance(new AlertDialogListener(){
+		if(itemId == R.id.menu_shutdown) {
+			QuitAppDialogFragment.newInstance(new AlertDialogListener() {
 				@Override
 				public void onPositiveClick() {
 					if(mSwitch != null){
 						mSwitch.setChecked(false);
 					} 
-					if(mEventCount != null){
+					
+					if(mEventCount != null) {
 						mEventCount.setText("0");
 						mEventCount.setVisibility(View.INVISIBLE);
 					}
-					getSupportActivity().finish();
+					
+					new Handler().postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							getActivity().finish();
+						}
+					}, 300L);
 				}
 				@Override
 				public void onNegativeClick() {
@@ -479,7 +487,7 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 			}).show(getFragmentManager());
 			return true;
 		} else if (itemId == R.id.menu_export_data) {
-			AppManager.exportData(getApplicationContext());
+			AppManager.exportData(((MainActivity)getActivity()));
 			return true;
 		} else if (itemId == R.id.menu_language_setting) {
 			LanguageSettingDialogFragment.newInstance(new AlertDialogListener(){
@@ -508,7 +516,7 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 			return true; 
 		} else if (itemId == R.id.menu_toggle_service){
 			if(mSwitch != null){
-				final boolean disabled = !AppManager.isRunning(getApplicationContext());
+				final boolean disabled = !AppManager.isRunning(((MainActivity)getActivity()));
 				mSwitch.setChecked(disabled);
 			} 
 			return true;
@@ -529,7 +537,7 @@ public class LoggerPanelFragment extends LoggerBaseFragment implements OnChecked
 	}
 
 	private void updateMenuItem(Menu menu){
-		menu.findItem(R.id.menu_toggle_service).setTitle(AppManager.isRunning(getApplicationContext()) 
+		menu.findItem(R.id.menu_toggle_service).setTitle(AppManager.isRunning(((MainActivity)getActivity())) 
 													? R.string.stop : R.string.start);	
 		menu.findItem(R.id.menu_export_data).setTitle(R.string.export_data);
 		menu.findItem(R.id.menu_shutdown).setTitle(R.string.quit);

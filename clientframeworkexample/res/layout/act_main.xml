@@ -12,14 +12,18 @@
 
     <Button
         android:id="@+id/archiveButton"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save Data to SD Card" />
+        android:text="Save Data to SD Card"
+        android:layout_margin="16dp"
+         />
 
     <Button
         android:id="@+id/sendAppData"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Application data" />
+        android:text="Application data" 
+        android:layout_margin="16dp"
+        />
 
 </LinearLayout>

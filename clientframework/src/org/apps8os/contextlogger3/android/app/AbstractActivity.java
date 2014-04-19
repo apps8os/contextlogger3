@@ -27,16 +27,20 @@ package org.apps8os.contextlogger3.android.app;
 
 import org.apps8os.contextlogger3.android.clientframework.pipeline.MainPipeline;
 import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.widget.Toast;
 
+import android.app.Service;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
 import edu.mit.media.funf.FunfManager;
 
 
 /**
- * Generic abstract Activity that connect to FunfManager ({@link Serivce}).
+ * Generic abstract Activity that connect to FunfManager ({@link Service}).
  * 
  * @param <T>
  */
@@ -46,14 +50,74 @@ public abstract class AbstractActivity <T extends Activity> extends Activity imp
 	private MainPipeline mMainPipeline = null;
 	private boolean mIsBound = false;
 	
+	/**
+	 * Whether FunfManager ({@link Service}) is bound to UI ({@link Activity}).
+	 * 
+	 * @return isBound ({@link Boolean})
+	 */
 	public boolean isFunfBound() {
 		return mIsBound;
 	}
 	
+	/**
+	 * Return an instance of MainPipeline. The value can be null.
+	 * 
+	 * @return 
+	 */
 	public MainPipeline getMainPipeline() {
 		return mMainPipeline;
 	}
 	
+	/**
+	 * Whether FunfManager is running.
+	 * 
+	 * @return
+	 */
+	public boolean isRunning() {
+		return (mFunfManager == null) ? false : mFunfManager.isEnabled(MainPipeline.getPipelineName());
+	}
+	
+	/**
+	 * Enable/disable MainPipeline.
+	 * 
+	 * @param enable
+	 */
+	public void togglePipeline(boolean enable) {
+		String pipelineName = MainPipeline.getPipelineName();
+		if(enable) {
+			mFunfManager.enablePipeline(pipelineName);
+			// get pipeline instance again
+			mMainPipeline = (MainPipeline) mFunfManager.getRegisteredPipeline(MainPipeline.getPipelineName());
+		} else {
+			mFunfManager.disablePipeline(pipelineName);
+			mMainPipeline = null;
+		}
+	}
+	
+	/**
+	 * export the data from internal memory to SD-card
+	 */
+	public void exportData() {
+		final Context context = getApplicationContext();
+		mMainPipeline = (mMainPipeline == null) ? (MainPipeline) mFunfManager.getRegisteredPipeline(MainPipeline.getPipelineName()) : mMainPipeline;
+		
+		if(mMainPipeline != null) {
+			if (mMainPipeline.isEnabled()) {
+				mMainPipeline.onRun(MainPipeline.ACTION_ARCHIVE, null);
+				
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						Toast.makeText(context, "Archived!", Toast.LENGTH_SHORT).show();
+					}
+				}, 500L);
+			} else {
+				Toast.makeText(context, "Pipeline is not enabled.", Toast.LENGTH_SHORT).show();
+			}					
+		} else {
+			Toast.makeText(context, "Pipeline is not available.", Toast.LENGTH_SHORT).show();
+		}
+	}
 	
 	@Override
 	protected void onStart() {
@@ -72,9 +136,10 @@ public abstract class AbstractActivity <T extends Activity> extends Activity imp
 	public void onServiceConnected(ComponentName name, IBinder service) {
 		mFunfManager = ((FunfManager.LocalBinder)service).getManager();
 		mIsBound = true;
-		mFunfManager.enablePipeline(MainPipeline.getPipelineName());
+		
 		// get pipeline instance
 		mMainPipeline = (MainPipeline) mFunfManager.getRegisteredPipeline(MainPipeline.getPipelineName());
+		togglePipeline(true);
 	}
 
 	@Override

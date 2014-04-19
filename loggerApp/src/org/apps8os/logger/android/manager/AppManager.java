@@ -62,8 +62,6 @@ import android.util.Log;
  * general concerns such as reading the configuration file,
  * and localization stuff.
  * 
- * @author Chao Wei
- *
  */
 public final class AppManager extends LoggerWrapper {
 

@@ -26,7 +26,7 @@ package org.apps8os.logger.android;
 
 import java.util.Locale;
 
-import org.apps8os.logger.android.app.BaseFragmentActivity.OnSupportFragmentListener;
+import org.apps8os.contextlogger3.android.app.BaseFragmentActivity.OnSupportFragmentListener;
 import org.apps8os.logger.android.fragment.LoggerHistoryFragment;
 import org.apps8os.logger.android.fragment.LoggerHistoryFragment2;
 import org.apps8os.logger.android.fragment.LoggerPanelFragment;
