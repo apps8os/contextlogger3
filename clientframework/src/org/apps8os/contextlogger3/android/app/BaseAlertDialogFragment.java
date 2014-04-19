@@ -22,7 +22,7 @@
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
-package org.apps8os.logger.android.app;
+package org.apps8os.contextlogger3.android.app;
 
 import org.holoeverywhere.app.DialogFragment;
 

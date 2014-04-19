@@ -22,7 +22,7 @@
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
-package org.apps8os.logger.android.app;
+package org.apps8os.contextlogger3.android.app;
 
 import org.holoeverywhere.app.Activity;
 
@@ -30,7 +30,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
-public abstract class BaseFragmentActivity extends Activity {
+public abstract class BaseFragmentActivity extends AbstractActivity<Activity> {
 
 	protected FragmentTransaction getSupportFragmentTransaction() {
 		return getSupportFragmentManager().beginTransaction();

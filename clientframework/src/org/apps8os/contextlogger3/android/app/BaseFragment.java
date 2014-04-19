@@ -22,9 +22,9 @@
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
  */
-package org.apps8os.logger.android.app;
+package org.apps8os.contextlogger3.android.app;
 
-import org.apps8os.logger.android.app.BaseFragmentActivity.OnSupportFragmentListener;
+import org.apps8os.contextlogger3.android.app.BaseFragmentActivity.OnSupportFragmentListener;
 import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.app.Fragment;
 

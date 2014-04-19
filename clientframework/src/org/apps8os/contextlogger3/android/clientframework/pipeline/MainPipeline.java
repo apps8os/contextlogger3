@@ -30,10 +30,7 @@ import java.util.Map;
 import org.apps8os.contextlogger3.android.clientframework.probe.AppProbe;
 import org.apps8os.contextlogger3.android.clientframework.probe.GoogleActivityRecognitionProbe;
 
-import android.content.ComponentName;
-import android.content.ServiceConnection;
 import android.os.Build;
-import android.os.IBinder;
 import android.util.Log;
 
 import com.google.gson.IJsonObject;
@@ -63,7 +60,7 @@ public class MainPipeline extends BasicPipeline {
 		}
 	}
 	
-	String getClassName() {
+	final String getClassName() {
 		return MainPipeline.class.getSimpleName();
 	}
 	
@@ -121,60 +118,4 @@ public class MainPipeline extends BasicPipeline {
 			}
 		}
 	}
-	
-	
-	/**
-	 * Service connection 
-	 *
-	 */
-	public static final class ContextLogger3ServiceConnection implements ServiceConnection {
-
-		private static ContextLogger3ServiceConnection mConnection = null;
-
-		public static ContextLogger3ServiceConnection getInstance() {
-			if(mConnection == null) {
-				mConnection = new ContextLogger3ServiceConnection();
-			}
-			return mConnection;
-		}
-		
-		private FunfManager mFunfManager = null;
-		private MainPipeline mMainPipeline = null;
-		
-		private ContextLogger3ServiceConnection() {
-		}
-		
-		public MainPipeline getMainPipeline() {
-			return mMainPipeline;
-		}
-		
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			Log.v(getClassName(), "initialize");
-			mFunfManager = ((FunfManager.LocalBinder)service).getManager();
-			if(mFunfManager != null) {
-				// enable pipeline
-				mFunfManager.enablePipeline(MainPipeline.getPipelineName());
-				
-				// get pipeline instance
-				mMainPipeline = (MainPipeline) mFunfManager.getRegisteredPipeline(MainPipeline.getPipelineName());
-			}
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-			destory();
-		}
-
-		String getClassName() {
-			return ContextLogger3ServiceConnection.class.getSimpleName();
-		}
-		
-		void destory() {
-			mFunfManager = null;
-			mMainPipeline = null;
-		}
-	}
-	
-	
 }
