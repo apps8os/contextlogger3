@@ -11,17 +11,28 @@ contextlogger3
 ### How to start?
 * You should clone git repo, init and update submodules
 
+- Clone the project by using valid SSH key
+ 
 ```
-  [LINUX/MAC]
   $git clone git@github.com:apps8os/contextlogger3.git
-  
-  [WINDOWS]
-  $git clone https://github.com/apps8os/contextlogger3.git
-  
-  $cd contextlogger3
-  $git submodule update --init --recursive
 ```
-* import the projects and its submodules as Android project (File -> Import -> Android -> Existing Android Code Into Workspace).
+  - Clone the project without SSH key
+ 
+```
+ $git clone https://github.com/apps8os/contextlogger3.git
+```
+- Enter the directory
+
+```
+$cd contextlogger3
+```
+- Update submodules
+ 
+```
+$git submodule update --init --recursive
+```
+
+* Import the projects and its submodules as Android project (File -> Import -> Android -> Existing Android Code Into Workspace).
 
 ### Referring from scientific articles
 
