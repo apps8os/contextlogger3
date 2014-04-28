@@ -7,11 +7,11 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.apps8os.contextlogger3.android.utils.IOUtil;
 import org.apps8os.logger.android.CassReceiver;
 import org.apps8os.logger.android.LoggerApp;
 import org.apps8os.logger.android.R;
 import org.apps8os.logger.android.storage.CassCaseDatabase;
+import org.apps8os.logger.android.util.IOUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
