@@ -52,7 +52,6 @@
    	<string name="give_input">输入无效</string>     	
   	<string name="language_setting">选择语言</string> 
   	<string name="remove_tag">删除以下活动名称?</string>    	
-    <string name="ui_demo">用户界面展示 </string> 
     <string name="app_running_notification">正在运行</string>
 	<string name="discard_activity_event">不记得时间</string>     
 </resources>

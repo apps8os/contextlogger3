@@ -2,25 +2,25 @@
 	"eventTags":
 	[
 		{
-			"name":"At workF"
+			"name":"|FI|At workF"
 		},
 		{
-			"name":"At home"
+			"name":"|FI|At home"
 		},
 		{
-			"name":"Walking"
+			"name":"|FI|Walking"
 		},
 		{
-			"name":"Cycling"
+			"name":"|FI|Cycling"
 		},
 		{
-			"name":"In a bus"
+			"name":"|FI|In a bus"
 		},
 		{
-			"name":"In a train"
+			"name":"|FI|In a train"
 		},
 		{
-			"name":"Driving a car"
+			"name":"|FI|Driving a car"
 		}		
 	]
 }

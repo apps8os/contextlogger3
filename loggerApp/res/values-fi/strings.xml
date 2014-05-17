@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (c) 2014 Aalto University and the authors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining 
+ * a copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation 
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the 
+ * Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included 
+ * in all copies or substantial portions of the Software.
+ *  
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+ * DEALINGS IN THE SOFTWARE.
+ *  
+ * Authors:
+ * Chao Wei (chao.wei@aalto.fi)
+ */
+-->
+<resources>
+
+    <string name="app_name">|FI|ContextLogger3</string>
+    <string name="start">|FI|Start</string>
+    <string name="stop">|FI|Stop</string>
+    <string name="on">|FI|ON</string>
+    <string name="off">|FI|OFF</string>
+    <string name="close">|FI|Close</string>
+    <string name="cancel">|FI|Cancel</string>
+    <string name="ok">|FI|OK</string>
+    <string name="discard">|FI|Discard</string>
+    <string name="quit">|FI|Quit</string>
+    <string name="now">|FI|Now</string>
+    <string name="no_data">|FI|There is no event data yet</string>
+    <string name="app_quit_content">|FI|Are you sure you want to quit from the application and stop logging the data from sensors?</string>
+    <string name="view_history">|FI|View history</string>
+    <string name="view_history2">|FI|View history by event</string>
+    <string name="history">|FI|History</string>
+    <string name="export_data">|FI|Export data to memory card</string>
+    <string name="event_time_picker_message">|FI|Confirm %1$s of %2$s activity</string>
+    <string name="add_your_own_event">|FI|Add your own</string>
+    <string name="add_tag">|FI|Add a new activity</string>
+    <string name="add_tag_hint">|FI|input activity name</string>
+    <string name="save">|FI|Save</string>
+    <string name="give_input">|FI|Please give the input</string>
+    <string name="remove_tag">|FI|Delete the below activity name?</string>
+    <string name="language_setting">|FI|Choose language</string>
+    <string name="app_running_notification">|FI|Running</string>
+    <string name="discard_activity_event">|FI|Cannot remember time</string>
+
+</resources>

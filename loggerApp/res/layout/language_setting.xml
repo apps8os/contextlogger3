@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
 /**
  * Copyright (c) 2013 Aalto University and the authors
  *
@@ -31,40 +31,48 @@
     android:minWidth="300dp"
     android:orientation="vertical" >
 
-    <TextView 
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"  
-        android:gravity="center_horizontal"  
-        android:layout_marginTop="20dp"  
-        android:layout_marginBottom="12dp"  
-        android:textSize="20sp"  
-		android:text="@string/language_setting"        
-        />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="@string/language_setting"
+        android:textSize="20sp" />
 
     <RadioGroup
         android:id="@+id/radio_group_language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="8dp" >
+        android:layout_margin="8dp"
+        android:orientation="vertical" >
 
         <org.holoeverywhere.widget.RadioButton
             android:id="@+id/radio_button_lang_en"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textSize="18sp" 
             android:minHeight="55dp"
-            android:text="@string/language_en"/>
+            android:text="@string/language_en"
+            android:textSize="18sp" />
+
+        <org.holoeverywhere.widget.RadioButton
+            android:id="@+id/radio_button_lang_fi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:minHeight="55dp"
+            android:text="@string/language_fi"
+            android:textSize="18sp" />
 
         <org.holoeverywhere.widget.RadioButton
             android:id="@+id/radio_button_lang_cn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:minHeight="55dp" 
-            android:textSize="18sp"
-            android:text="@string/language_cn"/>
+            android:minHeight="55dp"
+            android:text="@string/language_cn"
+            android:textSize="18sp" />
     </RadioGroup>
 
 </LinearLayout>

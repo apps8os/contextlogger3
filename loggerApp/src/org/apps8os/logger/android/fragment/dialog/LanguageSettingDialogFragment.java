@@ -50,6 +50,7 @@ public class LanguageSettingDialogFragment extends LoggerBaseDialogFragment impl
 	
 	private RadioButton mRadioButtonEng = null;
 	private RadioButton mRadioButtonCn = null;
+	private RadioButton mRadioButtonFi = null;
 	private boolean mInit = false;
 	
 	@Override
@@ -60,6 +61,7 @@ public class LanguageSettingDialogFragment extends LoggerBaseDialogFragment impl
     	((RadioGroup)view.findViewById(R.id.radio_group_language)).setOnCheckedChangeListener(this);
     	mRadioButtonEng = (RadioButton) view.findViewById(R.id.radio_button_lang_en);
     	mRadioButtonCn = (RadioButton) view.findViewById(R.id.radio_button_lang_cn);
+    	mRadioButtonFi = (RadioButton) view.findViewById(R.id.radio_button_lang_fi);
 		return view;
 	}
 	
@@ -74,7 +76,7 @@ public class LanguageSettingDialogFragment extends LoggerBaseDialogFragment impl
     		if(localeLang.toLowerCase(Locale.getDefault()).equals(getString(R.string.lang_cn))){
     			mRadioButtonCn.setChecked(true);
     		} else if (localeLang.toLowerCase(Locale.getDefault()).equals(getString(R.string.lang_fi))){
-    			mRadioButtonEng.setChecked(true);
+    			mRadioButtonFi.setChecked(true);
     		} else {
     			mRadioButtonEng.setChecked(true);
     		}
@@ -96,6 +98,8 @@ public class LanguageSettingDialogFragment extends LoggerBaseDialogFragment impl
 				locale = new Locale(getString(R.string.lang_en));
 			} else if (checkedId == R.id.radio_button_lang_cn) {
 				locale = new Locale(getString(R.string.lang_cn));
+			} else if(checkedId == R.id.radio_button_lang_fi) {
+				locale = new Locale(getString(R.string.lang_fi));
 			}
 		}
 		if(locale != null){
