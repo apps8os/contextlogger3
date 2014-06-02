@@ -27,32 +27,32 @@
 -->
 <resources>
 
-    <string name="app_name">|FI|ContextLogger3</string>
-    <string name="start">|FI|Start</string>
-    <string name="stop">|FI|Stop</string>
-    <string name="on">|FI|ON</string>
-    <string name="off">|FI|OFF</string>
-    <string name="close">|FI|Close</string>
-    <string name="cancel">|FI|Cancel</string>
-    <string name="ok">|FI|OK</string>
-    <string name="discard">|FI|Discard</string>
-    <string name="quit">|FI|Quit</string>
-    <string name="now">|FI|Now</string>
-    <string name="no_data">|FI|There is no event data yet</string>
-    <string name="app_quit_content">|FI|Are you sure you want to quit from the application and stop logging the data from sensors?</string>
-    <string name="view_history">|FI|View history</string>
-    <string name="view_history2">|FI|View history by event</string>
-    <string name="history">|FI|History</string>
-    <string name="export_data">|FI|Export data to memory card</string>
-    <string name="event_time_picker_message">|FI|Confirm %1$s of %2$s activity</string>
-    <string name="add_your_own_event">|FI|Add your own</string>
-    <string name="add_tag">|FI|Add a new activity</string>
-    <string name="add_tag_hint">|FI|input activity name</string>
-    <string name="save">|FI|Save</string>
-    <string name="give_input">|FI|Please give the input</string>
-    <string name="remove_tag">|FI|Delete the below activity name?</string>
-    <string name="language_setting">|FI|Choose language</string>
-    <string name="app_running_notification">|FI|Running</string>
-    <string name="discard_activity_event">|FI|Cannot remember time</string>
+    <string name="app_name">ContextLogger3</string>
+    <string name="start">Aloita</string>
+    <string name="stop">Lopeta</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="close">Sulje</string>
+    <string name="cancel">Peruuta</string>
+    <string name="ok">OK</string>
+    <string name="discard">Hylkää</string>
+    <string name="quit">Sulje</string>
+    <string name="now">Nyt</string>
+    <string name="no_data">Aktiviteetti dataa ei ole vielä kerätty</string>
+    <string name="app_quit_content">Oletko varma että haluat sulkea sovelluksen ja lopettaa datan keräämisen sensoreista?</string>
+    <string name="view_history">Näytä historia</string>
+    <string name="view_history2">Näytä historia tapahtumittain</string>
+    <string name="history">Historia</string>
+    <string name="export_data">Tallenna kerätty data muistikortille</string>
+    <string name="event_time_picker_message">Vahvista %1$s %2$s aktiviteetille</string>
+    <string name="add_your_own_event">Lisää oma</string>
+    <string name="add_tag">Lisää uusi aktiviteetti</string>
+    <string name="add_tag_hint">Anna aktiviteetin nimi</string>
+    <string name="save">Tallenna</string>
+    <string name="give_input">Syötä nimi</string>
+    <string name="remove_tag">Poista seuraava aktiviteetti?</string>
+    <string name="language_setting">Valitse kieli</string>
+    <string name="app_running_notification">Käynnissä</string>
+    <string name="discard_activity_event">En pysty muistamaan aikaa</string>
 
 </resources>
