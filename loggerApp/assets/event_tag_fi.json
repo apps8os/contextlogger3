@@ -2,25 +2,25 @@
 	"eventTags":
 	[
 		{
-			"name":"|FI|At workF"
+			"name":"Työpaikka"
 		},
 		{
-			"name":"|FI|At home"
+			"name":"Koti"
 		},
 		{
-			"name":"|FI|Walking"
+			"name":"Kävely"
 		},
 		{
-			"name":"|FI|Cycling"
+			"name":"Pyöräily"
 		},
 		{
-			"name":"|FI|In a bus"
+			"name":"Bussi"
 		},
 		{
-			"name":"|FI|In a train"
+			"name":"Juna"
 		},
 		{
-			"name":"|FI|Driving a car"
+			"name":"Henkilöauto"
 		}		
 	]
 }
