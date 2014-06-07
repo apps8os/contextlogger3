@@ -37,13 +37,13 @@ $git submodule update --init --recursive
 
 * Import the projects and its submodules as Android project (File -> Import -> Android -> Existing Android Code Into Workspace).
 
-* Import the dependcy project "google-play-services_lib"
+* Import the dependency project "google-play-services_lib"
 
-* Import the dependcy project "HoloEverywhere library" (HoloEverywhere -> library)
+* Import the dependency project "HoloEverywhere library" (HoloEverywhere -> library)
 
-* Import the dependcy project "HoloEverywhere Addon Preferences" (HoloEverywhere -> addons -> preferences) 
+* Import the dependency project "HoloEverywhere Addon Preferences" (HoloEverywhere -> addons -> preferences) 
 
-* Import the dependcy project "funf"
+* Import the dependency project "funf" (only funf, no tests and FunfTestApp)
  
 * Import the dependcy project "clientframework"
 
