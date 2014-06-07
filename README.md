@@ -9,6 +9,7 @@ contextlogger3
 * dataprocessing -- code for integrating data into database and processing it
 
 ### How to start?
+
 * You should clone git repo, init and update submodules
 
 - Clone the project by using valid SSH key
@@ -32,7 +33,21 @@ $cd contextlogger3
 $git submodule update --init --recursive
 ```
 
+* Open eclipse 
+
 * Import the projects and its submodules as Android project (File -> Import -> Android -> Existing Android Code Into Workspace).
+
+* Import the dependcy project "google-play-services_lib"
+
+* Import the dependcy project "HoloEverywhere library" (HoloEverywhere -> library)
+
+* Import the dependcy project "HoloEverywhere Addon Preferences" (HoloEverywhere -> addons -> preferences) 
+
+* Import the dependcy project "funf"
+ 
+* Import the dependcy project "clientframework"
+
+* Import main project "loggerApp"
 
 ### Referring from scientific articles
 
