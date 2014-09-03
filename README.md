@@ -10,44 +10,7 @@ contextlogger3
 
 ### How to start?
 
-* You should clone git repo, init and update submodules
-
-- Clone the project by using valid SSH key
- 
-```
-  $git clone git@github.com:apps8os/contextlogger3.git
-```
-  - Clone the project without SSH key
- 
-```
- $git clone https://github.com/apps8os/contextlogger3.git
-```
-- Enter the directory
-
-```
-$cd contextlogger3
-```
-- Update submodules
- 
-```
-$git submodule update --init --recursive
-```
-
-* Open eclipse 
-
-* Import the projects and its submodules as Android project (File -> Import -> Android -> Existing Android Code Into Workspace).
-
-* Import the dependency project "google-play-services_lib"
-
-* Import the dependency project "HoloEverywhere library" (HoloEverywhere -> library)
-
-* Import the dependency project "HoloEverywhere Addon Preferences" (HoloEverywhere -> addons -> preferences) 
-
-* Import the dependency project "funf" (only funf, no tests and FunfTestApp)
- 
-* Import the dependcy project "clientframework"
-
-* Import main project "loggerApp"
+See [Project setup instructions](https://github.com/apps8os/contextlogger3/wiki/Project-setup-instructions) in the wiki.
 
 ### Referring from scientific articles
 
