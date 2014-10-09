@@ -23,6 +23,7 @@
  *  
  * Authors:
  * Chao Wei (chao.wei@aalto.fi)
+ * Small modifications by Tuomas Vaittinen (tuomas.vaittinen@aalto.fi) 
  */
 -->
 <resources>
@@ -46,15 +47,29 @@
         },
         "version":1,
         "data":[
-        	"org.apps8os.contextlogger3.android.probe.AppProbe",
-            "org.apps8os.contextlogger3.android.probe.GoogleActivityRecognitionProbe",
+        	"org.apps8os.contextlogger3.android.clientframework.probe.AppProbe",
+           {"@type": "org.apps8os.contextlogger3.android.clientframework.probe.GoogleActivityRecognitionProbe",
+            "@schedule": {"interval": 60, "duration": 5, "strict": true}
+           },
            {"@type": "edu.mit.media.funf.probe.builtin.WifiProbe",
-           	"@schedule": {"interval": 20, "duration": 5, "strict": true}
+           	"@schedule": {"interval": 300, "duration": 5, "strict": true}
            },
            {"@type": "edu.mit.media.funf.probe.builtin.AccelerometerSensorProbe",
-            "@schedule": {"interval": 500, "duration": 5, "strict": true}
+            "@schedule": {"interval": 300, "duration": 5, "strict": true}
            },
-           "edu.mit.media.funf.probe.builtin.LocationProbe"
+           {"@type": "edu.mit.media.funf.probe.builtin.LocationProbe",
+           	"@schedule": {"interval": 300, "duration": 5, "strict": true}
+           },
+           {"@type": "edu.mit.media.funf.probe.builtin.BatteryProbe",
+            "@schedule": {"interval": 300, "strict": true}
+           },
+		   {"@type": "edu.mit.media.funf.probe.builtin.ProximitySensorProbe",
+            "@schedule": {"interval": 120, "duration": 5, "strict": true}
+           },
+		   {"@type": "edu.mit.media.funf.probe.builtin.LightSensorProbe",
+            "@schedule": {"interval": 120, "duration": 5, "strict": true}
+           }
+
         ]
        }</string>
 
@@ -74,6 +89,6 @@
     <!-- language_setting -->
     <string name="language_en">English</string>
     <string name="language_cn">中文</string>
-    <string name="language_fi">Soumi</string>
+    <string name="language_fi">Suomi</string>
 
 </resources>
